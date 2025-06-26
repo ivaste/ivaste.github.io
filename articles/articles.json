@@ -1,0 +1,15 @@
+[
+    {
+      "title": "article 1 title",
+      "filename": "article-1.html",
+      "date": "2025-01-01",
+      "tags": ["notes"]
+    },
+    {
+      "title": "article 2 title",
+      "filename": "article-2.html",
+      "date": "2025-01-02",
+      "tags": ["papers", "projects"]
+    }
+]
+  

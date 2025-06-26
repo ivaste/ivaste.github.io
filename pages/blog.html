@@ -1,0 +1,68 @@
+<!-- Main Content -->
+<div class="container">
+    <h1>Blog</h1>
+    <p>Work in progress</p>
+
+    <div class="btn-group" role="group">
+        <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio1" autocomplete="off" checked onclick="filterArticles('all')">
+        <label class="btn btn-outline-primary" for="vbtn-radio1">All</label>
+        <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio2" autocomplete="off" onclick="filterArticles('papers')">
+        <label class="btn btn-outline-primary" for="vbtn-radio2">Papers</label>
+        <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio3" autocomplete="off" onclick="filterArticles('projects')">
+        <label class="btn btn-outline-primary" for="vbtn-radio3">Projects</label>
+        <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio4" autocomplete="off" onclick="filterArticles('notes')">
+        <label class="btn btn-outline-primary" for="vbtn-radio4">Notes</label>
+        <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio5" autocomplete="off" onclick="filterArticles('articles')">
+        <label class="btn btn-outline-primary" for="vbtn-radio5">Articles</label>
+    </div>
+
+    <ul id="article-list"></ul>
+
+    <script>
+        let allArticles = [];
+        
+        fetch("articles/articles.json")
+          .then(res => {
+            if (!res.ok) throw new Error("Network response was not ok");
+            return res.json();
+          })
+          .then(data => {
+            allArticles = data;
+            renderArticles(allArticles); // show all on load
+          })
+          .catch(err => {
+            document.getElementById("article-list").innerHTML =
+              "<li class='text-danger'>Failed to load articles.</li>";
+          });
+        
+        function renderArticles(articles) {
+          const ul = document.getElementById("article-list");
+          ul.innerHTML = "";
+          articles.forEach(article => {
+            const li = document.createElement("li");
+            const a = document.createElement("a");
+            a.href = "javascript:void(0)";
+            a.onclick = function() {
+              loadSection("../articles/" + article.filename);
+            };
+            a.textContent = article.date + " - " + article.title;
+            li.appendChild(a);
+            ul.appendChild(li);
+          });
+        }
+        
+        function filterArticles(tag) {
+          if (tag === "all") {
+            renderArticles(allArticles);
+          } else {
+            const filtered = allArticles.filter(article =>
+              article.tags && article.tags.includes(tag)
+            );
+            renderArticles(filtered);
+          }
+        }
+        </script>
+        
+        
+
+</div>
