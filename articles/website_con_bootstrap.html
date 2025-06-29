@@ -1,0 +1,685 @@
+<h3>Scarica il documento PDF: <a href="../uploads/2016/01/StileCSS2.pdf"><img src="../uploads/2016/01/pdf_button.png" height="60"></a></h3>
+&nbsp;
+
+<!--SOMMARIO-->
+<p align="center"><img src="../uploads/2016/01/Style00.jpg" width="650" class="img-responsive"/></p>
+
+&nbsp;
+&nbsp;
+
+<!--INDICE-->
+<h2>Indice</h2>
+<ul>
+	<li><a href="#LinkStyle1">Pagina di Base</a>
+		<ul>
+			<li><a href="#LinkStyle1HTML">Codice HTML</a></li>
+			<li><a href="#LinkStyle1CSS">Codice CSS</a></li>
+		</ul>
+	</li>
+	<li><a href="#LinkStyle2">HEADER</a>
+		<ul>
+			<li><a href="#LinkStyle2HTML">Codice HTML</a></li>
+			<li><a href="#LinkStyle2CSS">Codice CSS</a></li>
+			<li><a href="#LinkStyle21">LOGO DEL SITO</a>
+				<ul>
+					<li><a href="#LinkStyle21HTML">Codice HTML</a></li>
+					<li><a href="#LinkStyle21CSS">Codice CSS</a></li>
+				</ul>
+			</li>
+			<li><a href="#LinkStyle22">NAVIGATION MENU</a>
+				<ul>
+					<li><a href="#LinkStyle22HTML">Codice HTML</a></li>
+					<li><a href="#LinkStyle22CSS">Codice CSS</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li><a href="#LinkStyle3">FOOTER</a>
+		<ul>
+			<li><a href="#LinkStyle3HTML">Codice HTML</a></li>
+			<li><a href="#LinkStyle3CSS">Codice CSS</a></li>
+		</ul>
+	</li>
+	<li><a href="#LinkStyle4">MAIN SECTION</a>
+		<ul>
+			<li><a href="#LinkStyle4CSS">Codice CSS</a></li>
+			<li><a href="#LinkStyle41">Pagina HOME</a>
+				<ul>
+					<li><a href="#LinkStyle41HTML">Codice HTML</a></li>
+					<li><a href="#LinkStyle41CSS">Codice CSS</a></li>
+				</ul>
+			</li>
+			<li><a href="#LinkStyle42">Pagina POST</a>
+				<ul>
+					<li><a href="#LinkStyle42HTML">Codice HTML</a></li>
+					<li><a href="#LinkStyle42CSS">Codice CSS</a></li>
+				</ul>
+			</li>
+			<li><a href="#LinkStyle43">Pagina WORKS</a>
+				<ul>
+					<li><a href="#LinkStyle43HTML">Codice HTML</a></li>
+					<li><a href="#LinkStyle43CSS">Codice CSS</a></li>
+				</ul>
+			</li>
+			<li><a href="#LinkStyle44">Pagina RESUME</a>
+				<ul>
+					<li><a href="#LinkStyle44HTML">Codice HTML</a></li>
+					<li><a href="#LinkStyle44CSS">Codice CSS</a></li>
+				</ul>
+			</li>
+			<li><a href="#LinkStyle45">Pagina CONTACTS</a>
+				<ul>
+					<li><a href="#LinkStyle45HTML">Codice HTML</a></li>
+					<li><a href="#LinkStyle45CSS">Codice CSS</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+
+&nbsp;
+&nbsp;
+
+<!--Pagina di Base-->
+<h2>1. Pagina di Base</h2><a name="LinkStyle1"></a>
+<p align="justify">La pagina di base, ovvero quella che rimane la stessa su tutte le pagine del sito, come un blog standard è composta di 3 sezioni: Header, Main section e Footer.</p>
+<p align="center"><img src="../uploads/2016/01/Style01.jpg" height="400"/><img src="../uploads/2016/01/Style02.jpg" height="400"/></p>
+
+&nbsp;
+
+<h3>Importare gli stili di bootstrap e lo stile creato</h3>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;&lt;!--Utilizzare la grandezza del dispositivo--&gt;
+&lt;link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"&gt;&lt;!--Stili di bootstrap--&gt;
+&lt;link rel="stylesheet" href="style.css"&gt;	&lt;!--Mio stile aggiuntivo--&gt;
+&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"&gt;&lt;/script&gt;	&lt;!--Bootstrap--&gt;</pre>
+
+<h3>Codice HTML</h3><a name="LinkStyle1HTML"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;body&gt;
+&lt;!-- Header --&gt;
+  &lt;nav class="navbar navbar-default navbar-fixed-top" role="navigation"&gt;
+    &lt;div class="container"&gt;
+      &lt;div class="navbar-header"&gt;...&lt;/div&gt;&lt;!-- Logo --&gt;
+      &lt;div class="collapse navbar-collapse" id="mainNavbar"&gt;...&lt;/div&gt;&lt;!-- Menu Items --&gt;
+    &lt;/div&gt;
+  &lt;/nav&gt;
+
+&lt;!-- Main Section --&gt;
+  ...
+
+&lt;!-- Footer --&gt;
+  &lt;footer class="container-fluid text-center"&gt;
+    &lt;p&gt;All works © Nome Cognome 2016.&lt;br&gt;
+    Please do not reproduce without the expressed written consent of Nome Cognome.&lt;/p&gt;
+  &lt;/footer&gt;
+
+&lt;/body&gt;</pre>
+
+<h3>Codice CSS</h3><a name="LinkStyle1CSS"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="css">
+	body {
+    padding-top: 50px;  /*Per lasciare spazio alla NavBar*/
+    font: 400 15px Lato, sans-serif;
+    line-height: 1.8;
+}
+.bg-grey {
+    background-color: #f6f6f6;
+}
+</pre>
+
+&nbsp;
+&nbsp;
+
+<!--HEADER-->
+<h2>2. HEADER</h2><a name="LinkStyle2"></a>
+<p align="justify">L’header, ovvero la sezione di pagina che compare in alto è di colore blu chiaro e contiene al suo interno il Logo del sito e il menu contenente il link alle varie pagine, entrambi sono posti nella stessa riga.
+Grazie a bootstrap se lo schermo del dispositivo è piccolo il menù scopare e al suo posto compare un bottone che se premuto fa scorrere il menu in basso.</p>
+<p align="center"><img src="../uploads/2016/01/Style03.jpg" height="40"/></p>
+<p align="center"><img src="../uploads/2016/01/Style04.jpg" height="50"/></p>
+<p align="center"><img src="../uploads/2016/01/Style05.jpg" height="200"/></p>
+
+<h3>Codice HTML</h3><a name="LinkStyle2HTML"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;nav class="navbar navbar-default navbar-fixed-top" role="navigation"&gt;
+  &lt;div class="container"&gt;
+    &lt;div class="navbar-header"&gt;...&lt;/div&gt;&lt;!-- Logo --&gt;
+    &lt;div class="collapse navbar-collapse" id="mainNavbar"&gt;...&lt;/div&gt;&lt;!-- Menu Items --&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;</pre>
+
+<h3>Codice CSS</h3><a name="LinkStyle2CSS"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="css">
+.navbar {
+    margin-bottom: 0;
+    background-color: #67b0d1;    /*Sfondo di colore Azzurro*/
+    z-index: 9999;
+    border: 0;
+    font-size: 18px !important;
+    line-height: 1.42857143 !important;
+    letter-spacing: 2px;
+    border-radius: 0;
+    font-family: Montserrat, sans-serif;
+}
+</pre>
+
+&nbsp;
+
+<!--LOGO DEL SITO-->
+<h3>2.1. LOGO DEL SITO</h3><a name="LinkStyle21"></a>
+<p align="justify">Questo è composto da un link in font “bold 28px” del font “Montserrat, sans-serif”, ma è possibile metterci anche un immagine.</p>
+<p align="center"><img src="../uploads/2016/01/Style06.jpg" height="130"/></p>
+
+<h4>Codice HTML</h4><a name="LinkStyle21HTML"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;div class="navbar-header"&gt;
+  &lt;!-- Bottone che sostituisce la lista  --&gt;
+  &lt;button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavbar"&gt;
+    &lt;span class="icon-bar"&gt;&lt;/span&gt;
+    &lt;span class="icon-bar"&gt;&lt;/span&gt;
+    &lt;span class="icon-bar"&gt;&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;a class="navbar-brand" href="index.php"&gt;TitoloSito&lt;/a&gt;
+&lt;/div&gt;</pre>
+
+<h4>Codice CSS</h4><a name="LinkStyle21CSS"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="css">
+.navbar .navbar-brand {
+    color: #fff !important;
+    font-weight: bold;
+    font-size: 28px !important;
+}
+</pre>
+
+&nbsp;
+
+<!--NAVIGATION MENU-->
+<h3>2.2. NAVIGATION MENU</h3><a name="LinkStyle22"></a>
+<p align="justify">Il navigation menu è composto da una lista contenente diversi link alle pagine anch’esso di colore azzurro.
+Quando si passa sopra col mouse ad un elemento della lista, questo diventa più chiaro.
+Se lo schermo del dispositivo è piccolo il navigation menu scompare e appare al suo posto un bottone che se premuto fa comparire il navigation menu sotto forma di lista.</p>
+<p align="center"><img src="../uploads/2016/01/Style08.jpg" height="100"/></p>
+<p align="center"><img src="../uploads/2016/01/Style05.jpg" height="200"/></p>
+
+<h4>Codice HTML</h4><a name="LinkStyle22HTML"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;div class="collapse navbar-collapse" id="mainNavbar"&gt;
+  &lt;ul class="nav navbar-nav navbar-right"&gt;
+          &lt;li class="active"&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="#"&gt;Page 1&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="#"&gt;Page 2&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="#"&gt;Page 3&lt;/a&gt;&lt;/li&gt;
+    	&lt;/ul&gt;
+&lt;/div&gt;</pre>
+
+<h4>Codice CSS</h4><a name="LinkStyle22CSS"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="css">
+/*Elementi menu navbar*/
+.navbar-default .navbar-nav li a{
+    color: #fff !important;
+    transition: all .2s ease-in-out;
+    transition-property: all;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+    transition-delay: initial;
+}
+
+/*Quando si clicca sugli elementi del menu navbar*/
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.active>a:focus,
+.navbar-default .navbar-nav>.active>a:hover,
+.navbar-default .navbar-nav li a:hover,
+.navbar-default .navbar-nav li a:focus{
+    background-color: rgba(255,255,255,.2);
+    color: #fff;    /*Testo di colore bianco*/
+}
+
+/*Bottone della navbar*/
+.navbar-default .navbar-toggle {
+    border-color: transparent;
+    color: #fff !important; /*Sfondo di colore bianco*/
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff; /*Testo di colore bianco*/
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus{
+     background-color: rgba(255,255,255,.2);
+}
+</pre>
+
+&nbsp;
+&nbsp;
+
+<!--FOOTER-->
+<h2>3. FOOTER</h2><a name="LinkStyle3"></a>
+<p align="justify">Il footer è quella parte di pagina di colore azzurro collocata alla fine della pagina, e contiene il nome dell’autore del sito e i copyright.</p>
+<p align="center"><img src="../uploads/2016/01/Style09.jpg" height="70"/></p>
+
+<h3>Codice HTML</h3><a name="LinkStyle3HTML"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;footer class="container-fluid text-center"&gt;
+  &lt;p&gt;All works © Stefano Ivancich 2016.&lt;br&gt;
+  	Please do not reproduce without the expressed written consent of Stefano Ivancich.&lt;/p&gt;
+&lt;/footer&gt;</pre>
+
+<h3>Codice CSS</h3><a name="LinkStyle3CSS"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="css">
+footer{
+    background-color: #67b0d1;    /*Sfondo di colore Azzurro*/
+    color: #fff;    /*Testo di colore bianco*/
+}
+</pre>
+
+&nbsp;
+&nbsp;
+
+<!--MAIN SECTION-->
+<h2>4. MAIN SECTION</h2><a name="LinkStyle4"></a>
+<p align="justify">La main section, di sfondo bianco, possiede il testo e diversi contenuti scelti dall’utente.
+Al suo interno ci sono diversi tipi di pagina:
+<ul>
+	<li>HOME: dove appare un elenco di tutti gli articoli creati dall’utente</li>
+	<li>POST: dove viene mostrato l’articolo</li>
+	<li>WORKS: dove appare una lista degli articoli con tanto di breve descrizione</li>
+	<li>RESUME: pagina dedicata al curriculum</li>
+	<li>CONTACTS: dove sono presenti l’indirizzi e-mail, numeri di telefono e altri vari contatti</li>
+</ul></p>
+
+<h3>Codice CSS</h3><a name="LinkStyle4CSS"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="css">
+.centered{
+    margin: 0 auto;
+    display: block;
+    max-width: 900px;
+}
+</pre>
+
+&nbsp;
+
+<!--Pagina HOME-->
+<h3>4.1. Pagina HOME</h3><a name="LinkStyle41"></a>
+<p align="justify">La pagina HOME contiene un Carousel, ovvero una sequenza di immagini a scorrimento, e una lista con immagini di grandezza 300x170px degli articoli, con titolo dell’articolo e data di pubblicazione.</p>
+<p align="center"><img src="../uploads/2016/01/Style10.jpg" height="500"/></p>
+
+<h4>Codice HTML</h4><a name="LinkStyle41HTML"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;!-- Carousel --&gt;
+&lt;div class="container-fluid bg-grey"&gt;
+  &lt;div id="myCarousel" class="carousel slide centered bg-grey" data-ride="carousel"&gt;
+    &lt;!-- Indicators --&gt;
+    &lt;ol class="carousel-indicators"&gt;
+      &lt;li data-target="#myCarousel" data-slide-to="0" class="active"&gt;&lt;/li&gt;
+      &lt;li data-target="#myCarousel" data-slide-to="1"&gt;&lt;/li&gt;
+      &lt;li data-target="#myCarousel" data-slide-to="2"&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+
+    &lt;!-- Wrapper for slides --&gt;
+    &lt;div class="carousel-inner" role="listbox"&gt;
+      &lt;div class="item active"&gt;
+        &lt;img src="LinkImmagine" class="center-block"&gt;
+        &lt;div class="carousel-caption"&gt;
+          &lt;h3&gt;TITOLO ARTICOLO&lt;/h3&gt;
+          &lt;p&gt;Breve descrizione&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class="item active"&gt;
+        &lt;img src="LinkImmagine" class="center-block"&gt;
+        &lt;div class="carousel-caption"&gt;
+          &lt;h3&gt;TITOLO ARTICOLO&lt;/h3&gt;
+          &lt;p&gt;Breve descrizione&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class="item active"&gt;
+        &lt;img src="LinkImmagine" class="center-block"&gt;
+        &lt;div class="carousel-caption"&gt;
+          &lt;h3&gt;TITOLO ARTICOLO&lt;/h3&gt;
+          &lt;p&gt;Breve descrizione&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Left and right controls --&gt;
+    &lt;a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"&gt;
+      &lt;span class="glyphicon glyphicon-chevron-left" aria-hidden="true"&gt;&lt;/span&gt;
+      &lt;span class="sr-only"&gt;Previous&lt;/span&gt;
+    &lt;/a&gt;
+    &lt;a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"&gt;
+      &lt;span class="glyphicon glyphicon-chevron-right" aria-hidden="true"&gt;&lt;/span&gt;
+      &lt;span class="sr-only"&gt;Next&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="container-fluid text-center bg-grey"&gt;
+  &lt;div class="row centered"&gt;
+    &lt;h2&gt;Works&lt;/h2&gt;
+    &lt;h4&gt;What I have created&lt;/h4&gt;
+
+    &lt;!-- Articoli--&gt;
+    &lt;div class="col-sm-4"&gt;
+      &lt;div class="thumbnail"&gt;
+        &lt;a href="linkPost"&gt;&lt;img src="Immagine300x170"&gt;&lt;/a&gt;
+        &lt;p&gt;&lt;a href="linkPost"&gt;&lt;strong&gt;Titolo&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;Pubblicato il data&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+
+<h4>Codice CSS</h4><a name="LinkStyle41CSS"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="css">
+/***************** CAROUSEL *********************************/
+.carousel-inner img {
+    -webkit-filter: grayscale(90%);
+    filter: grayscale(90%); /* make all photos black and white */
+    width: 100%; /* Set width to 100% */
+    margin: auto;
+}
+
+.carousel-caption h3 {
+    color: #67b0d1 !important;  /*Azzurro*/
+    font-size: 60px;
+    font-weight: bold;
+}
+
+.carousel-caption p {
+    color: black !important;  /*Azzurro*/
+    font-size: 40px;
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    .carousel-caption {
+        display: none; /* Hide the carousel text when the screen is less than 600 pixels wide */
+    }
+}
+
+/********************HOME***********************/
+.thumbnail {
+    padding: 0 0 15px 0;
+    border: none;
+    border-radius: 0;
+}
+
+.thumbnail img {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+}
+.thumbnail img:hover{
+    opacity: 0.3;
+}
+</pre>
+
+&nbsp;
+
+<!--Pagina POST-->
+<h3>4.2. Pagina POST</h3><a name="LinkStyle42"></a>
+<p align="justify">Pagina in cui appare l’articolo con il suo contenuto.</p>
+<p align="center"><img src="../uploads/2016/01/Style11.jpg" height="250"/></p>
+
+<h4>Codice HTML</h4><a name="LinkStyle42HTML"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;div class="container-fluid centered post"&gt;
+  &lt;article&gt;
+    &lt;header&gt;
+      &lt;hgroup&gt;
+        &lt;h1&gt;Titolo articolo&lt;/h1&gt;
+        &lt;h3&gt;Pubblicato il Data&lt;/h3&gt;
+      &lt;/hgroup&gt;
+    &lt;/header&gt;
+    &lt;hr&gt;
+    ...CONTENUTO...
+  &lt;/article&gt;
+&lt;/div&gt;</pre>
+
+<h4>Codice CSS</h4><a name="LinkStyle42CSS"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="css">
+.post h1{
+    margin-bottom: 0px;       /*Margine per togliere lo spazio tra un titolo e quello sotto*/
+}
+.post h2{
+    margin-bottom: 0px;       /*Margine per togliere lo spazio tra un titolo e quello sotto*/
+    margin-top: 0px;
+}
+.post h3{
+    color:#8d8d8d;  /*Grigio chiaro*/
+    margin-bottom: 0px;       /*Margine per togliere lo spazio tra un titolo e quello sotto*/
+    margin-top: 0px;
+}
+.post p{
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+</pre>
+
+&nbsp;
+
+<!--Pagina WORKS-->
+<h3>4.3. Pagina WORKS</h3><a name="LinkStyle43"></a>
+<p align="justify">Pagina dove appare una lista degli articoli con una breve descrizione divisi per anno.
+Esempio:</p>
+<p align="center"><img src="../uploads/2016/01/Style12.jpg" height="450"/></p>
+
+<h4>Codice HTML</h4><a name="LinkStyle43HTML"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;div class="container-fluid centered works"&gt;
+  &lt;h1&gt;Works&lt;/h1&gt;
+  &amp;nbsp;
+  &lt;h4 align="center"&gt;Anno&lt;/h4&gt;
+
+  &lt;div class="row"&gt;
+    &lt;div class="col-xs-4 col-sm-2"&gt;
+      &lt;a href="LinkArticolo"&gt;&lt;img src="LinkImmagine" width="100" /&gt;&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class="col-xs-8 col-sm-10"&gt;
+      &lt;a href="LinkArticolo"&gt;
+        &lt;h2&gt;Titolo Articolo&lt;/h2&gt;
+      &lt;/a&gt;
+      &lt;h3&gt;Breve Descrizione&lt;/h3&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  ...
+
+&lt;/div&gt;</pre>
+
+<h4>Codice CSS</h4><a name="LinkStyle43CSS"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="css">
+.works .row{
+    margin-bottom: 10px;    /*Margine per distanziare gli elementi della lista*/
+}
+.works img{
+    opacity: 1;
+}
+.works img:hover{
+    opacity: 0.3;
+}
+.works h1{
+    font:bold 36px Arial;
+    color: #222c36;             /*Grigio scurissimo*/
+}
+.works h2{
+    font:bold 18px Arial;
+    color: #222c36;             /*Grigio scurissimo*/
+    margin-bottom: -20px;       /*Margine per togliere lo spazio tra un titolo e quello sotto*/
+    margin-top:-10px;
+}
+.works h2:hover{
+    font:bold 18px Arial;
+    color:#3B5998;              /*Sfondo blu*/
+}
+.works h3{
+    font:14px Arial;
+    color:#8d8d8d;              /*Grigio chiaro*/
+}
+.works h4{
+    font:bold 24px Arial;
+    color: #222c36;             /*Grigio scurissimo*/
+}
+</pre>
+
+&nbsp;
+
+<!--Pagina RESUME-->
+<h3>4.4. Pagina RESUME</h3><a name="LinkStyle44"></a>
+<p align="justify">Pagina dedicata al curriculum.
+Esempio:</p>
+<p align="center"><img src="../uploads/2016/01/Style13.jpg" height="650"/></p>
+
+<h4>Codice HTML</h4><a name="LinkStyle44HTML"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;div class="container centered resume"&gt;
+  &lt;div class="row"&gt;	&lt;!--riga--&gt;
+    &lt;div class="col-sm-8"&gt;
+      &lt;h1&gt;Ivancich Stefano&lt;/h1&gt;
+      &lt;h3&gt;&lt;small&gt;Computer Engineering student at the University of Padova&lt;/small&gt;&lt;/h3&gt;
+      &lt;h4&gt;Mestre, Venice, Italy&lt;/h4&gt;
+    &lt;/div&gt;
+    &lt;div class="col-sm-4"&gt;
+      &lt;a href="http://stefan95.altervista.org../uploads/2015/12/IvancichStefanoCV.pdf"&gt;&lt;img src="../uploads/2016/01/DownloadCV.png" height="125"&gt;&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &amp;nbsp;
+  &lt;h2&gt;WORK EXPERIENCE&lt;/h2&gt;
+  &lt;hr&gt;
+
+  &lt;div class="row"&gt;	&lt;!--riga--&gt;
+    &lt;div class="col-sm-4"&gt;
+      &lt;p&gt;Marcon, Venice, Italy&lt;/p&gt;
+      &lt;h4&gt;Jun 2014 - Jul 2014&lt;/h4&gt;
+    &lt;/div&gt;
+    &lt;div class="col-sm-8"&gt;
+      &lt;p&gt;Studio Medici&lt;/p&gt;
+      &lt;h3&gt;Electronics and Software developer&lt;/h3&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &amp;nbsp;
+  &amp;nbsp;
+  &lt;h2&gt;EDUCATION&lt;/h2&gt;
+  &lt;hr&gt;
+  &lt;div class="row"&gt;	&lt;!--riga--&gt;
+    &lt;div class="col-sm-4"&gt;
+      &lt;p&gt;Padova, Italy&lt;/p&gt;
+      &lt;h4&gt;oct 2015 - present&lt;/h4&gt;
+    &lt;/div&gt;
+    &lt;div class="col-sm-8"&gt;
+      &lt;p&gt;Computer Engineering at the University of Padova&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="row"&gt;	&lt;!--riga--&gt;
+    &lt;div class="col-sm-4"&gt;
+      &lt;p&gt;Mestre, Venice, Italy&lt;/p&gt;
+      &lt;h4&gt;Sep 2010 - Jun 2015&lt;/h4&gt;
+    &lt;/div&gt;
+    &lt;div class="col-sm-8"&gt;
+      &lt;p&gt;High School ITIS C. Zuccante&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &amp;nbsp;
+  &amp;nbsp;
+  &lt;h2&gt;LANGUAGES&lt;/h2&gt;
+  &lt;hr&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-sm-12"&gt;
+      &lt;p&gt;Italian(Fluent), English(Intermediate B1)&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &amp;nbsp;
+  &amp;nbsp;
+  &lt;h2&gt;SKILLS&lt;/h2&gt;
+  &lt;hr&gt;
+  &lt;div class="row"&gt;	&lt;!--riga--&gt;
+    &lt;div class="col-sm-4"&gt;
+      &lt;h4&gt;Programmation languages&lt;/h4&gt;
+    &lt;/div&gt;
+    &lt;div class="col-sm-8"&gt;
+      &lt;p&gt;VisualBasic .NET, C/C++, Java, Assembly&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<h4>Codice CSS</h4><a name="LinkStyle44CSS"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="css">
+.resume *{
+    font:bold 16px Arial;
+    color: #222c36;             /*Grigio scurissimo*/
+
+}
+.resume p{
+    margin: 0;
+
+}
+.resume .row{
+    padding: 5px !important;
+}
+.resume hr{
+    margin: 0 auto;
+    background:rgba(0,0,0,0.4);
+    height:1;
+}
+.resume a{
+    font:16px Arial;
+    color: #222c36;             /*Grigio scurissimo*/
+}
+.resume a:hover{
+    font:bold 18px Arial;
+    color:#8d8d8d;              /*Grigio chiaro*/
+}
+.resume h1{
+    font:bold 36px Arial;
+    color: #222c36;             /*Grigio scurissimo*/
+}
+.resume h2{
+    font:bold 24px Arial;
+    color: #222c36;             /*Grigio scurissimo*/
+    margin: 0;
+}
+.resume h3{
+    font:20px Arial;
+    color:#8d8d8d;              /*Grigio chiaro*/
+    margin: 0;
+}
+.resume h4{
+    font:16px Arial;
+    color:#8d8d8d;              /*Grigio chiaro*/
+    margin: 0;
+}
+</pre>
+
+&nbsp;
+
+<!--Pagina CONTACTS-->
+<h3>4.5. Pagina CONTACTS</h3><a name="LinkStyle45"></a>
+<p align="justify">Pagina dove sono presenti l’indirizzi e-mail, numeri di telefono e altri vari contatti.
+Esempio:</p>
+<p align="center"><img src="../uploads/2016/01/Style14.jpg" height="150"/></p>
+
+<h4>Codice HTML</h4><a name="LinkStyle45HTML"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;div class="container centered resume"&gt;
+  &lt;h1&gt;Contacts&lt;/h1&gt;
+  &amp;nbsp;
+  &lt;div class="row"&gt;	&lt;!--riga--&gt;
+    &lt;div class="col-sm-4"&gt;&lt;h4&gt;E-mail&lt;/h4&gt;&lt;/div&gt;
+    &lt;div class="col-sm-8"&gt;&lt;p&gt;ivancich.stefano@gmail.com&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="row"&gt;	&lt;!--riga--&gt;
+    &lt;div class="col-sm-4"&gt;&lt;h4&gt;Skype&lt;/h4&gt;&lt;/div&gt;
+    &lt;div class="col-sm-8"&gt;&lt;p&gt;ste.iva&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="row"&gt;	&lt;!--riga--&gt;
+    &lt;div class="col-sm-4"&gt;&lt;h4&gt;InfoJobs&lt;/h4&gt;&lt;/div&gt;
+    &lt;div class="col-sm-8"&gt;&lt;p&gt;&lt;a href="https://www.infojobs.it/stefano-ivancich.prf"&gt;Stefano Ivancich&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="row"&gt;	&lt;!--riga--&gt;
+    &lt;div class="col-sm-4"&gt;&lt;h4&gt;LinkedIn&lt;/h4&gt;&lt;/div&gt;
+    &lt;div class="col-sm-8"&gt;&lt;p&gt;&lt;a href="https://it.linkedin.com/in/stefano-ivancich-283081103"&gt;Stefano Ivancich&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="row"&gt;	&lt;!--riga--&gt;
+    &lt;div class="col-sm-4"&gt;&lt;h4&gt;Facebook&lt;/h4&gt;&lt;/div&gt;
+    &lt;div class="col-sm-8"&gt;&lt;p&gt;&lt;a href="https://www.facebook.com/stefano.iva"&gt;stefano.iva&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+
+<h4>Codice CSS</h4><a name="LinkStyle45CSS"></a>
+<p align="justify">Sono state usati gli stessi stili della pagina RESUME.</p>

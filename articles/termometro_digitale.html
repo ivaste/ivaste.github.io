@@ -1,0 +1,186 @@
+<a href="../uploads/2015/01/TermometroDigitale.pdf">Scarica il documento PDF</a>
+&nbsp;
+
+<!--SOMMARIO-->
+<p align="justify">Di seguito si illustra il progetto di un termometro digitale.
+Il progetto è molto utile per capire il funzionamento delle dinamiche interne di un circuito di acquisizione dati gestito da un microcontrollore, il che diventa utilissimo per moltissime applicazioni dove è necessario acquisire valori analogici da sensori e manipolarne il segnale al fine di ottenere una misura più precisa.
+Questo sistema integra al suo interno il microcontrollore ATMega328p.
+Pur essendo un progetto artigianale e scolastico, il termometro non è molto ingombrante (6 cm di larghezza x 12.7cm di lunghezza).</p>
+<p align="center"><img src="../uploads/2015/01/Termomega1.jpg" height="400"></p>
+
+&nbsp;
+&nbsp;
+
+
+<!--INDICE-->
+<h2>Indice</h2>
+<ul>
+	<li><a href="#LinkIntroduzione">Introduzione</a></li>
+	<li><a href="#LinkSchemaABlocchi">Schema a Blocchi</a></li>
+	<li><a href="#LinkSchemaElettrico">Schema Elettrico</a></li>
+	<li><a href="#LinkAlimentazione">Alimentazione Duale</a></li>
+	<li><a href="#LinkRegolatore">Regolatore di tensione LM7805</a></li>
+	<li><a href="#LinkSensore">Sensore LM335</a></li>
+	<li><a href="#LinkCDC">Circuito di condizionamento</a>
+		<ul>
+			<li><a href="#LinkLM336">LM336</a></li>
+			<li><a href="#LinkAmplificatore">Amplificatore da strumentazione</a></li>
+			<li><a href="#LinkFiltro">Filtro LPF</a></li>
+		</ul>
+	</li>
+	<li><a href="#LinkATMega328p">ATMega328p</a></li>
+	<li><a href="#LinkLCD">LCD 16x2</a></li>
+	<li><a href="#LinkPCB">PCB</a></li>
+	<li><a href="#LinkSoftware">Software</a></li>
+	<li><a href="#LinkComponenti">Lista Componenti</a></li>
+	<li><a href="#LinkConclusioni">Conclusioni</a></li>
+</ul>
+
+&nbsp;
+
+<!--INTRODUZIONE-->
+<h2>Introduzione</h2><a name="LinkIntroduzione"></a>
+<p align="justify">Lo scopo del progetto è di realizzare un circuito in grado di acquisire la temperatura dell’ambiente tramite un sensore di mostrarla su in display LCD. Questo progetto non è quindi solo un puro e semplice esercizio, ma si tratta di un progetto con un’applicazione pratica e funzionale.</p>
+Il termometro ha le seguenti specifiche:
+<ul>
+	<li>Deve misurare un range di temperature di 0÷70°C</li>
+	<li>Deve essere gestito da un microcontrollore</li>
+	<li>Deve possedere un appropriato circuito di condizionamento</li>
+</ul>
+
+&nbsp;
+
+<!--SCHEMA A BLOCCHI-->
+<h2>Schema a blocchi</h2><a name="LinkSchemaABlocchi"></a>
+<p align="center"><img src="../uploads/2015/01/Termomega2.jpg" height="450"/></p>
+
+&nbsp;
+
+<!--SCHEMA A ELETTRICO-->
+<h2>Schema elettrico</h2><a name="LinkSchemaElettrico"></a>
+Clicca sull'immagine per ingrandirla
+<p align="center"><a href="../uploads/2015/01/SchemaElettrico.png"><img src="../uploads/2015/01/SchemaElettrico.png" height="400"/></a></p>
+
+&nbsp;
+
+<!--ALIMENTAZIONE-->
+<h2>Alimentazione Duale</h2><a name="LinkAlimentazione"></a>
+<p align="justify">L’alimentazione viene fornita da due batterie da 9V, necessaria per l’alimentazione degli operazionali.</p>
+<p align="center"><img src="../uploads/2015/01/Batteria9V.jpg" height="250"/><img src="../uploads/2015/01/Batteria9V.jpg" height="250"/></p>
+
+&nbsp;
+
+<!--Regolatore-->
+<h2>Regolatore di tensione LM7805</h2><a name="LinkRegolatore"></a>
+<p align="justify">Il regolatore di tensione LM7805 prende in ingresso la tensione di 9V della batteria e in uscita fornisce 5V necessari all’alimentazione dell’ATMega328p.</p>
+<p align="center"><img src="../uploads/2015/01/LM7805.jpg" height="250"/><img src="../uploads/2015/01/Voltage-regulator-pinout.png" height="250"/><img src="../uploads/2015/01/7805.jpg" height="250"/></p>
+
+&nbsp;
+
+<!--Sensore LM335-->
+<h2>Sensore LM335</h2><a name="LinkSensore"></a>
+<p align="justify">Questo integrato è un trasduttore di temperatura cioè in uscita fornisce una tensione proporzionale alla temperatura percepita. Questo componente è equivalente ad un diodo zener e il comportamento è regolato secondo la seguente formula:</p>
+<p align="center"><img src="../uploads/2015/01/Formula.jpg" height="50"/></p>
+<p align="justify">Dove con Vo si intende la tensione in uscita dall'LM335 e K la temperatura espressa in gradi Kelvin. Può misurare temperature che hanno un range compreso tra -223 °K (-50°C) e 423°K (150°C). Il trasduttore presenta 3 piedini: il potenziale negativo, il potenziale positivo e l'adjustment (regolazione). Quest'ultimo, infatti, serve per la taratura della Vo. Esso va collegato ad un trimmer utilizzato per calibrare la temperatura manualmente.
+In questo progetto si presume che il sensore fornisce una tensione compresa tra 2.7315V(0°C) e 3.4315V(70°C).</p>
+<p align="center"><img src="../uploads/2015/01/LM335.png" height="300"/><img src="../uploads/2015/01/Termomega3.jpg" height="300"/></p>
+
+&nbsp;
+
+<!--Circuito di condizionamento-->
+<h2>Circuito di condizionamento</h2><a name="LinkCDC"></a>
+<p align="justify">Il circuito di condizionamento prende in ingresso il segnale fornito dal sensore di temperatura LM335, lo manipola adattandolo al range dell’ADC dell’ATMega328(0-5V).
+È formato da un amplificatore da strumentazione, un filtro LPF e un riferimento di tensione di 2.7315V.</p>
+
+&nbsp;
+
+<!--LM336-->
+<h3>LM336</h3><a name="LinkLM336"></a>
+<p align="justify">E’ un integrato che fornisce un uscita stabile di 5V, in questo caso ridotti a 2.7315V mediante un partitore di tensione regolato da un trimmer.</p>
+<p align="center"><img src="../uploads/2015/01/BottomView.jpg" height="300"/><img src="../uploads/2015/01/Termomega4.jpg" height="300"/></p>
+
+&nbsp;
+
+<!--Amplificatore da strumentazione-->
+<h3>Amplificatore da strumentazione</h3><a name="LinkAmplificatore"></a>
+<p align="justify">Non è stato utilizzato un amplificatore da strumentazione integrato, ma ne è stata ricreata la struttura con 3 operazionali LM324N.</p>
+<p align="center"><img src="../uploads/2015/01/Termomega5.jpg" height="300"/></p>
+<p align="justify">L’uscita è regolata dalla seguente espressione:</p>
+<p align="center"><img src="../uploads/2015/01/Termomega6.jpg" height="50"/></p>
+
+&nbsp;
+
+<!--Filtro LPF-->
+<h3>Filtro LPF</h3><a name="LinkFiltro"></a>
+<p align="justify">Il filtro passa basso del secondo ordine posto in uscita dell’amplificatore da strumentazione elimina i disturbi in bassa frequenza.</p>
+<p align="center"><img src="../uploads/2015/01/Termomega7.jpg" height="300"/></p>
+
+&nbsp;
+
+<!--ATMega328p-->
+<h2>ATMega328p</h2><a name="LinkATMega328p"></a>
+<p align="justify">L’ATMega328p è il microcontrollore utilizzato dall’Arduino UNO, questo permette di usare codice Arduino in un progetto senza avere una intera e ingombrante scheda.
+Per utilizzare l’ATMega328p sono necessari un oscillatore al quarzo da 16Mhz, una tensione di alimentazione di 5V e una connessione seriale.
+L’ATMega328p prende in ingresso il segnale proveniente dal circuito di condizionamento, e lo mostra sul display LCD.</p>
+<p align="center"><img src="../uploads/2014/11/Atmega328.jpg" height="250"/><img src="../uploads/2015/01/atmega328_base.jpg" height="250"/><img src="../uploads/2015/01/arduinocircuit_fig12.jpg" height="250"/></p>
+
+&nbsp;
+
+<!--LCD 16x2-->
+<h2>LCD 16x2</h2><a name="LinkLCD"></a>
+<p align="justify">Questo display LCD 16x2 possiede 2 righe da 16 colonne, ovvero ciascuna riga contiene 16 caratteri. Visualizza costantemente la stringa “Temperatura: “e il valore in °C della temperatura misurata. Possiede un trimmer per regolarne il contrasto.</p>
+<p align="center"><img src="../uploads/2015/01/Temperatura.jpg" height="250"/></p>
+
+&nbsp;
+
+<!--PCB-->
+<h2>PCB</h2><a name="LinkPCB"></a>
+<p align="justify">Il pcb e gli schemi elettrici sono stati realizzati mediante l’utilizzo del software EAGLE.
+Nel top è presente il piano di massa, mentre nel bottom il piano di VCC.</p>
+<p align="center"><img src="../uploads/2015/01/PCB.jpg" height="250"/>
+<img src="../uploads/2015/01/TermometroSerigrafia.png" height="250"/>
+<img src="../uploads/2015/01/TermometroTop.png" height="250"/>
+<img src="../uploads/2015/01/TermometroBottom.png" height="250"/></p>
+
+&nbsp;
+
+<!--Software-->
+<h2>Software</h2><a name="LinkSoftware"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="enlighter">
+#include &lt;LiquidCrystal.h&gt;
+LiquidCrystal lcd(8, 9, 10, 11, 12, 13);
+float temperatura=0;
+
+void setup() {
+  lcd.begin(16, 2);
+  Serial.begin(9600);
+}
+
+void loop() {
+  float analogica=analogRead(0);
+  temperatura=(analogica*70)/1023;
+  Serial.print("Temperatura= ");
+  Serial.println(temperatura,4);
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Temperatura:");
+  lcd.setCursor(0, 1);
+  lcd.print(temperatura,1);
+  lcd.print(" C");
+  delay(2000);
+}
+
+</pre>
+
+&nbsp;
+
+<!--Lista Componenti-->
+<h2>Lista Componenti</h2><a name="LinkComponenti"></a>
+<p align="center"><img src="../uploads/2015/01/Termomega8.jpg" height="600"/></p>
+
+&nbsp;
+
+<!--Conclusioni-->
+<h2>Conclusioni</h2><a name="LinkConclusioni"></a>
+<p align="justify">Il progetto è stato concluso con successo, anche se non si era partiti nel modo migliore, visto la scarsità di componenti reperibili nel magazzino del laboratorio OEN2 dell’istituto.
+Per diminuire le dimensioni del PCB si potevano utilizzare componenti SMD, non presenti però nel magazzino della scuola, utilizzare un amplificatore da strumentazione integrato anziché ricrearne la struttura e sostituire i trimmer con dei resistori.</p>

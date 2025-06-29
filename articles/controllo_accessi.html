@@ -1,0 +1,563 @@
+<a href="../uploads/2014/07/AccessControl.pdf">Scarica il documento in PDF</a>
+
+&nbsp;
+<!--SOMMARIO-->
+<h2>SOMMARIO</h2>
+<p style="text-align: justify;">Di seguito si illustra un progetto di un dispositivo per il controllo degli accessi dei dipendenti di un azienda tramite l’uso di tessere RFid.
+Questo dispositivo integra al sui interno un Arduino YUN, un RTC DS1307, un RFid Card Reader e un buzzer.</p>
+<p style="text-align: center;"><img src="../uploads/2014/07/Acc01.jpg" alt="" height="400" /><img src="../uploads/2014/07/Acc02.jpg" alt="" height="400" /></p>
+
+&nbsp;
+&nbsp;
+
+<!--INDICE-->
+<h2>Indice</h2>
+<ul>
+	<li><a href="#LinkIntroduzione">Introduzione</a></li>
+	<li><a href="#LinkSchemaABlocchi">Schema a Blocchi</a></li>
+	<li><a href="#LinkSchemaElettrico">Schema Elettrico</a></li>
+	<li><a href="#LinkStruttura">Struttura</a></li>
+	<li><a href="#LinkAlimentazione">Alimentazione</a></li>
+	<li><a href="#LinkArduinoYUN">Arduino YUN</a></li>
+	<li><a href="#LinkRTC">RTC shield DS1307</a></li>
+	<li><a href="#LinkRFid">RFid reader RC522</a></li>
+	<li><a href="#LinkLCD">Display LCD 16x2</a></li>
+	<li><a href="#LinkBuzzer">Buzzer</a></li>
+	<li><a href="#LinkBasetta">Basetta millefori</a></li>
+	<li><a href="#LinkSoftware">Software</a>
+		<ul>
+			<li><a href="#LinkIP">Impostare l'indirizzo IP su Arduino YUN</a></li>
+			<li><a href="#LinkFunzionamento">Funzionamento</a></li>
+		</ul>
+	</li>
+	<li><a href="#LinkCodice">Codice</a></li>
+	<li><a href="#LinkComponenti">Lista Componenti</a></li>
+	<li><a href="#LinkConclusioni">Conclusioni</a></li>
+</ul>
+
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+<!--INTRODUZIONE-->
+<a name="LinkIntroduzione"><h2>Introduzione</h2></a>
+<p align="justify">L’obiettivo di questo progetto è realizzare un dispositivo che sia in grado di rilevare il codice della tessera che viene passata sopra al dispositivo stesso, inviare questo codice al server dell’azienda, attendere risposta dal server, visualizzare il nome della persona per alcuni istanti sul display LCD e inviare un segnale acustico per segnalare l’accesso valido o non valido.
+Questo progetto non è quindi solo un puro e semplice esercizio, ma si tratta di un progetto con un’applicazione pratica e funzionale proponibile al mercato.</p>
+&nbsp;
+Il dispositivo ha le seguenti specifiche:
+<ul>
+	<li>Il display LCD mostra sempre data e ora attuali.</li>
+	<li>L’ora del dispositivo viene sincronizzata con quella del server ogni 24 ore.</li>
+	<li>Acquisire i codici a 8 byte delle tessere RFid.</li>
+	<li>Inviare il codice rilevato, la data e l’ora al server.</li>
+	<li>Se il dispositivo non riesce a connettersi al server, le timbrature acquisite vengono salvate sulla memoria EEPROM e inviate al server successivamente.</li>
+	<li>Attendere dal server la risposta, se positiva si visualizza sul display il nome della persona con un segnale acustico positivo generato dal buzzer, altrimenti viene visualizzato a display la stringa “Badge non in anagrafica” con un segnale acustico negativo.</li>
+</ul>
+
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+<!--SCHEMA A BLOCCHI-->
+<a name="LinkSchemaABlocchi"><h2>Schema a blocchi</h2></a>
+<p align="center"><img src="../uploads/2014/07/Acc03.jpg" height="450"/></p>
+
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+<!--SCHEMA A ELETTRICO-->
+<a name="LinkSchemaElettrico"><h2>Schema elettrico</h2></a>
+Clicca sull'immagine per ingrandirla
+<p align="center"><a href="../uploads/2014/07/Acc04.png"><img src="../uploads/2014/07/Acc04.png" height="400"/></a></p>
+
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+<!--STRUTTURA-->
+<a name="LinkStruttura"><h2>Struttura</h2></a>
+<p align="justify">Il contenitore del circuito è stato pensato per essere attaccato ad un muro. E’ diviso in 2 parti: una interna che tiene saldi tutti i componenti e viene attaccata al muro, ed una esterna che funge da “coperchio” che protegge l’interno e fa scorgere solo il display.
+L’RFid reader è messo sotto il display e attaccato al coperchio in modo tale da poter rilevare la tessera anche dall’interno.
+E’ presente un foro nella parte superiore sinistra per far passare all’esterno il suono del buzzer.</p>
+<p align="center">
+<img src="../uploads/2014/07/Acc05.jpg" height="250"/><img src="../uploads/2014/07/Acc06.jpg" height="250"/><img src="../uploads/2014/07/Acc07.jpg" height="300"/><img src="../uploads/2014/07/Acc08.jpg" height="300"/><img src="../uploads/2014/07/Acc09.jpg" height="300"/><img src="../uploads/2014/07/Acc10.jpg" height="300"/><img src="../uploads/2014/07/Acc11.jpg" height="250"/><img src="../uploads/2014/07/Acc12.jpg" height="250"/><img src="../uploads/2014/07/Acc13.jpg" height="200"/><img src="../uploads/2014/07/Acc14.jpg" height="200"/><img src="../uploads/2014/07/Acc15.jpg" height="450"/><img src="../uploads/2014/07/Acc16.jpg" height="400"/><img src="../uploads/2014/07/Acc17.jpg" height="400"/><img src="../uploads/2014/07/Acc01.jpg" height="450"/><img src="../uploads/2014/07/Acc18.jpg" height="450"/><img src="../uploads/2014/07/Acc02.jpg" height="450"/>
+</p>
+&nbsp;
+<p align="justify">Con il software SolidWorks 2014 è stato progettato il contenitore ed infine ne è stato realizzato un prototipo con la <strong>stampante 3D.</strong></p>
+&nbsp;
+<p align="center">
+<img src="../uploads/2014/07/Acc19.jpg" height="300"/><img src="../uploads/2014/07/Acc20.jpg" height="300"/><img src="../uploads/2014/07/Acc21.jpg" height="450"/>
+</p>
+
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+<!--ALIMENTAZIONE-->
+<a name="LinkAlimentazione"><h2>Alimentazione</h2></a>
+<p align="justify">L’alimentazione viene fornita da un carica batterie con uscita microUSB 5V che viene collegato alla presa di corrente della stanza e va ad alimentare l’Arduino YUN.</p>
+<p align="center"><img src="../uploads/2014/07/Acc22.jpg" height="350"/></p>
+
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+<!--ARDUINO YUN-->
+<a name="LinkArduinoYUN"><h2>Arduino YUN</h2></a>
+<p align="justify">Arduino Yun è una scheda basata sul microcontrollore ATmega32u4 e il microprocessore Atheros AR9331, che supporta la distrubuzione Linux OpenWRT-Yun.
+In sostanza questa scheda è divisia in due parti: una parte Arduino che gestisce il display, l’RFid reader, il buzzer e l’RTC; ed una parte Linux che gestisce la comunicazione con il server tramite il cavo Ethernet.</p>
+<p align="center"><img src="../uploads/2014/07/Acc23.png" height="250"/><img src="../uploads/2014/07/Acc24.png" height="250"/></p>
+
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+<!--RTC shield DS1307-->
+<a name="LinkRTC"><h2>RTC shield DS1307</h2></a>
+<p align="justify">Basata sull’integrato DS1307 della Maxim-Dallas, questa shield per Arduino consente di avere un preciso orologio di sistema, sgravando la CPU dal calcolo e dalla gestione dei dati orari e liberando spazio nella memoria di programma.
+L'integrato DS1307 è un contatore BCD (Binary Coded Decimal) a basso consumo, che conta secondi, minuti, ore, giorni, mesi e anni, provvisto di 56 byte di RAM statica non volatile.
+Può operare nelle modalità 12 o 24 ore, con indicazione delle ore antimeridiane (AM) e di quelle pomeridiane (PM).
+Le informazioni sull’ora e la data vengono collocate in un apposito registro e trasferite al microcontrollore di Arduino mediante l’I²C-bus.</p>
+<p align="center"><img src="../uploads/2014/07/Acc25.jpg" height="350"/></p>
+
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+<!--RFid reader RC522-->
+<a name="LinkRFid"><h2>RFid reader RC522</h2></a>
+<p align="justify">Permette di leggere le schede RFID a 13.56MHz. Ogni tag RFid contiene un a stringa di 8 caratteri(8 byte).
+I tag RFid che possono essere utilizzati sono delle normali tessere aventi ognuna una stringa diversa, che vengono consegnate ai dipendenti.
+Questo RFid reader viene alimentato a 3.3V forniti dall’Arduino YUN e si interfaccia con esso tramite il bus SPI.</p>
+<p align="center"><img src="../uploads/2014/07/Acc26.jpg" height="350"/></p>
+
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+<!--Display LCD 16x2-->
+<a name="LinkLCD"><h2>Display LCD 16x2</h2></a>
+<p align="justify">Questo display LCD 16x2 possiede 2 righe da 16 colonne, ovvero ciascuna riga contiene 16 caratteri.
+Visualizza costantemente la data e l’ora attuali, quando si passa il badge si visualizza per alcuni istanti il nome della persona oppure le stringhe “Badgecode non in anagrafica” o “Non connesso al server”.</p>
+<p align="center"><img src="../uploads/2014/07/Acc27.jpg" height="350"/></p>
+
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+<!--BUZZER-->
+<a name="LinkBuzzer"><h2>Buzzer</h2></a>
+<p align="justify">Il buzzer emette un suono positivo quando il server risponde dando il nome della persona che ha timbrato il badge, un suono negativo invece quando il dispositivo non riesce a connettersi al server o quando riceve risposta che il badge non è contenuto nell’anagrafica.
+Il buzzer viene attivato tramite il controllo di un transistor NPN BC547 perché richiede una corrente di 50mA che un piedino digitale dell’Arduino YUN non è in grado di fornire.
+La frequenza per il suono acustico positivo è stata scelta di 1347Hz mentre quella per il negativo è di 200Hz.</p>
+<p align="center"><img src="../uploads/2014/07/Acc28.png" height="300"/><img src="../uploads/2014/07/Acc29.jpg" height="300"/></p>
+
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+<!--Basetta millefori-->
+<a name="LinkBasetta"><h2>Basetta millefori</h2></a>
+<p align="justify">La basetta millefori ospita 4 resistenze, 1 transistor e sbroglia la cablatura, ovvero ci sono più componenti che necessitano dei piedini di VCC e GND ma l’Arduino YUN più fornire un solo piedino di VCC e un altro paio di GND, quindi per non creare confusione con dei cavetti volanti saldati che si sdoppiano all’interno del contenitore è stato optato creare questa basetta.</p>
+<p align="center"><img src="../uploads/2014/07/Acc30.jpg" height="300"/><img src="../uploads/2014/07/Acc31.jpg" height="300"/></p>
+
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+<!--Software-->
+<a name="LinkSoftware"><h2>Software</h2></a>
+<a name="LinkIP"><h3>Impostare l'indirizzo IP su Arduino YUN</h3></a>
+<p align="justify">E’ stato scelto per l’Arduino YUN l’IP 192.168.2.20.
+Quindi:
+<ul>
+	<li>Alimentare Arduino</li>
+	<li>Dal pc connettersi tramite wifi</li>
+	<li>Da browser andare su http://arduino.local/ oppure 192.168.240.1</li>
+	<li>Andare su impostazioni avanzate, Network</li>
+	<li>Su WAN cliccare EDIT, scegliere STATIC ADDRESS ed inserire questi valori:</li>
+</ul>
+</p>
+<p align="center"><img src="../uploads/2014/07/Acc32.png" height="700"/></p>
+
+&nbsp;
+&nbsp;
+
+<a name="LinkFunzionamento"><h3>Funzionamento</h3></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic">setup():
+-	Mostro sul display la stringa "Avvio..."
+-	Inizializzo la connessione con l'arduino YUN(Bridge)
+-	Inizializzo la connessione SPI per l'RFID
+-	Inizializzo l'RFID
+-	Inizializzo la connessione I2C(Wire) per l'RTC
+-	Inizializzo l'RTC
+-	sincronizzaOra()
+
+loop():
+-	Acquisisce data/ora dall'RTC
+-	Se il giorno è diverso--&gt;sincronizzaOra();
+-	Finche ci sono dati nella EEPROM(Timbrature salvate) ed è presente la connessione al server:
+o	Leggo 28 byte(lunghezza della stringa di ogni timbratura &lt;S&gt;AAAAMMGGHHMMSSTTTTTTTT&lt;E&gt;)
+o	Invio la stringa al server
+o	Resetto i 28 indirizzi appena letti(li porto a 255)
+-	Mostro data e ora sul display
+-	Se non c'è un RFID rifai il loop, altrimenti continua
+-	Preparo la stringa da inviare
+-	Se il server è connesso:
+  - Invio della stringa al server (&lt;S&gt;AAAAMMGGHHMMSSTTTTTTTT&lt;E&gt;)
+  - Ricevo una stringa di risposta dal server:
+    - Se la stringa è valida: &lt;S&gt;OK_TTTTTTTT_NOMECOGNOME_dd/MM/yyyy HH:mm&lt;E&gt;
+      - Se i primi 2 caratteri della stringa = OK
+        - Mostro sul display la stringa ricevuta(Nome e cognome)
+        - Suono acustico del Buzzer positivo  per 2000ms
+      - Se = KO &lt;S&gt;KO_BADGECODE NON IN ANAGRAFICA&lt;E&gt;
+        - Mostro sul display la stringa ricevuta(Badge non in anagrafica)
+        - Suono acustico del Buzzer negativo per 2000ms
+- Altrimenti se il serve non è connesso:
+  - Mostro a display la stringa "Non in rete"
+  - Salvo sulla EEPROM il badge appena acquisito:
+    - Inizio a scrivere dalla prima casella vuota(!=255)
+    - Scrivo la stringa di 28 caratteri
+    - Mostro a display la stringa "Salvato" per 2000ms
+
+sincronizzaOra():
+- Se è connesso al server:
+- Invio al server la stringa "&lt;S&gt;GT&lt;E&gt;" (Get time)
+- Ricevo la stringa di risposta
+- Se la stringa è valida:
+  - Se i primi 2 caratteri della stringa = ST (Set Time):
+  - Scompongo la stringa
+  - Imposto la data e l'ora del RTC
+</pre>
+
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+<!--CODICE-->
+<a name="LinkCodice"><h2>Codice</h2></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="enlighter">/*
+  Pin:
+      Display: 7,6,5,4,12,11, GND,5V
+      RFID: 10,9,ICPS: 1,3,4,6, 3.3V
+      RTC: 2(SDA),3(SCL)
+      Buzzer: 13, GND,5V
+*/
+#include &lt;LiquidCrystal.h&gt;
+#include &lt;Wire.h&gt;
+#include "RTClib.h"
+#include &lt;YunClient.h&gt;
+#include &lt;SPI.h&gt;
+#include &lt;MFRC522.h&gt;
+//#include &lt;FileIO.h&gt;
+#include &lt;EEPROM.h&gt;
+
+#define SS_PIN 10    // PIN Sda RFID RC522
+#define RST_PIN 9    // PIN Reset RFID RC522
+MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance.
+
+IPAddress ip(192,168,1,100);
+int porta=10010;
+YunClient client;
+
+RTC_DS1307 RTC;
+int giornoSalvato=0;
+
+//int nCarattere=0;
+
+int indirizzo=0;
+
+LiquidCrystal lcd(7, 6, 5, 4, 12, 11);    // Pin utilizzati dal LCD
+
+void setup() {
+  lcd.begin(16, 2);
+  lcd.print("Avvio...");
+  Bridge.begin();
+  //FileSystem.begin();
+  //Serial.begin(9600);
+  SPI.begin();        // Init SPI bus
+  mfrc522.PCD_Init(); // Init MFRC522 card
+  Wire.begin();
+  RTC.begin();
+  RTC.sqw(1);     //0 Led off - 1 Freq 1Hz - 2 Freq 4096kHz - 3 Freq 8192kHz - 4 Freq 32768kHz
+  sincronizzaOra();
+
+  //delay(25000);
+}
+
+void sincronizzaOra(){
+  DateTime now = RTC.now();
+  if (client.connect(ip, porta)) /*Serial.println("Connesso")*/;
+  //else Serial.println("Non connesso");
+  if (client.connected()) {
+    client.print("&lt;S&gt;GT&lt;E&gt;");  // Get Time
+    //Serial.print("Stringa inviata --&gt; ");
+    //Serial.println("&lt;S&gt;GT&lt;E&gt;");
+    while(!client.available()){}
+    if(client.available()){
+      String valRicevuto=client.readString();
+      //Serial.print("Stringa ricevuta --&gt; ");
+      //Serial.println(valRicevuto);
+      if(valRicevuto.startsWith("&lt;S&gt;")&amp;&amp;valRicevuto.endsWith("&lt;E&gt;")){
+        if(valRicevuto.substring(3,5)=="ST"){
+          int anno=valRicevuto.substring(valRicevuto.indexOf("_")+1,valRicevuto.indexOf("_")+5).toInt();
+          int mese=valRicevuto.substring(valRicevuto.indexOf("_")+5,valRicevuto.indexOf("_")+7).toInt();
+          int giorno=valRicevuto.substring(valRicevuto.indexOf("_")+7,valRicevuto.indexOf("_")+9).toInt();
+          int ora=valRicevuto.substring(valRicevuto.indexOf("_")+9,valRicevuto.indexOf("_")+11).toInt();
+          int minuti=valRicevuto.substring(valRicevuto.indexOf("_")+11,valRicevuto.indexOf("_")+13).toInt();
+          int secondi=valRicevuto.substring(valRicevuto.indexOf("_")+13,valRicevuto.indexOf("_")+15).toInt();
+          RTC.adjust(DateTime((uint16_t)anno, (uint8_t)mese, (uint8_t)giorno, (uint8_t)ora, (uint8_t)minuti,(uint8_t)secondi));
+          giornoSalvato=(int)now.day();
+          //Serial.print("ORA SINCRONIZZATA ");
+        }
+      }
+    }
+    client.stop();
+  }
+}
+
+void loop() {
+  DateTime now = RTC.now();
+
+// Sincronizzazione ora:
+  if(giornoSalvato!=(int)now.day())sincronizzaOra();
+
+// Invio dati salvati su SD:
+  /*File dataFile = FileSystem.open("/mnt/sd/datalog.txt");
+  if(dataFile){
+    String stringaSD="";
+    while(dataFile.available()){
+      if (client.connect(ip, porta)){
+        if (client.connected()) {
+          dataFile.seek(nCarattere);
+          char carattereLetto=(char)dataFile.read();
+          if(carattereLetto=='\n'){
+            client.print(stringaSD);
+            stringaSD="";
+          }
+          else stringaSD+=carattereLetto;
+          nCarattere++;
+        }
+      }
+    }
+  }
+  dataFile.close();*/
+  //FileSystem.remove("/mnt/sd/datalog.txt");
+  //Process p;
+  //p.runShellCommand("rm /mnt/sd/datalog.txt");
+  //nCarattere=0;
+  String stringaLetta="";
+  indirizzo=0;
+  while(EEPROM.read(indirizzo)!=255 &amp;&amp; client.connect(ip, porta) &amp;&amp; client.connected()){  //Finche ci sono dati nella eeprom
+      //lcd.clear();
+    for(int i=0;i&lt;28;i++){  // Leggo la stringa dalla eeprom
+      stringaLetta+=(char)EEPROM.read(indirizzo);
+        //lcd.setCursor(0, 0);  // Colonna 0, riga 0
+        //lcd.print((char)EEPROM.read(indirizzo));
+        //lcd.setCursor(0, 1);
+        //lcd.print(indirizzo);
+        //delay(500);
+      indirizzo++;
+    }
+    client.print(stringaLetta);  // Invio la stringa
+      //lcd.setCursor(0, 1);
+      //lcd.print("Inviata");
+    //delay(5000);
+    stringaLetta="";  // Azzero la stringa per il prossimo badge
+    indirizzo-=28;
+    for(int i=0;i&lt;28;i++){    // Resetto gli indirizzi appena letti
+      EEPROM.write(indirizzo,(byte)255);
+        //lcd.setCursor(0, 0);
+        //lcd.print(indirizzo);
+      //delay(100);
+      indirizzo++;
+    }
+          //lcd.setCursor(0, 1);
+          //lcd.print(indirizzo);
+          //lcd.print("Azzerati");
+          //delay(500);
+    client.stop();
+
+  }
+  client.stop();
+
+
+// Mostro data e ora sul LCD:
+  String data="";
+  if(now.day()&lt;10) data+="0";
+  data+=now.day();
+  data+="-";
+  if(now.month()&lt;10) data+="0";
+  data+=now.month();
+  data+="-";
+  data+=now.year();
+  lcd.setCursor(0, 0);  // Colonna 0, riga 0
+  lcd.print(data);
+  String ora="";
+  if(now.hour()&lt;10) ora+="0";
+  ora+=now.hour();
+  ora+=":";
+  if(now.minute()&lt;10) ora+="0";
+  ora+=now.minute();
+  ora+=":";
+  if(now.second()&lt;10) ora+="0";
+  ora+=now.second();
+  lcd.setCursor(0, 1);  // Colonna 0, riga 1
+  lcd.print(ora);
+
+// Aquisisco RFID:
+  unsigned long currentMillis = millis();
+
+      // Look for new cards
+    if ( ! mfrc522.PICC_IsNewCardPresent()) return;
+    // Select one of the cards
+    if ( ! mfrc522.PICC_ReadCardSerial()) return;
+    String uid_s = "";
+    if (!mfrc522.PICC_IsNewCardPresent() &amp;&amp; !mfrc522.PICC_ReadCardSerial()) {
+      for (byte i = 0; i &lt; mfrc522.uid.size; i++) {
+        String uid_a = String(mfrc522.uid.uidByte[i] &lt; 0x10 ? "0" : "");
+        String uid_b = String(mfrc522.uid.uidByte[i], HEX);
+        uid_s = uid_a+uid_b+uid_s;
+      }
+    }
+  // Preparo la stringa da inviare:
+    String stringa="";
+    stringa+="&lt;S&gt;";
+    stringa+=now.year();
+    if(now.month()&lt;10) stringa+="0";
+    stringa+=now.month();
+    if(now.day()&lt;10) stringa+="0";
+    stringa+=now.day();
+    if(now.hour()&lt;10) stringa+="0";
+    stringa+=now.hour();
+    if(now.minute()&lt;10) stringa+="0";
+    stringa+=now.minute();
+    if(now.second()&lt;10) stringa+="0";
+    stringa+=now.second();
+    stringa+=uid_s;    // Badgecode
+    stringa+="&lt;E&gt;";
+
+    //Serial.print("RFID UID rivelato --&gt; ");
+    //Serial.println(uid_s);
+
+    lcd.clear();
+    lcd.setCursor(0, 0);  // Colonna 0, riga 0
+    lcd.print("Verifico...");
+
+  // Invio della stringa al server
+    if (client.connect(ip, porta)){
+      /*Serial.println("Connesso")*/;
+      if (client.connected()) {
+      client.print(stringa);
+      //Serial.print("Stringa inviata --&gt; ");
+      //Serial.println(stringa);
+        while(!client.available()){}
+        if(client.available()){
+          String valRicevuto=client.readString();
+          //Serial.print("Stringa ricevuta --&gt; ");
+          //Serial.println(valRicevuto);
+          if(valRicevuto.startsWith("&lt;S&gt;")&amp;&amp;valRicevuto.endsWith("&lt;E&gt;")){
+            if(valRicevuto.substring(3,5)=="OK"){
+              String s=valRicevuto.substring(15,valRicevuto.length()-3);
+              String fRow=s.substring(0,s.indexOf("_"));
+              String sRow=s.substring(s.indexOf("_")+1,s.length());
+              //Serial.println(fRow);
+              //Serial.println(sRow);
+              //Serial.println("");
+              // Scrivo su display:
+              lcd.setCursor(0, 0);  // Colonna 0, riga 0
+              lcd.print(fRow);
+              lcd.setCursor(0, 1);  // Colonna 0, riga 1
+              lcd.print(sRow);
+              // Suono acustico di accesso consentito:
+              tone(13, 1347, 1000);
+              delay(2000);
+              lcd.clear();
+            }
+            else {
+              String s=valRicevuto.substring(valRicevuto.indexOf("_")+1,valRicevuto.length()-3);
+              //Serial.println(s);
+              // Visualizzo su display:
+              lcd.setCursor(0, 0);  // Colonna 0, riga 0
+              if(s.length()&gt;15){
+                lcd.print(s.substring(0,14));
+                lcd.setCursor(0, 1);  // Colonna 0, riga 1
+                lcd.print(s.substring(14,s.length()));
+              }
+              else{
+                lcd.print(s);
+              }
+              // Suono acustico di accesso NON consentito:
+              tone(13, 220, 1000);
+              delay(2000);
+              lcd.clear();
+            }
+          }
+        }
+        client.stop();
+      }
+    }
+    else {
+      //Serial.println("Non connesso");
+      lcd.setCursor(0, 0);  // Colonna 0, riga 0
+      lcd.print("Non in rete");
+
+
+      /*File dataFile = FileSystem.open("/mnt/sd/datalog.txt", FILE_APPEND);
+         if (dataFile) {
+           dataFile.print(stringa);
+           dataFile.close();
+         }*/
+        //else Serial.println("error opening datalog.txt");
+        indirizzo=0;
+        while(EEPROM.read(indirizzo)!=255)indirizzo++;  // Inizia a scrivere dalla prima casella vuota
+        for(int i=0;i&lt;28;i++){
+          EEPROM.write(indirizzo, (byte)stringa[i]);
+          //lcd.print((int)indirizzo);
+          //lcd.print(" ");
+          //lcd.print(i);
+          //delay(100);
+          indirizzo++;
+          //lcd.setCursor(0, 0);  // Colonna 0, riga 0
+         }
+        lcd.setCursor(0, 1);  // Colonna 0, riga 0
+        lcd.print("Salvato");
+        delay(2000);
+        lcd.clear();
+    }
+    delay(500);
+}
+</pre>
+
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+<!--Lista Componenti-->
+<a name="LinkComponenti"><h2>Lista Componenti</h2></a>
+<p align="center"><img src="../uploads/2014/07/Acc33.jpg" height="400"/></p>
+
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+<!--Conclusioni-->
+<a name="LinkConclusioni"><h2>Conclusioni</h2></a>
+<p align="justify">Il progetto è stato concluso con successo.
+Durante la progettazione è stato rilevata una pecca dell’Arduino YUN, ovvero che le istruzioni software per comunicare con la parte Linux sono molto pesanti, dell’ordine di 1Kbyte – 1.5Kbyte, che gravano molto sul codice, visto che la memoria di programma utilizzabile è di soli 28kByte. Infatti le timbrature non inviate al server in caso di problemi di rete vengono salvate nella memoria EEPROM dell’ Arduino YUN e non in una memoria SD perché le istruzioni necessarie sono troppo pesanti e occupano tutta la memoria di programma.</p>

@@ -1,0 +1,57 @@
+<a href="../uploads/2015/01/CNY70.pdf">Scarica il documento PDF</a>
+
+&nbsp;
+
+<!--SOMMARIO-->
+<p align="justify">Il sensore CNY70 è un sensore di tipo ottico. Al suo interno sono presenti un diodo emettitore ad infrarosso (che lavora su una lunghezza d'onda di 950 nm) ed un foto transistor. La distanza di lettura si aggira sui 0,3 mm.</p>
+All'interno della capsula di questo sensore è montato un diodo LED che emette raggi infrarossi, invisibili all'occhio umano. Il diodo è dotato di due terminali, l'anodo (A) ed il catodo (K).
+
+Sulla stessa superficie è ubicato un foto transistor che ha la proprietà di condurre corrente fra l'emettitore (E) e il collettore (C), proporzionale alla quantità di luce che incide sulla base.
+
+Dato che sia l'emettitore sia il ricevitore dei raggi sono disposti sulla stessa superficie, è necessario che davanti ad entrambi sia presente una superficie riflettente, per fare in modo che il foto transistor possa ricevere i raggi che genera il led.
+
+La superficie riflettente deve essere situata a pochi millimetri da quella su cui sono montati emettitore e ricevitore, per far si che i raggi riflessi abbiano sufficiente intensità.
+<p align="center"><img src="../uploads/2015/01/cny70.jpg" alt="" height="300" /><img src="../uploads/2015/01/TopView.jpg" alt="" height="300" /></p>
+&nbsp;
+
+&nbsp;
+
+<!--LISTA COMPONENTI-->
+<h2>Componenti</h2>
+<ul>
+	<li>Sensore Vishay CNY70</li>
+	<li>Resistore 220Ω</li>
+	<li>Resistore 10k</li>
+	<li>Arduino</li>
+</ul>
+&nbsp;
+
+&nbsp;
+
+<!--SCHEMA ELETTRICO-->
+<h2>Schema elettrico</h2>
+Clicca sull'immagine per ingrandirla
+<p align="center"><a href="../uploads/2015/01/Schema.png"><img src="../uploads/2015/01/Schema.png" alt="" height="350" /></a></p>
+&nbsp;
+
+&nbsp;
+
+<!--CODICE ARDUINO-->
+<h2>Codice di esempio</h2>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="enlighter">void setup() {
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  Serial.println(analogRead(1)); // 0=Bianco 1023=Nero
+  delay(100);
+}</pre>
+
+&nbsp;
+
+&nbsp;
+
+<!--LINK-->
+<h2>Link utili</h2>
+<strong>Datasheet Vishay CNY70: </strong><a href="http://www.vishay.com/docs/83751/cny70.pdf">http://www.vishay.com/docs/83751/cny70.pdf</a>

@@ -1,0 +1,45 @@
+<a href="../uploads/2014/07/BuzzerArduino.pdf">Scarica il documento PDF</a>
+&nbsp;
+
+<!--SOMMARIO-->
+<p align="justify">La maggior parte dei buzzer in commercio consumano una corrente talmente elevata(&gt;20mA), che un pin dell’Arduino non può fornire. Quindi per utilizzare un buzzer con Arduino è necessario utilizzare un transistor.</p>
+<p align="center"><img src="../uploads/2014/07/BuzzerArduino.jpg" height="300"><img src="../uploads/2014/07/BuzzerArduino2.png" height="300"></p>
+&nbsp;
+&nbsp;
+
+<!--LISTA COMPONENTI-->
+<h2>Componenti</h2>
+<ul>
+ 	<li>Buzzer</li>
+ 	<li>Arduino</li>
+ 	<li>Transistor BC547 (NPN, IC=100Ma, hFE=100)</li>
+ 	<li>Resistore 10 kΩ.</li>
+</ul>
+&nbsp;
+&nbsp;
+
+<!--DIMENSIONAMENTO-->
+<h2>Dimensionameto</h2>
+<p align="justify">Per mandare in saturazione il transistor NPN deve essere soddisfatta questa condizione:</p>
+<p align="justify"><img src="../uploads/2014/07/BuzzerArduino3.jpg" height="50"></p>
+<p align="justify">Per convenzione si sceglie un valore di IB 2-5 volte maggiore.</p>
+<p align="justify">Ad esempio il buzzer scelto consuma 50mA e il transistor possiede un hFE di 100, quindi:</p>
+<p align="justify"><img src="../uploads/2014/07/BuzzerArduino4.jpg" height="50"></p>
+<p align="justify">Viene scelta IB=2mA, quindi RB=10kΩ.</p>
+&nbsp;
+&nbsp;
+
+<!--CODICE ARDUINO-->
+<h2>Codice di esempio</h2>
+<strong>tone(pin,frequenza,durata)</strong>
+&nbsp;
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">void setup() {
+
+}
+
+void loop() {
+  tone(13, 220, 1000);
+  delay(1000);
+}
+</pre>
+&nbsp;

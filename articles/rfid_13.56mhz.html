@@ -1,0 +1,93 @@
+<a href="../uploads/2014/06/Rfid.pdf">Scarica il documento PDF</a>
+
+&nbsp;
+
+<!--SOMMARIO-->
+<p align="justify">Questo dispositivo permette di leggere le schede RFID a 13.56MHz. Ogni tag RFID contiene un a stringa di 8 caratteri.</p>
+<p align="center"><img src="../uploads/2015/01/RFID.jpg" alt="" height="400" /></p>
+&nbsp;
+
+&nbsp;
+
+<!--LISTA COMPONENTI-->
+<h2>Componenti</h2>
+<ul>
+	<li>RFID RC522</li>
+	<li>Tag RFID</li>
+	<li>Arduino</li>
+</ul>
+&nbsp;
+
+&nbsp;
+
+<!--SCHEMA ELETTRICO-->
+<h2>Schema elettrico</h2>
+Clicca sull'immagine per ingrandirla
+<p align="center"><a href="../uploads/2015/01/RfidSCH.png"><img src="../uploads/2015/01/RfidSCH.png" alt="" height="400" /></a></p>
+&nbsp;
+
+&nbsp;
+
+<!--Tabella connessione piedini-->
+<h2>Tabella connessione piedini</h2>
+<p align="center"><img src="../uploads/2015/01/Tabella2.jpg" alt="" height="300" /></p>
+&nbsp;
+
+&nbsp;
+
+<!--CODICE ARDUINO-->
+<h2>Codice di esempio</h2>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="enlighter">#include &lt;SPI.h&gt;
+#include &lt;MFRC522.h&gt;
+ /*modifico i pin dei ss e rst*/
+#define SS_PIN 10
+#define RST_PIN 9
+
+MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance.
+
+long previousMillis = 0;
+long interval = 10;
+
+
+void setup() {
+  Serial.begin(9600); // Initialize serial communications with the PC
+  SPI.begin();        // Init SPI bus
+  mfrc522.PCD_Init(); // Init MFRC522 card
+  Serial.println("Avvicina il tag RFID");
+  Serial.println("In attesa di lettura...");
+}
+
+void loop() {
+  unsigned long currentMillis = millis();
+  if(currentMillis - previousMillis &gt; interval) {
+    previousMillis = currentMillis;
+      // Look for new cards
+    if ( ! mfrc522.PICC_IsNewCardPresent()) return;
+
+    // Select one of the cards
+    if ( ! mfrc522.PICC_ReadCardSerial()) return;
+
+    String uid_s = "";
+    if (!mfrc522.PICC_IsNewCardPresent() &amp;&amp; !mfrc522.PICC_ReadCardSerial()) {
+      for (byte i = 0; i &lt; mfrc522.uid.size; i++) {
+        String uid_a = String(mfrc522.uid.uidByte[i] &lt; 0x10 ? "0" : "");
+        String uid_b = String(mfrc522.uid.uidByte[i], HEX);
+        uid_s = uid_s+uid_a+uid_b;
+      }
+    }
+
+    Serial.print("RFID UID rivelato --&gt; ");
+    Serial.println(uid_s);
+    Serial.println("");
+    Serial.println();
+    Serial.println("In attesa di lettura...");
+  }
+}</pre>
+
+&nbsp;
+
+&nbsp;
+
+<!--LINK-->
+<h2>Link utili</h2>
+<strong>Libreria MFRC522: </strong><a href="https://github.com/miguelbalboa/rfid">https://github.com/miguelbalboa/rfid</a>

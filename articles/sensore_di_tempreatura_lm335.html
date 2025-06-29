@@ -1,0 +1,48 @@
+<a href="../uploads/2014/11/LM335.pdf">Scarica il documento PDF</a>
+&nbsp;
+
+<!--SOMMARIO-->
+<p align="justify">Questo integrato è un trasduttore di temperatura cioè in uscita fornisce una tensione proporzionale alla temperatura percepita. Questo componente è equivalente ad un diodo zener e il comportamento è regolato secondo la seguente formula:</p>
+<p align="center"><img src="../uploads/2014/11/Formula.jpg" height="50"/></p>
+<p align="justify">Dove con Vo si intende la tensione in uscita dall'LM335 e K la temperatura espressa in gradi Kelvin. Può misurare temperature che hanno un range compreso tra -223 °K (-50°C) e 423°K (150°C). Il trasduttore presenta 3 piedini: il potenziale negativo, il potenziale positivo e l'adjustment (regolazione). Quest'ultimo, infatti, serve per la taratura della Vo. Esso va collegato ad un trimmer utilizzato per calibrare la temperatura manualmente.</p>
+<p align="center"><img src="../uploads/2014/11/LM335.png" height="300"/><img src="../uploads/2014/11/BottomView.jpg" height="300"/></p>
+
+&nbsp;
+&nbsp;
+
+<!--LISTA COMPONENTI-->
+<h2>Componenti</h2>
+<ul>
+	<li>Resistore 6.8 kΩ.</li>
+	<li>Trimmer 10kΩ</li>
+	<li>Sensore LM335</li>
+	<li>Arduino UNO</li>
+	<li>Cavetti Jumper</li>
+</ul>
+&nbsp;
+&nbsp;
+
+<!--LISTA COMPONENTI-->
+<h2>Schema elettrico</h2>
+<p align="center"><img src="../uploads/2014/11/Schema.bmp" height="300"/></p>
+
+&nbsp;
+&nbsp;
+
+<!--CODICE ARDUINO-->
+<h2>Codice di esempio</h2>
+&nbsp;
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">
+void loop() {
+	temperatura=analogRead(0)*10*(5/1024);
+	Serial.print("Temperatura= ");
+	Serial.println(temperatura);
+	delay(1000);
+}
+</pre>
+&nbsp;
+&nbsp;
+
+<!--LINK-->
+<h2>Link utili</h2>
+<strong>Datasheet LM335: </strong><a href="http://www.ti.com/lit/ds/symlink/lm335.pdf">http://www.ti.com/lit/ds/symlink/lm335.pdf</a>&nbsp;

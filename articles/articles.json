@@ -1,7 +1,7 @@
 [
   {
     "title": "Notes of Machine Learning",
-    "filename": "machine-learning-notes.html",
+    "filename": "notes_of_machine_learning.html",
     "date": "2022-02-09",
     "tags": [
       "notes"
@@ -9,7 +9,7 @@
   },
   {
     "title": "Notes of Automata",
-    "filename": "automata-notes.html",
+    "filename": "notes_of_automata.html",
     "date": "2022-01-31",
     "tags": [
       "notes"
@@ -17,7 +17,7 @@
   },
   {
     "title": "Online Education Platform",
-    "filename": "online-education-platform.html",
+    "filename": "online_education_platform.html",
     "date": "2021-11-14",
     "tags": [
       "projects"
@@ -25,7 +25,7 @@
   },
   {
     "title": "TSP Optimization",
-    "filename": "tsp-optimization.html",
+    "filename": "tsp_optimization.html",
     "date": "2021-09-17",
     "tags": [
       "projects"
@@ -33,7 +33,7 @@
   },
   {
     "title": "IoT eCommerce",
-    "filename": "iot-ecommerce.html",
+    "filename": "iot_ecommerce.html",
     "date": "2021-08-17",
     "tags": [
       "projects"
@@ -41,7 +41,7 @@
   },
   {
     "title": "Plagiarism Detector",
-    "filename": "plagiarism-detector.html",
+    "filename": "plagiarism_detector.html",
     "date": "2021-07-31",
     "tags": [
       "projects"
@@ -49,7 +49,7 @@
   },
   {
     "title": "Notes of Artificial Intelligence",
-    "filename": "artificial-intelligence-notes.html",
+    "filename": "notes_of_artificial_intelligence.html",
     "date": "2021-07-03",
     "tags": [
       "notes"
@@ -57,7 +57,7 @@
   },
   {
     "title": "AI for FakeNews Detection in Social Media",
-    "filename": "ai-for-fake-news-detection-in-social-media.html",
+    "filename": "ai_for_fakenews_detection_in_social_media.html",
     "date": "2021-06-20",
     "tags": [
       "projects"
@@ -65,7 +65,7 @@
   },
   {
     "title": "Notes of Strategic Enterprise Management",
-    "filename": "strategic-enterprise-management-notes.html",
+    "filename": "notes_of_strategic_enterprise_management.html",
     "date": "2021-06-16",
     "tags": [
       "notes"
@@ -73,7 +73,7 @@
   },
   {
     "title": "Overview of the CoAP protocol for IoT",
-    "filename": "coap-protocol-for-iot.html",
+    "filename": "overview_of_the_coap_protocol_for_iot.html",
     "date": "2021-06-09",
     "tags": [
       "projects"
@@ -81,7 +81,7 @@
   },
   {
     "title": "Notes of Web Applications",
-    "filename": "web-applications-notes.html",
+    "filename": "notes_of_web_applications.html",
     "date": "2021-06-03",
     "tags": [
       "notes"
@@ -89,7 +89,7 @@
   },
   {
     "title": "Notes of Innovation Entrepreneurship and Finance",
-    "filename": "innovation-entrepreneurship-and-finance-notes.html",
+    "filename": "notes_of_innovation_entrepreneurship_and_finance.html",
     "date": "2021-01-19",
     "tags": [
       "notes"
@@ -97,7 +97,7 @@
   },
   {
     "title": "Key word spotting",
-    "filename": "key-word-spotting.html",
+    "filename": "key_word_spotting.html",
     "date": "2020-09-23",
     "tags": [
       "projects"
@@ -105,7 +105,7 @@
   },
   {
     "title": "Notes of Big Data",
-    "filename": "big-data-notes.html",
+    "filename": "notes_of_big_data.html",
     "date": "2020-06-26",
     "tags": [
       "notes"
@@ -113,7 +113,7 @@
   },
   {
     "title": "Notes of Bioinformatics",
-    "filename": "bioinformatics-notes.html",
+    "filename": "notes_of_bioinformatics.html",
     "date": "2020-06-22",
     "tags": [
       "notes"
@@ -121,7 +121,7 @@
   },
   {
     "title": "Network Alignment for Bioinformatics",
-    "filename": "network-alignment-for-bioinformatics.html",
+    "filename": "network_alignment_for_bioinformatics.html",
     "date": "2020-06-11",
     "tags": [
       "projects"
@@ -129,7 +129,7 @@
   },
   {
     "title": "DeepLearning Alzheimer Diagnosis",
-    "filename": "deeplearning-alzheimer-diagnosis.html",
+    "filename": "deeplearning_alzheimer_diagnosis.html",
     "date": "2019-07-04",
     "tags": [
       "projects"
@@ -137,7 +137,7 @@
   },
   {
     "title": "Dispensa di Economia",
-    "filename": "economy-notes.html",
+    "filename": "dispensa_di_economia.html",
     "date": "2019-06-30",
     "tags": [
       "notes"
@@ -145,15 +145,16 @@
   },
   {
     "title": "Notes of Electronics",
-    "filename": "electronics-notes.html",
+    "filename": "notes_of_electronics.html",
     "date": "2019-06-16",
     "tags": [
-      "notes","electronics"
+      "notes",
+      "electronics"
     ]
   },
   {
     "title": "Notes of DeepLearning",
-    "filename": "deeplearning-notes.html",
+    "filename": "notes_of_deeplearning.html",
     "date": "2019-02-10",
     "tags": [
       "notes"
@@ -161,15 +162,15 @@
   },
   {
     "title": "Gateway SMS",
-    "filename": "gateway-sms.html",
+    "filename": "gateway_sms.html",
     "date": "2019-02-03",
     "tags": [
       "projects"
     ]
   },
   {
-    "title": "Dispensa Probabilita'",
-    "filename": "probability-notes.html",
+    "title": "Dispensa Probabilita",
+    "filename": "dispensa_probabilita.html",
     "date": "2019-01-30",
     "tags": [
       "notes"
@@ -177,7 +178,7 @@
   },
   {
     "title": "Dispensa Matematica Discreta",
-    "filename": "discrete-mathematics-notes.html",
+    "filename": "dispensa_matematica_discreta.html",
     "date": "2018-11-22",
     "tags": [
       "notes"
@@ -185,7 +186,7 @@
   },
   {
     "title": "Dispensa Intelligenza Artificiale",
-    "filename": "artificial-intelligence-notes.html",
+    "filename": "dispensa_intelligenza_artificiale.html",
     "date": "2018-08-26",
     "tags": [
       "notes"
@@ -193,7 +194,7 @@
   },
   {
     "title": "TakeThePill - Android App",
-    "filename": "takethepill-android-app.html",
+    "filename": "takethepill_android_app.html",
     "date": "2018-07-12",
     "tags": [
       "projects"
@@ -201,7 +202,7 @@
   },
   {
     "title": "Dispensa Reti di calcolatori",
-    "filename": "computer-networks-notes.html",
+    "filename": "dispensa_reti_di_calcolatori.html",
     "date": "2018-06-24",
     "tags": [
       "notes"
@@ -209,7 +210,7 @@
   },
   {
     "title": "Dispensa Sistemi Embedded",
-    "filename": "embedded-systems-notes.html",
+    "filename": "dispensa_sistemi_embedded.html",
     "date": "2018-06-22",
     "tags": [
       "notes"
@@ -217,7 +218,7 @@
   },
   {
     "title": "Fake News Detection",
-    "filename": "fake-news-detection.html",
+    "filename": "fake_news_detection.html",
     "date": "2018-05-18",
     "tags": [
       "projects"
@@ -225,7 +226,7 @@
   },
   {
     "title": "Database Home Renting",
-    "filename": "database-home-renting.html",
+    "filename": "database_home_renting.html",
     "date": "2018-02-21",
     "tags": [
       "projects"
@@ -233,7 +234,7 @@
   },
   {
     "title": "Dispensa Project Management",
-    "filename": "project-management-notes.html",
+    "filename": "dispensa_project_management.html",
     "date": "2018-02-08",
     "tags": [
       "notes"
@@ -241,7 +242,7 @@
   },
   {
     "title": "Dispensa Basi di Dati",
-    "filename": "database-notes.html",
+    "filename": "dispensa_basi_di_dati.html",
     "date": "2018-01-27",
     "tags": [
       "notes"
@@ -249,7 +250,7 @@
   },
   {
     "title": "Dispensa Sistemi Operativi",
-    "filename": "operating-systems-notes.html",
+    "filename": "dispensa_sistemi_operativi.html",
     "date": "2017-08-17",
     "tags": [
       "notes"
@@ -257,7 +258,7 @@
   },
   {
     "title": "Fluxus - App Android",
-    "filename": "fluxus-android-app.html",
+    "filename": "fluxus_app_android.html",
     "date": "2016-02-26",
     "tags": [
       "projects"
@@ -265,7 +266,7 @@
   },
   {
     "title": "WebSite con Bootstrap",
-    "filename": "website-with-bootstrap.html",
+    "filename": "website_con_bootstrap.html",
     "date": "2016-01-16",
     "tags": [
       "projects"
@@ -273,199 +274,248 @@
   },
   {
     "title": "DEFO Fires",
-    "filename": "defo-fires.html",
+    "filename": "defo_fires.html",
     "date": "2015-06-29",
     "tags": [
-      "projects","electronics"
+      "projects",
+      "electronics"
     ]
   },
   {
     "title": "Sensore di temperatura LM35",
-    "filename": "temperature-sensor-lm35.html",
+    "filename": "sensore_di_temperatura_lm35.html",
     "date": "2015-05-31",
-    "tags": ["electronics"]
+    "tags": [
+      "electronics"
+    ]
   },
   {
     "title": "Automobile Bluetooth",
-    "filename": "automobile-bluetooth.html",
+    "filename": "automobile_bluetooth.html",
     "date": "2015-05-17",
     "tags": [
-      "projects","electronics"
+      "projects",
+      "electronics"
     ]
   },
   {
     "title": "Stile CSS",
-    "filename": "css-style.html",
+    "filename": "stile_css.html",
     "date": "2015-03-15",
-    "tags": ["electronics"]
+    "tags": [
+      "electronics"
+    ]
   },
   {
     "title": "Shield Bluetooth Arduino",
-    "filename": "shield-bluetooth-arduino.html",
+    "filename": "shield_bluetooth_arduino.html",
     "date": "2015-02-15",
-    "tags": ["electronics"]
+    "tags": [
+      "electronics"
+    ]
   },
   {
     "title": "Mouse Arduino",
-    "filename": "mouse-arduino.html",
+    "filename": "mouse_arduino.html",
     "date": "2015-02-08",
-    "tags": ["electronics"]
+    "tags": [
+      "electronics"
+    ]
   },
   {
     "title": "Servomotori e Arduino",
-    "filename": "servomotors-and-arduino.html",
+    "filename": "servomotori_e_arduino.html",
     "date": "2015-01-25",
-    "tags": ["electronics"]
+    "tags": [
+      "electronics"
+    ]
   },
   {
     "title": "Termometro Digitale",
-    "filename": "digital-thermometer.html",
+    "filename": "termometro_digitale.html",
     "date": "2015-01-11",
     "tags": [
-      "projects","electronics"
+      "projects",
+      "electronics"
     ]
   },
   {
     "title": "Microcontrollore Atmega328p",
-    "filename": "atmega328p-microcontroller.html",
+    "filename": "microcontrollore_atmega328p.html",
     "date": "2014-11-22",
-    "tags": ["electronics"]
+    "tags": [
+      "electronics"
+    ]
   },
   {
     "title": "Sensore di tempreatura LM335",
-    "filename": "lm335-temperature-sensor.html",
+    "filename": "sensore_di_tempreatura_lm335.html",
     "date": "2014-11-01",
-    "tags": ["electronics"]
+    "tags": [
+      "electronics"
+    ]
   },
   {
     "title": "Controllo Accessi Mobile",
-    "filename": "mobile-access-control.html",
+    "filename": "controllo_accessi_mobile.html",
     "date": "2014-07-31",
     "tags": [
-      "projects","electronics"
+      "projects",
+      "electronics"
     ]
   },
   {
     "title": "GSM e GPS con Arduino",
-    "filename": "gsm-and-gps-with-arduino.html",
+    "filename": "gsm_e_gps_con_arduino.html",
     "date": "2014-07-27",
-    "tags": ["electronics"]
+    "tags": [
+      "electronics"
+    ]
   },
   {
     "title": "SDCard con Arduino",
-    "filename": "sdcard-with-arduino.html",
+    "filename": "sdcard_con_arduino.html",
     "date": "2014-07-20",
-    "tags": ["electronics"]
+    "tags": [
+      "electronics"
+    ]
   },
   {
     "title": "Controllo Accessi",
-    "filename": "access-control.html",
+    "filename": "controllo_accessi.html",
     "date": "2014-07-13",
     "tags": [
-      "projects","electronics"
+      "projects",
+      "electronics"
     ]
   },
   {
     "title": "Buzzer Arduino",
-    "filename": "buzzer-arduino.html",
+    "filename": "buzzer_arduino.html",
     "date": "2014-07-07",
-    "tags": ["electronics"]
+    "tags": [
+      "electronics"
+    ]
   },
   {
     "title": "RTC DS1307",
-    "filename": "ds1307-rtc.html",
+    "filename": "rtc_ds1307.html",
     "date": "2014-07-03",
-    "tags": ["electronics"]
+    "tags": [
+      "electronics"
+    ]
   },
   {
     "title": "RFid 13.56MHz",
-    "filename": "rfid-13-56mhz.html",
+    "filename": "rfid_13_56mhz.html",
     "date": "2014-06-28",
-    "tags": ["electronics"]
+    "tags": [
+      "electronics"
+    ]
   },
   {
     "title": "LCD 16x2",
-    "filename": "lcd-16x2.html",
+    "filename": "lcd_16x2.html",
     "date": "2014-06-24",
-    "tags": ["electronics"]
+    "tags": [
+      "electronics"
+    ]
   },
   {
     "title": "Arduino YUN",
-    "filename": "arduino-yun.html",
+    "filename": "arduino_yun.html",
     "date": "2014-06-21",
-    "tags": ["electronics"]
+    "tags": [
+      "electronics"
+    ]
   },
   {
     "title": "PIClock Orologio Digitale",
-    "filename": "piclock-digital-clock.html",
+    "filename": "piclock_orologio_digitale.html",
     "date": "2014-05-31",
     "tags": [
-      "projects","electronics"
+      "projects",
+      "electronics"
     ]
   },
   {
     "title": "Robot RescueB 2014",
-    "filename": "robot-rescueb-2014.html",
+    "filename": "robot_rescueb_2014.html",
     "date": "2014-04-20",
     "tags": [
-      "projects","electronics"
+      "projects",
+      "electronics"
     ]
   },
   {
     "title": "Bussola HMC5883L",
-    "filename": "compass-hmc5883l.html",
+    "filename": "bussola_hmc5883l.html",
     "date": "2014-03-30",
-    "tags": ["electronics"]
+    "tags": [
+      "electronics"
+    ]
   },
   {
     "title": "Accelerometro ADXL345",
-    "filename": "accelerometer-adxl345.html",
+    "filename": "accelerometro_adxl345.html",
     "date": "2014-03-23",
-    "tags": ["electronics"]
+    "tags": [
+      "electronics"
+    ]
   },
   {
     "title": "Sensore Luminosita CNY70",
-    "filename": "light-sensor-cny70.html",
+    "filename": "sensore_luminosita_cny70.html",
     "date": "2014-03-16",
-    "tags": ["electronics"]
+    "tags": [
+      "electronics"
+    ]
   },
   {
     "title": "MLX90614 Temperatura",
-    "filename": "mlx90614-temperature-sensor.html",
+    "filename": "mlx90614_temperatura.html",
     "date": "2014-03-09",
-    "tags": ["electronics"]
+    "tags": [
+      "electronics"
+    ]
   },
   {
     "title": "Light Follower",
-    "filename": "light-follower.html",
+    "filename": "light_follower.html",
     "date": "2014-02-27",
     "tags": [
-      "projects","electronics"
+      "projects",
+      "electronics"
     ]
   },
   {
     "title": "Infrarossi GP2Y0A21",
-    "filename": "infrared-gp2y0a21.html",
+    "filename": "infrarossi_gp2y0a21.html",
     "date": "2014-02-16",
-    "tags": ["electronics"]
+    "tags": [
+      "electronics"
+    ]
   },
   {
     "title": "Alimentatore stabilizzato",
-    "filename": "stabilized-power-supply.html",
+    "filename": "alimentatore_stabilizzato.html",
     "date": "2014-01-29",
     "tags": [
-      "projects","electronics"
+      "projects",
+      "electronics"
     ]
   },
   {
     "title": "Microcontrollore ATtiny",
-    "filename": "atmega328p-microcontroller.html",
+    "filename": "microcontrollore_attiny.html",
     "date": "2013-12-28",
-    "tags": ["electronics"]
+    "tags": [
+      "electronics"
+    ]
   },
   {
     "title": "Sito Web",
-    "filename": "website-with-bootstrap.html",
+    "filename": "sito_web.html",
     "date": "2013-10-15",
     "tags": [
       "projects"
@@ -473,28 +523,35 @@
   },
   {
     "title": "Ultrasuoni RaspberryPI",
-    "filename": "ultrasound-raspberrypi.html",
+    "filename": "ultrasuoni_raspberrypi.html",
     "date": "2013-08-26",
-    "tags": ["electronics"]
+    "tags": [
+      "electronics"
+    ]
   },
   {
     "title": "Web Server Linux",
-    "filename": "linux-web-server.html",
+    "filename": "web_server_linux.html",
     "date": "2013-07-25",
-    "tags": ["electronics"]
+    "tags": [
+      "electronics"
+    ]
   },
   {
     "title": "Radar con Arduino",
-    "filename": "radar-with-arduino.html",
+    "filename": "radar_con_arduino.html",
     "date": "2013-05-30",
     "tags": [
-      "projects","electronics"
+      "projects",
+      "electronics"
     ]
   },
   {
     "title": "Ultrasuoni Arduino",
-    "filename": "ultrasound-arduino.html",
+    "filename": "ultrasuoni_arduino.html",
     "date": "2013-04-29",
-    "tags": ["electronics"]
+    "tags": [
+      "electronics"
+    ]
   }
 ]

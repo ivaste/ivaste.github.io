@@ -1,0 +1,647 @@
+<a href="../uploads/2015/03/StileCSS.pdf">Scarica il documento PDF</a>
+&nbsp;
+
+<!--SOMMARIO-->
+<p align="center"><img src="../uploads/2015/03/Style00.jpg" height="600"/></p>
+
+&nbsp;
+&nbsp;
+
+<!--INDICE-->
+<h2>Indice</h2>
+<ul>
+	<li><a href="#LinkStyle1">Pagina di Base</a>
+		<ul>
+			<li><a href="#LinkStyle1HTML">Codice HTML</a></li>
+			<li><a href="#LinkStyle1CSS">Codice CSS</a></li>
+		</ul>
+	</li>
+	<li><a href="#LinkStyle2">HEADER</a>
+		<ul>
+			<li><a href="#LinkStyle2HTML">Codice HTML</a></li>
+			<li><a href="#LinkStyle2CSS">Codice CSS</a></li>
+			<li><a href="#LinkStyle21">LOGO DEL SITO</a>
+				<ul>
+					<li><a href="#LinkStyle21HTML">Codice HTML</a></li>
+					<li><a href="#LinkStyle21CSS">Codice CSS</a></li>
+				</ul>
+			</li>
+			<li><a href="#LinkStyle22">NAVIGATION MENU</a>
+				<ul>
+					<li><a href="#LinkStyle22HTML">Codice HTML</a></li>
+					<li><a href="#LinkStyle22CSS">Codice CSS</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li><a href="#LinkStyle3">FOOTER</a>
+		<ul>
+			<li><a href="#LinkStyle3HTML">Codice HTML</a></li>
+			<li><a href="#LinkStyle3CSS">Codice CSS</a></li>
+		</ul>
+	</li>
+	<li><a href="#LinkStyle4">MAIN SECTION</a>
+		<ul>
+			<li><a href="#LinkStyle4HTML">Codice HTML</a></li>
+			<li><a href="#LinkStyle4CSS">Codice CSS</a></li>
+			<li><a href="#LinkStyle41">Pagina HOME</a>
+				<ul>
+					<li><a href="#LinkStyle41HTML">Codice HTML</a></li>
+					<li><a href="#LinkStyle41CSS">Codice CSS</a></li>
+				</ul>
+			</li>
+			<li><a href="#LinkStyle42">Pagina POST</a>
+				<ul>
+					<li><a href="#LinkStyle42HTML">Codice HTML</a></li>
+					<li><a href="#LinkStyle42CSS">Codice CSS</a></li>
+				</ul>
+			</li>
+			<li><a href="#LinkStyle43">Pagina WORKS</a>
+				<ul>
+					<li><a href="#LinkStyle43HTML">Codice HTML</a></li>
+					<li><a href="#LinkStyle43CSS">Codice CSS</a></li>
+				</ul>
+			</li>
+			<li><a href="#LinkStyle44">Pagina RESUME</a>
+				<ul>
+					<li><a href="#LinkStyle44HTML">Codice HTML</a></li>
+					<li><a href="#LinkStyle44CSS">Codice CSS</a></li>
+				</ul>
+			</li>
+			<li><a href="#LinkStyle45">Pagina CONTACTS</a>
+				<ul>
+					<li><a href="#LinkStyle45HTML">Codice HTML</a></li>
+					<li><a href="#LinkStyle45CSS">Codice CSS</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+
+</ul>
+
+&nbsp;
+&nbsp;
+
+<!--Pagina di Base-->
+<h2>Pagina di Base</h2><a name="LinkStyle1"></a>
+<p align="justify">La pagina di base, ovvero quella che rimane la stessa su tutte le pagine del sito, è composta di 3 sezioni: Header, Main section e Footer.</p>
+<p align="center"><img src="../uploads/2015/03/Style02.jpg" height="450"/></p>
+
+&nbsp;
+
+<h3>Codice HTML</h3><a name="LinkStyle1HTML"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;body&gt;
+  &lt;div class="pagina"&gt;
+    &lt;header class="top_header"&gt;&lt;/header&gt;
+    &lt;section class="main"&gt;&lt;/section&gt;
+    &lt;footer class="footer"&gt;&lt;/footer&gt;
+  &lt;/div&gt;
+&lt;/body&gt;</pre>
+
+<h3>Codice CSS</h3><a name="LinkStyle1CSS"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="css">*{ /*Tutto*/
+  margin:0px; /*Lo spazio tra un paragrafo, testo, img e altro è di 0px(-top,bottom...)*/
+  padding:0px; /*Mette 0 pixel tra il testo e il bordo in ogni lato.(-top,-bottom...)*/
+}
+body{
+  width:100%; /*La larghezza del body è del 100% della larghezza del browser*/
+  display:-webkit-box; /*Permette di sistemare in maniera flessibile i box presenti all’interno*/
+  display:-moz-box; /*Stesso comando precedente ma per firefox*/
+  -webkit-box-pack:center; /*Mette tutto il contenuto del body al centro della pagina*/
+  -moz-box-pack:center; /*Stesso comando precedente ma per firefox*/
+  background:#272727; /*Sfondo della pagina grigio*/
+}
+header, section, footer{
+  display:block; /*In pratica li mette uno sotto l'altro, se no potrebbero essere nella stessa riga*/
+}
+.pagina{
+  display:-webkit-box; /*Permette di sistemare in maniera flessibile i box presenti all’interno*/
+  -webkit-box-orient:vertical; /*Gli elementi del div si allineano verticalmente*/
+  -webkit-box-flex: 1; /*1=vuol dire flessibile*/
+  display:-moz-box; /*Stesso comando precedente ma per firefox*/
+  -moz-box-orient:vertical;/*Stesso comando precedente ma per firefox*/
+  -moz-box-flex: 1; /*Stesso comando precedente ma per firefox*/
+}</pre>
+
+&nbsp;
+&nbsp;
+
+<!--HEADER-->
+<h2>HEADER</h2><a name="LinkStyle2"></a>
+<p align="justify">L’header, ovvero la sezione di pagina che compare in alto è di colore grigio scuro e contiene al suo interno il Logo del sito e il menu contenente il link alle varie pagine, entrambi sono posti nella stessa riga.</p>
+<p align="center"><img src="../uploads/2015/03/Style03.jpg" height="75"/></p>
+
+&nbsp;
+
+<h3>Codice HTML</h3><a name="LinkStyle2HTML"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;header class="top_header"&gt;
+  &lt;div class="logo"&gt;&lt;/div&gt;
+  &lt;nav class="menu"&gt;&lt;/nav&gt;
+&lt;/header&gt;</pre>
+
+<h3>Codice CSS</h3><a name="LinkStyle2CSS"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="css">
+.top_header{
+	display:-webkit-box; /*Permette di sistemare in maniera flessibile i box presenti all’interno*/
+	-webkit-box-orient:horizontal; /*Gli elementi del div si allineano orizontalmente*/
+	display:-moz-box; /*Stesso comando precedente ma per firefox*/
+	-moz-box-orient:horizontal;/*Stesso comando precedente ma per firefox*/
+	-webkit-box-pack:start;/*Mette tutto il contenuto verso la destra della pagina*/
+	-moz-box-pack:start; /*Stesso comando precedente ma per firefox*/
+	text-decoration: none; /*Per non avere link sottolineati*/
+	color:white; /*Colore del testo bianco*/
+	font:bold 30px Arial;
+	height: 95px;
+	background:#272727; /*Sfondo della pagina grigio*/
+}
+.top_header a{
+	text-decoration: none; /*Per non avere link sottolineati*/
+	color:white; /*Colore del testo bianco*/
+}
+</pre>
+
+&nbsp;
+
+<!--LOGO DEL SITO-->
+<h3>LOGO DEL SITO</h3><a name="LinkStyle21"></a>
+<p align="justify">Questo è composto da un link in font “bold 50px Arial”, ma è possibile metterci anche un immagine.</p>
+<p align="center"><img src="../uploads/2015/03/Style04.jpg" height="150"/></p>
+
+<h4>Codice HTML</h4><a name="LinkStyle21HTML"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;div class="logo"&gt;
+  &lt;a href="#"&gt;TitoloSito&lt;/a&gt;
+&lt;/div&gt;</pre>
+
+<h4>Codice CSS</h4><a name="LinkStyle21CSS"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="css">
+.logo{
+	margin:0;
+	font:bold 50px Arial;
+	padding:15px;
+}
+</pre>
+
+&nbsp;
+
+<!--NAVIGATION MENU-->
+<h3>NAVIGATION MENU</h3><a name="LinkStyle22"></a>
+<p align="justify">Il navigation menu è composto da una lista contenente diversi link alle pagine.
+Quando si passa sopra col mouse ad un elemento della lista, questo si “abbassa” e diventa di colore blu.</p>
+<p align="center"><img src="../uploads/2015/03/Style05.jpg" height="90"/>
+<img src="../uploads/2015/03/Style06.jpg" height="125"/></p>
+
+<h4>Codice HTML</h4><a name="LinkStyle22HTML"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;nav class="menu"&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="#"&gt;HOME&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;WORKS&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;RESUME&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;CONTACTS&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</pre>
+
+<h4>Codice CSS</h4><a name="LinkStyle22CSS"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="css">
+.menu{
+}
+	.menu ul{
+	list-style: none;
+	margin:0px;
+}
+.menu ul li{
+	float:left;
+	vertical-align: middle;
+	padding:30px;
+	transition: padding 0.2s linear; /*L'effetto di cambiamento di padding dura 0.2s*/
+}
+	.menu ul li:hover { /*Quando si passa sopra col mouse*/
+	position: relative;
+	background:#3B5998; /*Sfondo blu*/
+	padding-top:70px; /*Padding superiore aumenta a 70px*/
+}
+</pre>
+
+&nbsp;
+&nbsp;
+
+<!--FOOTER-->
+<h2>FOOTER</h2><a name="LinkStyle3"></a>
+<p align="justify">Il footer è quella parte di pagina di colore grigio scure collocata alla fine della pagina, e contiene il nome dell’autore del sito.</p>
+<p align="center"><img src="../uploads/2015/03/Style07.jpg" height="65"/></p>
+
+&nbsp;
+
+<h3>Codice HTML</h3><a name="LinkStyle3HTML"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;footer class="footer"&gt;
+  Copyright-2015. By Nome Cognome
+&lt;/footer&gt;</pre>
+
+<h3>Codice CSS</h3><a name="LinkStyle3CSS"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="css">
+.footer{
+	color:white;
+	text-align:center; /*Tutto il testo viene allineato al centro*/
+	padding:20px; /*20 pixel tra il testo e il bordo in ogni lato.*/
+	font:16px Arial;
+	background:#272727; /*Sfondo della pagina grigio*/
+}
+</pre>
+
+&nbsp;
+&nbsp;
+
+<!--MAIN SECTION-->
+<h2>MAIN SECTION</h2><a name="LinkStyle4"></a>
+<p align="justify">La main section, di sfondo bianco, possiede il testo e diversi contenuti scelti dall’utente.
+Al suo interno ci sono diversi tipi di pagina:
+<ul>
+	<li>HOME: dove appare un elenco di tutti gli articoli creati dall’utente</li>
+	<li>POST: dove viene mostrato l’articolo</li>
+	<li>WORKS: dove appare una lista degli articoli con tanto di breve descrizione</li>
+	<li>RESUME: pagina dedicata al curriculum</li>
+	<li>CONTACTS: dove sono presenti l’indirizzi e-mail, numeri di telefono e altri vari contatti</li>
+</ul></p>
+
+&nbsp;
+
+<h3>Codice HTML</h3><a name="LinkStyle4HTML"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;section class="main"&gt;
+
+&lt;/section&gt;</pre>
+
+<h3>Codice CSS</h3><a name="LinkStyle4CSS"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="css">
+.main{
+	display:-webkit-box; /*Permette di sistemare in maniera flessibile i box presenti all’interno*/
+	display:-moz-box; /*Stesso comando precedente ma per firefox*/
+	-webkit-box-pack:center; /*Mette tutto il contenuto del body al centro della pagina*/
+	-moz-box-pack:center; /*Stesso comando precedente ma per firefox */
+	-webkit-box-flex: 1; /*1=vuol dire flessibile*/
+	-moz-box-flex: 1; /*Stesso comando precedente ma per firefox*/
+	width:100%; /*La larghezza del è del 100% larghezza del browser*/
+	background: #ffffff; /*Sfondo bianco*/
+	padding-top:70px;
+	padding-bottom:50px;
+}
+</pre>
+
+&nbsp;
+
+<!--Pagina HOME-->
+<h3>Pagina HOME</h3><a name="LinkStyle41"></a>
+<p align="justify">La pagina HOME contiene una lista con immagini di grandezza 300x170px degli articoli, con tanto di titolo dell’articolo e data.</p>
+<p align="center"><img src="../uploads/2015/03/Style08.jpg" height="300"/></p>
+
+<h4>Codice HTML</h4><a name="LinkStyle41HTML"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;div class="index"&gt;
+  &lt;div class="scheda"&gt;
+    &lt;a href="#"&gt;&lt;img src="#" width="300"/&gt;&lt;/a&gt;
+    &lt;a href="#"&gt;&lt;h1&gt;Titolo articolo&lt;/h1&gt;&lt;/a&gt;
+    &lt;h2&gt;Pubblicato il 15 gennaio 2015&lt;/h2&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+
+<h4>Codice CSS</h4><a name="LinkStyle41CSS"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="css">
+.index{
+	background: #ffffff; /*Sfondo bianco*/
+	max-width:1000px;
+}
+.scheda{
+	float:left; /*Ogni scheda va a capo quando non ci sta nel browser*/
+	min-width:300px;
+	max-width:300px;
+	padding:15px;
+}
+.scheda img{
+	opacity: 1;
+}
+	.scheda img:hover{ /*Quando si passa col mouse sopra all’immagine*/
+	opacity: 0.3;
+}
+.scheda h1{
+	font:20px Arial;
+	color: #222c36; /*Grigio scurissimo*/
+}
+.scheda h1:hover{
+	font:bold 20px Arial;
+	color:#3B5998; /*Sfondo blu*/
+}
+.scheda h2{
+	font:14px Arial;
+	color:#8d8d8d; /*Grigio chiaro*/
+}
+.scheda a{
+	text-decoration: none; /*Per non avere link sottolineati*/
+}
+</pre>
+
+&nbsp;
+
+<!--Pagina POST-->
+<h3>Pagina POST</h3><a name="LinkStyle42"></a>
+<p align="justify">Pagina in cui appare l’articolo con il suo contenuto.</p>
+
+<h4>Codice HTML</h4><a name="LinkStyle42HTML"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;div class="post"&gt;
+  &lt;article&gt;
+    &lt;header&gt;
+      &lt;hgroup&gt;
+        &lt;h1&gt;Titolo articolo&lt;/h1&gt;
+        &lt;h3&gt;Pubblicato il 15 gennaio 2015&lt;/h3&gt;
+      &lt;/hgroup&gt;
+    &lt;/header&gt;
+    CONTENUTO
+  &lt;/article&gt;
+&lt;/div&gt;</pre>
+
+<h4>Codice CSS</h4><a name="LinkStyle42CSS"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="css">
+.post{
+	-webkit-box-flex: 1; /*1=vuol dire flessibile*/
+	-moz-box-flex: 1; /*Stesso comando precedente ma per firefox*/
+	max-width:1000px;
+	background:white;
+	font:16px Arial;
+	color: #222c36; /*Grigio scurissimo*/
+}
+.post ul{
+	list-style-type:decimal;
+	margin-left:20px; /*padding di 20 px quindi sposto di 20px*/
+}
+.post ul ul{
+	list-style-type:disc;
+}
+.post ul ul ul{
+	list-style-type:square;
+}
+.post hr{
+	background:rgba(0,0,0,0.4);
+	height:1;
+}
+.post a{
+	color:black;
+	font:bold 16px Arial;
+}
+.post a:hover{
+	color:rgba(0,0,0,0.4);
+	font:bold 18px Arial;
+}
+.post h1{
+	font:bold 36px Arial;
+}
+.post h2{
+	font:bold 24px Arial;
+}
+.post h3{
+	font:20px Arial;
+	color:#8d8d8d; /*Grigio chiaro*/
+}
+.post code {
+	color:blue;
+	margin-left:20px;
+	font:italic 18px Arial;
+}
+.post article{
+	border-bottom:1px solid rgba(0,0,0,0.4);
+	margin-bottom:20px;
+}
+.post header{
+	border-bottom:1px solid rgba(0,0,0,0.4);
+	margin-bottom:20px;
+}
+</pre>
+
+&nbsp;
+
+<!--Pagina WORKS-->
+<h3>Pagina WORKS</h3><a name="LinkStyle43"></a>
+<p align="justify">Pagina dove appare una lista degli articoli con tanto di breve descrizione.
+Esempio:</p>
+<p align="center"><img src="../uploads/2015/03/Style09.jpg" height="500"/></p>
+
+<h4>Codice HTML</h4><a name="LinkStyle43HTML"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;div class="works"&gt;
+  &lt;h1&gt;Works&lt;/h1&gt;
+  &lt;div class="works-horizontal"&gt;
+    &lt;a href="#"&gt;&lt;img src="#" width="100" /&gt;&lt;/a&gt;
+    &lt;div class="works-vertical"&gt;
+      &lt;a href="#"&gt;
+        &lt;h2&gt;Titolo Articolo&lt;/h2&gt;
+      &lt;/a&gt;
+      &lt;h3&gt;DESCRIZIONE&lt;/h3&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+
+<h4>Codice CSS</h4><a name="LinkStyle43CSS"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="css">
+.works{
+}
+.works div{
+	padding: 5px;/*Mette 5 pixel tra il testo e il bordo in ogni lato.*/
+}
+.works-horizontal{
+	display:-webkit-box; /*Permette di sistemare in maniera flessibile i box presenti all’interno*/
+	-webkit-box-orient:horizontal; /*Gli elementi del div si allineano orizontalmente*/
+	display:-moz-box; /*Stesso comando precedente ma per firefox*/
+	-moz-box-orient:horizontal; /*Stesso comando precedente ma per firefox*/
+}
+.works-vertical{
+	display:-webkit-box; /*Permette di sistemare in maniera flessibile i box presenti all’interno*/
+	display:-moz-box; /*Stesso comando precedente ma per firefox*/
+	-webkit-box-orient:vertical; /*Gli elementi del div si allineano verticalmente*/
+	-webkit-box-pack:center; /*Mette tutto il contenuto del body al centro della pagina*/
+	-moz-box-pack:center; /*Stesso comando precedente ma per firefox*/
+	-moz-box-orient:vertical; /*Stesso comando precedente ma per firefox*/
+}
+.works img{
+	opacity: 1;
+}
+.works img:hover{
+	opacity: 0.3;
+}
+.works a{
+	text-decoration: none; /*Per non avere link sottolineati*/
+}
+.works h1{
+	font:bold 36px Arial;
+	color: #222c36; /*Grigio scurissimo*/
+}
+.works h2{
+	font:bold 18px Arial;
+	color: #222c36; /*Grigio scurissimo*/
+}
+.works h2:hover{
+	font:bold 18px Arial;
+	color:#3B5998; /*Sfondo blu*/
+}
+.works h3{
+	font:14px Arial;
+	color:#8d8d8d; /*Grigio chiaro*/
+}
+.works h4{
+	font:bold 24px Arial;
+	color: #222c36; /*Grigio scurissimo*/
+}
+</pre>
+
+<!--Pagina RESUME-->
+<h3>Pagina RESUME</h3><a name="LinkStyle44"></a>
+<p align="justify">Pagina dedicata al curriculum.
+Esempio:</p>
+<p align="center"><img src="../uploads/2015/03/Style10.jpg" height="550"/></p>
+
+<h4>Codice HTML</h4><a name="LinkStyle43HTML"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;div class="resume"&gt;
+  &lt;div class="resume-horizontal"&gt;
+    &lt;div&gt;
+      &lt;h1&gt;Ivancich Stefano&lt;/h1&gt;
+      &lt;h4&gt;Electronics, Software and Web developer&lt;/h4&gt;
+      Mestre, Venice, Italy
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;br&gt;
+      &lt;a href="http://stefan95.altervista.org../uploads/2015/08/IvancichStefanoCV.pdf"&gt;Download the entire curriculum in PDF&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;br&gt;
+  &lt;hr&gt;
+  &lt;div&gt;
+    &lt;h3&gt;Careful attention to detail and order.&lt;/h3&gt;
+    &lt;h3&gt;Strong creative and conceptual brainstorming skills.&lt;/h3&gt;
+    &lt;h3&gt;Polite and friendly communication skills.&lt;/h3&gt;
+    &lt;h3&gt;Capable of quickly learning any new software and programmation language necessary.&lt;/h3&gt;
+  &lt;/div&gt;
+  &lt;br&gt;&lt;br&gt;
+  &lt;h2&gt;WORK EXPERIENCE&lt;/h2&gt;
+  &lt;hr&gt;
+  &lt;div class="resume-horizontal"&gt;
+    &lt;div&gt;
+      Marcon, Venice, Italy
+      &lt;h4&gt;Jun 2014 - Jul 2014&lt;/h4&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      Studio Medici
+      &lt;h3&gt;Hardware and Software developer&lt;/h3&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;br&gt;&lt;br&gt;
+  &lt;h2&gt;EDUCATION&lt;/h2&gt;
+  &lt;hr&gt;
+  &lt;div class="resume-horizontal"&gt;
+    &lt;div&gt;
+      Mestre, Venice, Italy
+      &lt;h4&gt;Sep 2010 - Jun 2015&lt;/h4&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      High School ITIS C. Zuccante
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;br&gt;&lt;br&gt;
+  &lt;h2&gt;LANGUAGES&lt;/h2&gt;
+  &lt;hr&gt;
+  &lt;div class="resume-horizontal"&gt;
+    &lt;div&gt;Italian(Fluent), English(Intermediate B1)&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;br&gt;&lt;br&gt;
+  &lt;h2&gt;SKILLS&lt;/h2&gt;
+  &lt;hr&gt;
+  &lt;div class="resume-horizontal"&gt;
+    &lt;div&gt;&lt;h4&gt;Programmation languages&lt;/h4&gt;&lt;/div&gt;
+    &lt;div&gt;VisualBasic .NET, C/C++, Java, Assembly&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="resume-horizontal"&gt;
+    &lt;div&gt;&lt;h4&gt;3D Design&lt;/h4&gt;&lt;/div&gt;
+    &lt;div&gt;SolidWorks&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="resume-horizontal"&gt;
+    &lt;div&gt;&lt;h4&gt;Web&lt;/h4&gt;&lt;/div&gt;
+    &lt;div&gt;HTML5, CSS, Bootstrap, PHP, SQL, Mysql, Wordpress&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="resume-horizontal"&gt;
+    &lt;div&gt;&lt;h4&gt;Electronics Software&lt;/h4&gt;&lt;/div&gt;
+    &lt;div&gt;Eagle, KiCad, Fritzing, Altium Designer&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+
+<h4>Codice CSS</h4><a name="LinkStyle44CSS"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="css">
+.resume{
+	display:-webkit-box; /*Permette di sistemare in maniera flessibile i box presenti all’interno*/
+	-webkit-box-orient:vertical; /*Gli elementi del div si allineano verticalmente*/
+	display:-moz-box; /*Stesso comando precedente ma per firefox*/
+	-moz-box-orient:vertical;/*Stesso comando precedente ma per firefox*/
+	background:white;
+}
+.resume *{
+	font:bold 16px Arial;
+	color: #222c36; /*Grigio scurissimo*/
+}
+.resume a{
+	font:16px Arial;
+	color: #222c36; /*Grigio scurissimo*/
+}
+.resume a:hover{
+	font:bold 18px Arial;
+	color:#8d8d8d; /*Grigio chiaro*/
+}
+.resume h1{
+	font:bold 36px Arial;
+	color: #222c36; /*Grigio scurissimo*/
+}
+.resume h2{
+	font:bold 24px Arial;
+	color: #222c36; /*Grigio scurissimo*/
+}
+.resume h3{
+	font:20px Arial;
+	color:#8d8d8d; /*Grigio chiaro*/
+}
+.resume h4{
+	font:16px Arial;
+	color:#8d8d8d; /*Grigio chiaro*/
+}
+.resume-horizontal{
+	display:-webkit-box; /*Permette di sistemare in maniera flessibile i box presenti all’interno*/
+	-webkit-box-orient:horizontal; /*Gli elementi del div si allineano orizontalmente*/
+	display:-moz-box; /*Stesso comando precedente ma per firefox*/
+	-moz-box-orient:horizontal; /*Stesso comando precedente ma per browser firefox*/
+}
+.resume-horizontal div{
+	padding: 5px; /*Mette 5 pixel tra il testo e il bordo in ogni lato.*/
+	min-width:200px;
+}
+</pre>
+
+&nbsp;
+
+<!--Pagina CONTACTS-->
+<h3>Pagina CONTACTS</h3><a name="LinkStyle45"></a>
+<p align="justify">Pagina dove sono presenti l’indirizzi e-mail, numeri di telefono e altri vari contatti.</p>
+<p align="center"><img src="../uploads/2015/03/Style11.jpg" height="250"/></p>
+
+<h4>Codice HTML</h4><a name="LinkStyle45HTML"></a>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;div class="resume"&gt;
+  &lt;h1&gt;Contacts&lt;/h1&gt;
+  &lt;br&gt;
+  &lt;div class="resume-horizontal"&gt;
+    &lt;div&gt;&lt;h4&gt;E-mail&lt;/h4&gt;&lt;/div&gt;
+    &lt;div&gt;ivancich.stefano@gmail.com&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="resume-horizontal"&gt;
+    &lt;div&gt;&lt;h4&gt;Skype&lt;/h4&gt;&lt;/div&gt;
+    &lt;div&gt;ste.iva&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="resume-horizontal"&gt;
+    &lt;div&gt;&lt;h4&gt;InfoJobs&lt;/h4&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;a href="https://www.infojobs.it/stefano-ivancich.prf"&gt;Stefano Ivancich&lt;&lt;/a&gt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="resume-horizontal"&gt;
+    &lt;div&gt;&lt;h4&gt;Facebook&lt;/h4&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;a href="https://www.facebook.com/stefano.iva"&gt;stefano.iva&lt;/a&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+
+<h4>Codice CSS</h4><a name="LinkStyle45CSS"></a>
+Sono state usati gli stessi stili della pagina RESUME.

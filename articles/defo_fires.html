@@ -1,0 +1,444 @@
+<a href="../uploads/2015/06/ReteSensori.pdf">Scarica il documento PDF</a>
+<a href="../uploads/2015/06/Rete-di-sensori.pdf">Scarica la presentazione PDF</a>
+&nbsp;
+
+<!--SOMMARIO-->
+<p align="justify">Di seguito s’illustra un progetto di un sistema volto alla rilevazione di temperatura di più punti non collegati fisicamente tra loro. Questi comunicano tramite il protocollo ZIGBEE utilizzato dei moduli wireless xBee.
+Questo sistema integra al suo interno moduli xBee Serie 2 e sensori di temperatura LM35.
+Pur essendo un progetto artigianale e scolastico, non è molto ingombrante (7,7 cm di larghezza x 6,5 cm di lunghezza x 4,8 cm di altezza).
+Sono stati realizzati mediante il software SolidWorks e una stampante 3D i contenitori per ogni sensore.</p>
+<p align="center"><img src="../uploads/2015/06/ReteSensori01.jpg" height="400">
+<img src="../uploads/2015/06/ReteSensori02.jpg" height="400"></p>
+
+&nbsp;
+&nbsp;
+
+<!--INDICE-->
+<h2>Indice</h2>
+<ul>
+	<li><a href="#LinkIntroduzione">Introduzione</a></li>
+	<li><a href="#LinkSchemaABlocchi">Schema a Blocchi</a></li>
+	<li><a href="#LinkSchemaElettrico">Schema Elettrico</a></li>
+	<li><a href="#LinkReteZigBee">Rete ZigBee</a></li>
+	<li><a href="#LinkStruttura">Struttura del sensore</a></li>
+	<li><a href="#LinkProgetto">Parti del progetto</a>
+		<ul>
+			<li><a href="#LinkAlimentazione">Alimentazione</a></li>
+			<li><a href="#LinkLM317">Circuito di regolazione dei 3.3V LM317</a></li>
+			<li><a href="#LinkLED">LED di power-on</a></li>
+			<li><a href="#LinkXbee">xBee serie 2</a></li>
+		</ul>
+	</li>
+	<li><a href="#LinkConsumi">Consumi</a></li>
+	<li><a href="#LinkManutenzione">Installazione e manutenzione</a></li>
+	<li><a href="#LinkPCB">PCB</a></li>
+	<li><a href="#LinkSoftware">Software</a>
+		<ul>
+			<li><a href="#LinkSoftwarexBee">Software xBee</a></li>
+			<li><a href="#LinkSoftwarePC">Software sul PC</a></li>
+		</ul>
+	</li>
+	<li><a href="#LinkComponenti">Lista Componenti e Costi</a></li>
+	<li><a href="#LinkConclusioni">Conclusioni</a></li>
+</ul>
+
+&nbsp;
+&nbsp;
+
+<!--INTRODUZIONE-->
+<h2>Introduzione</h2><a name="LinkIntroduzione"></a>
+<p align="justify">Questa rete di sensori è pensata per monitorare la temperatura in un bosco per prevenire un incendio.
+È costituita da un punto centrale collegato a un PC e da tanti moduli uguali contenenti un sensore di temperatura.
+La comunicazione con il punto centrale avviene tramite i moduli wireless xBee. Il protocollo di comunicazione usato tra di essi è lo ZIGBEE, protocollo implementato nei moduli xBee che permette un basso consumo energetico rispetto alla comunicazione wireless di base.
+I moduli sono costituiti da: una batteria a 9V, un interruttore, un circuito di regolazione a 3.3V, un led che segnala la presenza di alimentazione, un xBee ed un sensore di temperatura LM35.
+L’xBee deve essere alimentato con una tensione compresa tra 3V e 3.4V, il datasheet consiglia 3.3V.
+È stato scelto un sensore di temperatura LM35 perché i moduli xBee in modalità ZIGBEE possono accettare in ingresso al loro ADC tensioni da 0V a 1.2V.
+LM35, infatti, fornisce in uscita 0V a 0°C e 1.2V a 120°C con un passo di 10mV/°C. Utilizzando questo sensore quindi non serve un circuito di condizionamento del suo segnale.</p>
+
+&nbsp;
+&nbsp;
+
+<!--SCHEMA A BLOCCHI-->
+<h2>Schema a blocchi</h2><a name="LinkSchemaABlocchi"></a>
+<p align="center"><img src="../uploads/2015/06/ReteSensori03.jpg" height="600"/></p>
+
+&nbsp;
+&nbsp;
+
+<!--SCHEMA A ELETTRICO-->
+<h2>Schema elettrico</h2><a name="LinkSchemaElettrico"></a>
+Clicca sull'immagine per ingrandirla
+<p align="center"><a href="../uploads/2015/06/ReteSensori04.png"><img src="../uploads/2015/06/ReteSensori04.png" height="400"/></a></p>
+
+&nbsp;
+&nbsp;
+
+<!--RETE ZIGBEE-->
+<h2>Rete ZigBee</h2><a name="LinkReteZigBee"></a>
+<p align="justify">Nel mondo delle tecnologie senza fili ZigBee rappresenta uno dei principali standard di comunicazione.
+Attraverso l'uso di piccole antenne digitali a bassa potenza e basso consumo basate sullo standard IEEE 802.15.4.
+Ci sono tre differenti tipi di dispositivo ZigBee:</p>
+<ul>
+	<li>ZigBee Coordinator (ZC): è il dispositivo più "intelligente" tra quelli disponibili, costituisce la radice di una rete ZigBee e può operare da ponte tra più reti. Ci può essere un solo "Coordinator" in ogni rete. Esso è inoltre in grado di memorizzare informazioni riguardo alla sua rete e può agire come deposito per le chiavi di sicurezza.</li>
+	<li>ZigBee Router (ZR): questi dispositivi agiscono come router intermedi passando i dati da e verso altri dispositivi. Di fatto non vi sono distinzioni hardware tra un ZC e un ZR se non che viene rilasciato al coordinator il ruolo di inizializzare la rete, dopodiché diventano dispositivi identici.</li>
+	<li>ZigBee End-Device (ZED): includono solo le funzionalità minime per dialogare con il suo nodo parente (Coordinator o Router), non possono trasmettere dati provenienti da altri dispositivi e dunque non partecipano al multi-hop di un messaggio; sono i nodi che richiedono il minor quantitativo di memoria e quindi risultano spesso più economici rispetto ai ZR o ai ZC.</li>
+</ul>
+<p align="center"><img src="../uploads/2015/06/ReteSensori05.jpg" height="250"/></p>
+
+&nbsp;
+&nbsp;
+
+<!--STRUTTURA DEL SENSORE-->
+<h2>Struttura del sensore</h2><a name="LinkStruttura"></a>
+<p align="justify">Il contenitore del circuito è stato pensato per essere posto in un bosco, interrato nel suolo con il sensore di temperatura fuoriuscente oppure incastrato in un albero.
+E’ diviso in 2 parti: una interna che tiene saldi tutti i componenti ed una esterna che funge da “coperchio” che protegge l’interno e fa scorgere l’interruttore, il sensore e il LED.
+Il contenitore è inoltre pensato per essere impermeabile, sfortunatamente non avendo i mezzi a disposizione ne sono stati realizzati dei prototipi con una stampante 3D.</p>
+<p align="center"><img src="../uploads/2015/06/ReteSensori06.jpg" height="400"/>
+<img src="../uploads/2015/06/ReteSensori07.jpg" height="300"/>
+<img src="../uploads/2015/06/ReteSensori08.jpg" height="300"/>
+</p>
+<p align="justify">L’xBee centrale (COORDINATOR) è collegato al PC tramite un modulo apposito(Explorer) via USB.</p>
+<p align="center"><img src="../uploads/2015/06/ReteSensori09.jpg" height="200"/><img src="../uploads/2015/06/ReteSensori10.jpg" height="200"/>
+<img src="../uploads/2015/06/ReteSensori11.jpg" height="300"/>
+</p>
+
+&nbsp;
+&nbsp;
+
+<!--PARTI DEL PROGETTO-->
+<h2>Parti del progetto</h2><a name="LinkProgetto"></a>
+<h3>Alimentazione</h3><a name="LinkAlimentazione"></a>
+<p align="justify">L'alimentazione di ciascun sensore avviene tramite una batteria a 9V 1200mA con un apposito connettore jack da 2.1mm. Possono essere utilizzate batterie anche con tensione maggiore ad esempio 12V, 15V, 18V.</p>
+<p align="center"><img src="../uploads/2015/06/ReteSensori12.jpg" height="300"/><img src="../uploads/2015/06/ReteSensori13.jpg" height="300"/></p>
+
+&nbsp;
+
+<h3>Circuito di regolazione dei 3.3V LM317</h3><a name="LinkLM317"></a>
+<p align="justify">Questo circuito trasforma la tensione fornita dalla batteria in una tensione stabile di 3.3V necessari per alimentare l’xBee e il sensore di temperatura LM35.
+Schema preso dal datasheet.</p>
+<p align="center"><img src="../uploads/2015/06/ReteSensori14.jpg" height="300"/></p>
+
+<p><strong>Dimensionamento:</strong>
+Da datasheet:
+<ul>
+	<li><img src="../uploads/2015/06/ReteSensori15.jpg" height="40"/></li>
+	<li>Vref=1.25V è la tensione di riferimento tra il pin OUT e il pin ADJ, quindi la tensione ai capi di R1.</li>
+	<li>Iout(min)=5mA è la minima corrente di uscita necessaria a mantenere la regolazione. Valore tipico 3.5mA, valore massimo 10mA. Si è scelto 5mA per semplificare i calcoli.</li>
+	<li>Iadj=100mA è la corrente massima ce può uscire dal pin ADJ.</li>
+	<li>C1=100nF non è necessario ma è raccomandato se non è presente un condensatore di bypass o il regolatore non è posto vicino ad esso.</li>
+</ul>
+Quindi:
+<img src="../uploads/2015/06/ReteSensori16.jpg" height="50"/>
+Si è scelta R1=270Ω.
+Quindi Iout(min)=4.6mA.
+<img src="../uploads/2015/06/ReteSensori17.jpg" height="60"/>
+Si è scelta R2=440Ω, quindi di usare 2 resistori in serie da 220Ω.
+</p>
+
+&nbsp;
+
+<h3>LED di power-on</h3><a name="LinkLED"></a>
+<p align="justify">Il led verde indica che il dispositivo è acceso.</p>
+<p align="center"><img src="../uploads/2015/06/ReteSensori18.jpg" height="200"/><img src="../uploads/2015/06/ReteSensori19.jpg" height="200"/><img src="../uploads/2015/06/ReteSensori20.gif" height="200"/></p>
+
+<p><strong>Dimensionamento:</strong>
+<ul>
+	<li>Vcc=3.3V Tensione fornita dal regolatore LM317.</li>
+	<li>Vled=2.2V</li>
+	<li>Iled=500μA E stato provato in laboratorio che il led ha una buona luminosità anche con solo 500μA.</li>
+</ul>
+<img src="../uploads/2015/06/ReteSensori21.jpg" height="50"/>
+</p>
+
+&nbsp;
+
+<h3>xBee serie 2</h3><a name="LinkXbee"></a>
+<p align="justify">Il modulo XBee Series 2 è una soluzione compatibile con lo standard ZigBee/IEEE 802.15.4 che soddisfa la necessità di una rete a basso costo e a basso consumo, pensata soprattutto per l'utilizzo con sensori. I moduli sono semplici da utilizzare, richiedono pochissima energia e costituiscono una soluzione efficace ed affidabile per la trasmissione di dati critici. Le dimensioni estremamente compatte, fanno risparmiare spazio prezioso nelle applicazioni.</p>
+<p align="center"><img src="../uploads/2015/06/ReteSensori22.jpg" height="200"/><img src="../uploads/2015/06/ReteSensori23.jpg" height="200"/></p>
+<p align="justify"><strong>Caratteristiche tecniche:</strong>
+<ul>
+	<li>Frequenza operativa 2.4 GHz</li>
+	<li>Potenza RF 2 mW (+3 dBm)(boost mode abilitato)</li>
+	<li>Portata fino a: 120mt al chiuso e 2500mt all'aperto</li>
+	<li>Velocità RF: 250.000bps</li>
+	<li>Velocità interfaccia seriale: 1200 ... 230400 bps</li>
+	<li>Possibilità di antenna filo, Chip oppure connettore U.FL. RF e RPSMA</li>
+	<li>Range di Temperatura Industriale (-40 – 85° C)</li>
+	<li>Approvato per utilizzo in Europa, USA e Canada</li>
+	<li>Supportate modalità di rete avanzate e basso consumo</li>
+</ul>
+Molti persone, quando considerano un'applicazione wireless con i microcontrollori, comparano i moduli XBee a 2.4GHz con dei moduli radio, a basso costo, ad esempio da 433MHz o simili. Sebbene i moduli a 433MHz costano meno e possono essere impiegati in alcune semplici applicazioni, i moduli XBee offrono notevoli vantaggi.
+Il primo grande vantaggio consiste nel fatto che i moduli XBee sono bidirezionali, parecchi sistemi economici a 433MHz sono unidirezionali, con questo sistema il trasmettitore non ha idea se il ricevitore stia ricevendo i dati o meno. I moduli XBee trasmettono e ricevono i dati in entrambe le direzioni, in questo modo è possibile testare facilmente (da entrambe i lati) se il sistema sta funzionando correttamente.
+Il secondo vantaggio consiste nell'indirizzamento univoco di questi moduli. Ogni XBee ha un numero seriale univoco. Questo significa che 2 o più unita possono essere settate per parlare esclusivamente tra loro, ignorando tutti i segnali di altri moduli. Questo non è facilmente ottenibile con i moduli a 433MHz.
+Il terzo vantaggio consiste nella logica precostruita all'interno dei moduli XBee, infatti sono già implementati tutti i necessari controlli tipici di una trasmissione wireless, quali ad esempio l'error checking.
+Infine il protocollo XBee consente diversi numeri di canali, settando differenti unità in differenti canali, possono essere minimizzate eventuali interferenze.</p>
+
+&nbsp;
+&nbsp;
+
+<!--CONSUMI-->
+<h2>Consumi</h2><a name="LinkConsumi"></a>
+<p align="justify">Circuito di regolazione a 3.3V: I_3.3V=I_(OUT(MIN))+I_ADJ=4.6mA+0.1mA=4.7mA
+Led di power-on: ILED=500μA
+LM35: ILM35=500μA da Datasheet
+Quindi si ha un consumo teorico continuo di 5.7mA ma tenendo conto delle tolleranze dei componenti ci si può mettere nel caso peggiore di un consumo di 6mA.
+xBee:
+<ul>
+	<li>Isleep=15mA Consumo a riposo</li>
+	<li>Itx=170mA Consumo in modalità trasmissione.</li>
+	<li>Irx=45mA Consumo in modalità ricezione.</li>
+</ul>
+Come si può notare l’xBee consuma molto, quindi non tutti gli xBee posso essere di tipo ROUTER, ovvero che trasmettono e ricevono continuamente, ma anche un END-WIRE non lo si può tenere continuamente in modalità trasmissione.
+Eseguendo dei test in laboratorio si è visto che il segnale per essere inviato può metterci fino ad 1s.
+Quindi un modulo END-WIRE dovrà stare a riposo per un certo lasso di tempo e poi trasmettere per 1s.
+Sfortunatamente i moduli ROUTER dovranno stare in ricezione continuamente per far arrivare al punto centrale i dati degli END-WIRE e ROUTER più lontani.
+Ogni quanto far trasmettere un dato può essere deciso dall’utente a seconda delle proprie esigenze.
+Calcolo corrente media assorbita dai moduli:
+END-WIRE:</p>
+<p align="center"><img src="../uploads/2015/06/ReteSensori24.jpg" height="60"/></p>
+<p align="justify">Tsleep è l’intervallo di tempo deciso dall’utente per ogni quanto vuole fare una misura.
+Ttx=1s è il lasso di tempo massimo impiegato dall’xBee per trasmettere un dato.
+ROUTER:</p>
+<p align="center"><img src="../uploads/2015/06/ReteSensori25.jpg" height="60"/></p>
+<p align="justify">Dove Ndisp è il numero di dispositivi da qui il ROUTER deve ricevere i dati.
+Durata di vita della batteria:</p>
+<p align="center"><img src="../uploads/2015/06/ReteSensori26.jpg" height="50"/></p>
+<p align="justify">Dove CBATT è la capacità in mA/h che la batteria può fornire e IM è la corrente media in mA assorbita dal ROUTER o l’END-WIRE.
+
+&nbsp;
+
+<strong>Esempio</strong>
+Avendo a disposizione una batteria comune da 9V 1000mA/h per ogni modulo, assumendo che ogni ROUTER debba ricevere dati da altri 3 ROUTER e 10 END-WIRE e si vuole prendere una misura ogni 10min(600s).
+Ogni quanto si devono effettuare dei cambi di batterie?</p>
+<p align="center"><img src="../uploads/2015/06/ReteSensori27.jpg" height="200"/></p>
+<p align="justify">Quindi la batteria per un END-WIRE va sostituita circa ogni 3 giorni mentre quella di un ROUTER ogni giorno.
+Come si nota dai risultati è chiaro che i moduli xBee pur essendo tra i dispositivi di comunicazione wireless di minor consumo energetico sul mercato, assorbono tanta corrente.
+Quindi per aumentare l’efficienza di questa rete è necessario utilizzare una batteria con capacità superiore. E anche aumentare l’intervallo di tempo tra un campione di temperatura e l’altro, cosi facendo però la parte di bosco incendiata può venire rilevata tempo dopo e quindi il fuoco si propaga di più. Per ovviare a questo si può aumentare il numero di dispositivi.
+Ad esempio si può utilizzare una batteria da 100A/h, campionare 1 volta all’ora e pretendendo che un ROUTER riceva dati da altri 10 ROUTER e 400 END-WIRE. Questo significa che su un’area quadrata di 100x100m si ha un sensore ogni 20m e la durata delle batterie raggiunge un anno.</p>
+
+&nbsp;
+&nbsp;
+
+<!--Installazione e manutenzione-->
+<h2>Installazione e manutenzione</h2><a name="LinkManutenzione"></a>
+<p align="justify">Pe utilizzare questa rete è necessario sapere in precedenza quanti sensori si vogliono collocare e a quale distanza l’uno dall’altro.
+Infatti, prima dell’installazione deve esserci delle fasi di preparazione del prodotto:
+<ul>
+	<li>Settaggio degli xBee.</li>
+	<li>Preparazione dei circuiti e dei contenitori.</li>
+	<li>Preparazione del software grafico da installare sul PC (Cartina, disposizione dei sensori e varianti proposte dal cliente). </li>
+</ul>
+
+L’installazione avviene in più fasi:
+<ul>
+	<li>Installazione del software grafico sul PC del cliente, eventualmente fornendogliene uno.</li>
+	<li>Avvio del software e del coordinator.</li>
+	<li>Gli operatori collocando ogni sensore lo accendono uno alla volta e lo comunicano all’operatore che è situato nel punto centrale davanti al monitor che vede il nuovo xBee acceso e lo posiziona nella cartina.</li>
+</ul>
+
+&nbsp;
+
+<strong>Manutenzione</strong>
+Quando un sensore non invia più dati, un operatore si reca per verificarne il funzionamento.
+Questi deve aprire il modulo controllare tramite un tester il circuito elettronico la tensione in vari punti.
+La batteria va sostituita periodicamente, poco prima del tempo calcolato dalle formule indicate nel paragrafo dei consumi.
+Sia quando si cambia batteria che quando sostituisce un sensore si deve riaccendere e ripetere il passo 3 dell’installazione.</p>
+
+&nbsp;
+&nbsp;
+
+<!--PCB-->
+<h2>PCB (PrintedCircuit Board)</h2><a name="LinkPCB"></a>
+<p align="justify">È stato realizzato un PCB contenente tutti i componenti precedentemente elencati.
+Il pcb e lo schema elettrico sono stati realizzati mediante l’utilizzo del software EAGLE CAD 7.1.</p>
+<p align="center"><img src="../uploads/2015/06/ReteSensori28.jpg" height="250"/>
+<img src="../uploads/2015/06/ReteSensori29.jpg" height="300"/></p>
+
+&nbsp;
+&nbsp;
+
+<!--Software-->
+<h2>Software</h2><a name="LinkSoftware"></a>
+<h3>xBee serie 2</h3><a name="LinkSoftwarexBee"></a>
+<p align="justify">L’xBee non ha bisogno di essere programmato con un linguaggio di programmazione, ma possiede un firmware da caricare e dei valori da settare tramite il software XCTU fornito dalla DIGI.
+Il firmware serve ad indicare il tipo di dispositivo ZigBee(Coordinator, Router o End-Device).
+Vediamo il firmware da caricare e i parametri da impostare.
+<strong>Coordinator:</strong>
+<ul>
+	<li><strong>Firmware:</strong> COORDINATOR API.</li>
+	<li><strong>PAN ID:</strong> indirizzo desiderato per il coordinator</li>
+</ul></p>
+<p align="center"><img src="../uploads/2015/06/ReteSensori30.jpg" height="300"/></p>
+<p align="justify"><strong>Router e End-Device:</strong>
+<ul>
+	<li><strong>Firmware:</strong> ROUTER AT oppure END-DEVICE AT</li>
+	<li><strong>PAN ID:</strong> lo stesso del coordinator</li>
+	<li><strong>JV:</strong> Enabled</li>
+	<li><strong>D0:</strong> ADC[2]</li>
+	<li><strong>IR sampling:</strong> periodo di campionamento desiderato in ms.</li>
+</ul></p>
+<p align="center"><img src="../uploads/2015/06/ReteSensori31.jpg" height="350"/>
+<img src="../uploads/2015/06/ReteSensori32.jpg" height="300"/>
+<img src="../uploads/2015/06/ReteSensori33.jpg" height="150"/></p>
+
+&nbsp;
+
+<h3>Software sul PC</h3><a name="LinkSoftwarePC"></a>
+<p align="justify">Il software su pc è realizzato con Visual Basic .NET per consentire una maggiore velocità e facilità in fase di programmazione.
+
+<strong>Grafica</strong>
+La parte grafica visualizzabile da un operatore posto sul punto centrale della rete, si presenta come una cartina della zona, con sopra dei quadrati posti sulle aree in cui sono presenti i corrispondenti sensori.
+Questi quadrati sono colorati, il loro colore cambia a seconda della temperatura rilevata dal corrispondente sensore: azzurro (temperatura&lt;45°C), arancio (45°C&lt;temperatura&lt;60°C) e rosso (temperatura&gt;60°C). Inoltre è presente il valore di temperatura, la distinzione dei colori è utile all’operatore per riconoscere facilmente a vista una temperatura anomala in caso siano presenti molti sensori.</p>
+<p align="center"><img src="../uploads/2015/06/ReteSensori34.jpg" height="300"/><img src="../uploads/2015/06/ReteSensori35.jpg" height="300"/></p>
+
+<p align="justify"><strong>Codice</strong>
+Ogni xBee invia un frame di 22byte in esadecimale all’xBee centrale, il primo byte rappresenta il byte di start che vale 7E, i bye 12 e 13 indicano l’indirizzo dell’xBee  invece i byte 20 e 21 rappresentano il valore letto dall’ADC dell’xBee. Quindi il software quando legge il byte 7E si prepara a leggere altri 21 byte e preleva solo il 20esimo e il 21esimo, dopo di che gli converte in decimale e si ricalcola il valore originale.</p>
+<p align="center"><img src="../uploads/2015/06/ReteSensori36.jpg" height="50"/></p>
+
+<p align="justify">Dove k=100.
+Il valore di k è impostato di norma a 100 per ogni sensore ma può essere modificato dall’operatore poiché i sensori non sono precisi e col tempo si usurano e potrebbero non restituire una temperatura corretta.</p>
+<p align="center"><img src="../uploads/2015/06/ReteSensori37.jpg" height="300"/></p>
+
+&nbsp;
+
+<pre class="EnlighterJSRAW" data-enlighter-language="null">    Private Sub ButtonConnectSerialPort__Click() Handles ButtonConnectSerialPort.Click
+        On Error Resume Next        'Se accadono errori ad una istruzione, la salta per evitare che il programma si arresti
+        If ButtonConnectSerialPort.Text = "Connect Port" Then   'Se il testo del bottone ConnectSerialPort  è "Connect Port":
+            SerialPort1.PortName = ComboBoxPort.Text            'Assegna al portname la porta COM del ComboBoxPort selozionata
+            SerialPort1.Open()                                  'Apre la porta seriale
+            ButtonConnectSerialPort.Text = "Disconnect Port"    'La scritta sul bottone connetti diventa "Disconnect Port"
+            ComboBoxPort.Enabled = False                        'La ComboBoxPort non può essere più selezionata
+            Timer1.Enabled = True
+        Else
+            SerialPort1.Close()                                 'Chiude la porta seriale
+            ButtonConnectSerialPort.Text = "Connect Port"       'La scritta sul bottone connetti diventa "Connect Port"
+            ComboBoxPort.Enabled = True                         'La ComboBoxPort può essere di nuovo selezionata
+            e = False
+            Timer1.Enabled = False
+        End If
+    End Sub
+
+    Private Sub disegna()       'Funzione richiamata per rappresentare graficamente le temperature
+        'Disegno ZONA 1:
+        If gradi(0) &lt; 30 Then
+            LabelGradi0.BackColor = Color.FromArgb(150, 51, 153, 255)    'FromArgb(AlphaValue,RedValue,GreenValue,BlueValue) Azzurro
+        ElseIf gradi(0) &lt; 35 Then
+            LabelGradi0.BackColor = Color.FromArgb(150, 255, 128, 0)     'Arancione
+        Else
+            LabelGradi0.BackColor = Color.FromArgb(150, 255, 0, 0)       'Rosso
+        End If
+        LabelGradi0.Text = gradi(0).ToString("0.0") + "°C"
+
+        'Disegno ZONA 2:
+        If gradi(1) &lt; 30 Then
+            LabelGradi1.BackColor = Color.FromArgb(150, 51, 153, 255)    'FromArgb(AlphaValue,RedValue,GreenValue,BlueValue) Azzurro
+        ElseIf gradi(1) &lt; 35 Then
+            LabelGradi1.BackColor = Color.FromArgb(150, 255, 128, 0)     'Arancione
+        Else
+            LabelGradi1.BackColor = Color.FromArgb(150, 255, 0, 0)       'Rosso
+        End If
+        LabelGradi1.Text = gradi(1).ToString("0.0") + "°C"
+
+        'Disegno ZONA 3:
+        If gradi(2) &lt; 30 Then
+            LabelGradi2.BackColor = Color.FromArgb(150, 51, 153, 255)    'FromArgb(AlphaValue,RedValue,GreenValue,BlueValue) Azzurro
+        ElseIf gradi(2) &lt; 35 Then
+            LabelGradi2.BackColor = Color.FromArgb(150, 255, 128, 0)     'Arancione
+        Else
+            LabelGradi2.BackColor = Color.FromArgb(150, 255, 0, 0)       'Rosso
+        End If
+        LabelGradi2.Text = gradi(2).ToString("0.0") + "°C"
+    End Sub
+
+    Private Sub Timer1_Tick() Handles Timer1.Tick
+        disegna()     'Richiama la funzione disegna() che farà visualizzare graficamente i dati
+    End Sub
+
+    Private Sub SerialPort1_DataReceived() Handles SerialPort1.DataReceived 'Funzione eseguita ogni volta che la porta seriale riceve un dato
+        'In questo caso la porta seriale non riceverà 1 Byte alla volta ma 22Byte tutti insieme,
+        'quindi questo evento(Data_Received) viene richiamato 1 Volta sola ogni 22Byte ricevuti.
+        DatoRicevuto = SerialPort1.ReadByte()    'Assegna alla variabile 1 Byte letto dalla coda della porta seriale
+
+        If i &gt; 20 Then i = 0 'Se il contatore è &gt;20 (ovvero 21, cioè sono state eseguite 21 letture oltre a quella iniziale)
+        If DatoRicevuto = 126 Then e = True '126 in decimale = 7E in esadecimale, ovvero il byte di inizio Frame
+
+        If e Then
+            stringaRicevuta(i) = DatoRicevuto
+            For j As Integer = 0 To 20 Step 1 'Leggo i 21 Byte rimasti
+                i = i + 1
+                DatoRicevuto = SerialPort1.ReadByte()
+                stringaRicevuta(i) = DatoRicevuto
+            Next
+            'Unione dei 2 byte del valore dell'ADC e calcolo valore in Volt:
+            Dim valoreHex20 As String
+            If Hex(stringaRicevuta(20)).Length &lt; 2 Then
+                valoreHex20 = "0" &amp; Hex(stringaRicevuta(20))
+            Else
+                valoreHex20 = Hex(stringaRicevuta(20))
+            End If
+            valoreHEX = Hex(stringaRicevuta(19)) &amp; valoreHex20 'Hex(stringaRicevuta(20))   'Il valore della misura dell'ADC è composto da 2 Byte
+            valoreDEC = Convert.ToInt32(valoreHEX, 16)    'Converto il valore esadecimale in un Intero a 16 bit
+            valoreVolt = (valoreDEC / 1023) * 1.2          'Calcolo il valore dei volt misurati
+
+            indirizzo = Hex(stringaRicevuta(12)) &amp; Hex(stringaRicevuta(13))   'Ricavo l'indirizzo dell'xBee
+            Dim indirizzoDec As Integer
+            indirizzoDec = Convert.ToInt32(indirizzo, 16)
+
+            'Inserisco nell'array dei valori i rispettivi valori dei sensori
+            If indirizzi(0) = indirizzoDec Then
+                indirizzi(0) = indirizzoDec
+                gradi(0) = valoreVolt * NumericUpDown1.Value
+            Else
+                If indirizzi(0) = 0 Then
+                    indirizzi(0) = indirizzoDec
+                    gradi(0) = valoreVolt * NumericUpDown1.Value
+                Else
+                    If indirizzi(1) = indirizzoDec Then
+                        indirizzi(1) = indirizzoDec
+                        gradi(1) = valoreVolt * NumericUpDown2.Value
+                    Else
+                        If indirizzi(1) = 0 Then
+                            indirizzi(1) = indirizzoDec
+                            gradi(1) = valoreVolt * NumericUpDown2.Value
+                        Else
+                            If indirizzi(2) = indirizzoDec Then
+                                indirizzi(2) = indirizzoDec
+                                gradi(2) = valoreVolt * NumericUpDown3.Value
+                            Else
+                                If indirizzi(2) = 0 Then
+                                    indirizzi(2) = indirizzoDec
+                                    gradi(2) = valoreVolt * NumericUpDown3.Value
+                                End If
+                            End If
+                        End If
+                    End If
+                End If
+            End If
+        End If
+    End Sub
+End Class</pre>
+
+&nbsp;
+&nbsp;
+
+<!--Componenti-->
+<h2>Lista Componenti e Costi</h2><a name="LinkComponenti"></a>
+<strong>Coordinator:</strong>
+<p align="center"><img src="../uploads/2015/06/ReteSensori38.jpg" height="200"/></p>
+Costo totale coordinator: <strong>45€</strong>
+
+<strong>Router o End-Wire:</strong>
+<p align="center"><img src="../uploads/2015/06/ReteSensori39.jpg" height="400"/></p>
+Costo totale Router o End Wire: <strong>35€</strong>
+
+<p align="justify">Come si vede il costo è molto basso, ad esempio supponendo di volere una rete di 100 sensori, distanti 100m l’uno dall’altro, quindi comprendo un area quadrata di 1Km x 1Km, il costo totale sarà di 3500€ se non di meno, visto che comprando in grandi quantità i componenti si spende meno.</p>
+
+&nbsp;
+&nbsp;
+
+<!--Componenti-->
+<h2>Conclusioni</h2><a name="LinkConclusioni"></a>
+<p align="justify">Il progetto si è concluso con successo, anche se non si era partiti nel modo migliore, visto la scarsità di componenti reperibili nei laboratori dell’istituto.
+Questo progetto rappresenta quindi un prototipo realizzato artigianalmente di un progetto molto più ampio.
+Alcuni miglioramenti che sicuramente devono essere effettuati avendo più risorse e mezzi sono: utilizzo di una batteria che abbia una capacità maggiore, ad esempio si può implementare la tecnologia dei carica batterie portatili per gli smartphone, che posseggono capacità dell’ordine delle decine di migliaia di mA. Anche un contenitore impermeabile, poiché nei boschi c’è sicuramente molta umidità, e prima o poi piove. Utilizzo di un sensore di temperatura migliore, che magari abbia un range di temperature superiore ai 150°C.
+Questo progetto risulta applicabile in altri ambiti, ad esempio all’interno di una serra per monitorare la temperatura ambientale in vari punti, o aggiungendo altri sensori, si può rilevare anche l’umidità e altre caratteristiche sulle piante e ambientali nei boschi, nelle serre e in qualsiasi altro ambiente.</p>

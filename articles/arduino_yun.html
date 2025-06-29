@@ -1,0 +1,83 @@
+<a href="../uploads/2015/01/ArduinoYUN.pdf">Scarica il documento PDF</a>
+
+&nbsp;
+
+<!--SOMMARIO-->
+<p align="justify">Arduino Yun è una scheda basata sul microcontrollore ATmega32u4 e il microprocessore Atheros AR9331, che supporta la distrubuzione Linux OpenWRT-Yun.</p>
+La parte Linux(AR9331) gestisce:
+<ul>
+	<li>La connessione Ethernet</li>
+	<li>La comunicazione WiFi</li>
+	<li>Una porta USB-Host</li>
+	<li>Lo slot Micro-SD</li>
+</ul>
+<p align="center"><img src="../uploads/2015/01/YunParts.png" alt="" height="450" /></p>
+<p align="justify">La parte Arduino(ATmega32u4) possiede:</p>
+
+<ul>
+	<li><strong>Comunicazione seriale:</strong> pin 0(RX) e 1(TX), utilizzati anche per comunicare con la parte Linux(AR9331), per la console a linea di comando.</li>
+	<li><strong>Comunicazione I2C:</strong> pin 2(SDA) e 3(SCL)</li>
+	<li><strong>Interrupt:</strong>
+<ul>
+	<li>Pin 3(interrupt 0)</li>
+	<li>Pin 2(interrupt 1)</li>
+	<li>Pin 0(interrupt 2), collegato anche con la parte Linux come seriale RX.</li>
+	<li>Pin 1(interrupt 3), collegato anche con la parte Linux come seriale TX.</li>
+	<li>Pin 7(interrupt 4), collegato anche con la parte Linux come segnale di handshake.</li>
+</ul>
+</li>
+	<li><strong>PWM:</strong> Pin 3, 5, 6, 9, 10, 11 e 13</li>
+	<li><strong>SPI:</strong> connettore ICSP(non sui piedini I/O come in altri Arduini), collegato anche con la parte Linux sempre come SPI.</li>
+	<li><strong>I/O Analogici:</strong> A0-A5, A6-A11(rispettivamente sui pin 4, 6, 8, 9, 10 e 12)</li>
+</ul>
+Clicca sull'immagine per ingrandirla
+<p align="center"><a href="../uploads/2015/01/YunPinOut.png"><img src="../uploads/2015/01/YunPinOut.png" alt="" height="450" /></a></p>
+<p align="justify">La comunicazione tra la parte Linux e la parte Arduino avviene tramite il bus seriale situato sui pin 0(RX) e 1(TX). Questo bus viene usato per inviare comandi alla parte Linux.</p>
+<p align="center"><img src="../uploads/2015/01/BridgeInShort.png" alt="" height="400" /></p>
+&nbsp;
+
+&nbsp;
+
+<!--PROGRAMMAZIONE-->
+<h2>Programmazione</h2>
+<p align="justify">Ci sono 2 modi per programmare l’ATmega:</p>
+
+<ul>
+	<li>Via microUSB(come un normale Arduino):
+<ul>
+	<li>Selezionare Strumenti--&gt;programmatore--&gt;“AVRISP mkII”.</li>
+	<li>Caricare lo sketch.</li>
+</ul>
+</li>
+	<li>Via Wi-Fi:
+<ul>
+	<li>Connettere il proprio PC alla rete di ArduinoYUN.</li>
+	<li>selezionare Strumenti--&gt;programmatore--&gt;“Parallel programmer”</li>
+	<li>Caricare lo sketch</li>
+</ul>
+</li>
+</ul>
+&nbsp;
+
+&nbsp;
+
+<!--PROBLEMI-->
+<h2>Problemi</h2>
+<strong>Istruzioni pesanti</strong>
+Nell’uso delle varie librerie legate alla comunicazione tra la parte Arduino e la parte Linux, come la librerie Console, Process e FileIO, le istruzioni pesano molto.
+
+Ad esempio per inviare un semplice comando alla console di Linux:
+<pre>  p.<span style="color: #cc6600;">runShellCommand</span>(<span style="color: #006699;">"/usr/bin/pretty-wifi-info.lua | grep Signal"</span>);
+</pre>
+<p align="justify">questa istruzione occupa circa 1.5kB sui 28.6kB della memoria di programma utilizzabili.</p>
+Addirittura alcuni sketch di esempio forniti con l’IDE Arduino occupano il 50-60% della memoria di programma.
+
+&nbsp;
+
+&nbsp;
+
+<!--LINK-->
+<h2>Link utili</h2>
+<a href="http://arduino.cc/en/Main/ArduinoBoardYun?from=Products.ArduinoYUN">http://arduino.cc/en/Main/ArduinoBoardYun?from=Products.ArduinoYUN</a>
+
+<a href="http://arduino.cc/en/Guide/ArduinoYun">http://arduino.cc/en/Guide/ArduinoYun</a>

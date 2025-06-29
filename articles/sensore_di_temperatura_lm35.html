@@ -1,0 +1,42 @@
+<a href="../uploads/2015/08/LM35.pdf">Scarica il documento PDF</a>
+&nbsp;
+
+<!--SOMMARIO-->
+<p align="justify">Questo integrato è un trasduttore di temperatura cioè in uscita fornisce una tensione proporzionale alla temperatura percepita. Il comportamento è regolato secondo la seguente formula:</p>
+<p align="center"><img src="../uploads/2015/08/LM35Formula.jpg" height="50"/></p>
+<p align="justify">Dove con Vo si intende la tensione in uscita e C la temperatura espressa in gradi Celsius(Centigradi).
+Le principali caratteristiche sono:</p>
+<ul>
+	<li>Calibrato direttamente in gradi Celsius (Centigradi)</li>
+	<li>Scala lineare + 10.0 mV/°C</li>
+	<li>Range misurabile −55°C to +150°C</li>
+	<li>Adatto ad applicazioni remote</li>
+	<li>Basso costo (circa 1€)</li>
+	<li>Opera da 3 a 30 Volts</li>
+	<li>Meno di 60 uA di consumo</li>
+</ul>
+<p align="justify">Possiede 3 piedini: 2 di alimentazione (Vcc e GND) e uno di output che può essere collegato direttamente ad un ADC.</p>
+
+<p align="center"><img src="../uploads/2015/08/LM35.jpg" height="300"/></p>
+
+&nbsp;
+&nbsp;
+
+<!--CODICE ARDUINO-->
+<h2>Codice di esempio</h2>
+&nbsp;
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">
+void loop() {
+	temperatura=analogRead(0)*10*(5/1024);
+	Serial.print("Temperatura= ");
+	Serial.println(temperatura);
+	delay(1000);
+}
+</pre>
+
+&nbsp;
+&nbsp;
+
+<!--LINK-->
+<h2>Link utili</h2>
+<strong>Datasheet LM35: </strong><a href="http://www.ti.com/lit/ds/symlink/lm35.pdf">http://www.ti.com/lit/ds/symlink/lm35.pdf</a>&nbsp;

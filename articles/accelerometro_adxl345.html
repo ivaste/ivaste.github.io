@@ -1,0 +1,80 @@
+<a href="../uploads/2015/01/ADXL345.pdf">Scarica il documento PDF</a>
+
+&nbsp;
+
+<!--SOMMARIO-->
+<p align="justify">L’ADXL345 è un piccolo, sottile, a bassa potenza, accelerometro a 3 assi con alta risoluzione (13 bit) di misura fino a ± 16 g. I dati di uscita sono formattati a blocchi di 16 bit accessibili sia attraverso il bus SPI (a 3 o 4 fili) sia con l'interfaccia digitale I2C. L’ADXL345 è adatto per misurare l'accelerazione statica di gravità nelle applicazioni tilt-sensing.</p>
+<p align="center"><img src="../uploads/2015/01/ADXL345.jpg" alt="" height="300" /></p>
+&nbsp;
+
+&nbsp;
+
+<!--LISTA COMPONENTI-->
+<h2>Componenti</h2>
+<ul>
+	<li>Accelerometro ADXL345</li>
+	<li>Arduino</li>
+</ul>
+&nbsp;
+
+&nbsp;
+
+<!--SCHEMA ELETTRICO-->
+<h2>Schema elettrico</h2>
+Clicca sull'immagine per ingrandirla
+<p align="center"><a href="../uploads/2015/01/Schema1.png"><img src="../uploads/2015/01/Schema1.png" alt="" height="250" /></a></p>
+&nbsp;
+
+&nbsp;
+
+<!--CODICE ARDUINO-->
+<h2>Codice di esempio</h2>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="enlighter">#include "Wire.h"
+#include "ADXL345.h"
+
+const float alpha = 0.5;
+
+double fXg = 0;
+double fYg = 0;
+double fZg = 0;
+
+ADXL345 acc;
+
+void setup()
+{
+  acc.begin();
+  Serial.begin(9600);
+  delay(100);
+}
+
+void loop()
+{
+  double pitch, roll, Xg, Yg, Zg;
+  acc.read(&amp;Xg, &amp;Yg, &amp;Zg);
+
+  //Low Pass Filter to smooth out data
+  fXg = Xg * alpha + (fXg * (1.0 - alpha));
+  fYg = Yg * alpha + (fYg * (1.0 - alpha));
+  fZg = Zg * alpha + (fZg * (1.0 - alpha));
+
+  //Roll and Pitch Equations
+  roll  = (atan2(-fYg, fZg)*180.0)/M_PI;
+  pitch = (atan2(fXg, sqrt(fYg*fYg + fZg*fZg))*180.0)/M_PI;
+
+        Serial.print("\tY: ");
+  Serial.print(pitch);
+  Serial.print("\t Z: ");
+  Serial.println(roll);
+
+  delay(500);
+}
+</pre>
+&nbsp;
+
+&nbsp;
+
+<!--LINK-->
+<h2>Link utili</h2>
+<strong>Libreria ADXL345.h: </strong><a href="https://github.com/Anilm3/ADXL345-Accelerometer/tree/master/Arduino">https://github.com/Anilm3/ADXL345-Accelerometer/tree/master/Arduino</a>
+<strong>Datasheet ADXL345: </strong><a href="http://www.analog.com/static/imported-files/data_sheets/ADXL345.pdf">http://www.analog.com/static/imported-files/data_sheets/ADXL345.pdf</a>
+<strong>Guida GY80: </strong><a href="http://blog.oscarliang.net/use-gy80-arduino-adxl345-accelerometer/">http://blog.oscarliang.net/use-gy80-arduino-adxl345-accelerometer/</a>

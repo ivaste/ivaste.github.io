@@ -1,0 +1,100 @@
+<a href="../uploads/2015/01/MLX90614.pdf">Scarica il documento PDF</a>
+
+&nbsp;
+
+<!--SOMMARIO-->
+<p align="justify">Il sensore di temperatura MLX90614, offre la possibilità di ottenere ottimi rilevamenti di temperatura.</p>
+E’ contenuto in una breakout board che si occupa di gestire il sensore, e fornisce tramite interfacciamento con il bus I2C i valori di temperatura.
+<p align="center"><img src="../uploads/2015/01/MLX90614.jpg" alt="" height="200" /><img src="../uploads/2015/01/TopMLX90614.jpg" alt="" height="200" /></p>
+&nbsp;
+
+&nbsp;
+
+<!--LISTA COMPONENTI-->
+<h2>Componenti</h2>
+<ul>
+	<li>Sensore di temperatura MLX90614</li>
+	<li>2 resistori da 10kΩ</li>
+	<li>Arduino</li>
+</ul>
+&nbsp;
+
+&nbsp;
+
+<!--SCHEMA ELETTRICO-->
+<h2>Schema elettrico</h2>
+Clicca sull'immagine per ingrandirla
+<p align="center"><a href="../uploads/2015/01/MLX90614_schem.png"><img src="../uploads/2015/01/MLX90614_schem.png" alt="" height="300" /></a><a href="../uploads/2015/01/MLX90614_bb.png"><img src="../uploads/2015/01/MLX90614_bb.png" alt="" height="300" /></a></p>
+&nbsp;
+
+&nbsp;
+
+<!--CODICE ARDUINO-->
+<h2>Codice di esempio</h2>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="enlighter">#include &lt;i2cmaster.h&gt;
+
+void setup(){
+    Serial.begin(9600);
+    Serial.println("Setup...");
+
+    i2c_init(); //Initialise the i2c bus
+    PORTC = (1 &lt;&lt; PORTC4) | (1 &lt;&lt; PORTC5);//enable pullups
+}
+
+void loop(){
+  Serial.println(temp1());
+  delay(500);
+}
+
+float temp1()
+{
+   int dev = 0x5A&lt;&lt;1;
+  int data_low = 0;
+  int data_high = 0;
+  int pec = 0;
+
+  i2c_start_wait(dev+I2C_WRITE);
+  i2c_write(0x07);
+
+  // read
+  i2c_rep_start(dev+I2C_READ);
+  data_low = i2c_readAck(); //Read 1 byte and then send ack
+  data_high = i2c_readAck(); //Read 1 byte and then send ack
+  pec = i2c_readNak();
+  i2c_stop();
+
+  //This converts high and low bytes together and processes temperature, MSB is a error bit and is ignored for temps
+  double tempFactor = 0.02; // 0.02 degrees per LSB (measurement resolution of the MLX90614)
+  double tempData = 0x0000; // zero out the data
+  int frac; // data past the decimal point
+
+  // This masks off the error bit of the high byte, then moves it left 8 bits and adds the low byte.
+  tempData = (double)(((data_high &amp; 0x007F) &lt;&lt; 8) + data_low);
+  tempData = (tempData * tempFactor)-0.01;
+
+  float celcius = tempData - 273.15;
+  float fahrenheit = (celcius*1.8) + 32;
+
+
+  return(celcius);
+}</pre>
+&nbsp;
+
+&nbsp;
+
+<!--PIU MLX-->
+<h2>Usare più MLX contemporaneamente</h2>
+<p align="justify">Per usare più MLX90614 contemporaneamente devono avere tutti l’indirizzo I2C diverso, quindi si deve cambiare l’indirizzo I2C di ciascun MLX.</p>
+<strong>Codice cambio indirizzo I2C:</strong>
+
+in arrivo...
+
+&nbsp;
+
+&nbsp;
+
+<!--LINK-->
+<h2>Link utili</h2>
+<strong>Libreria i2c master: </strong><a href="http://homepage.hispeed.ch/peterfleury/i2cmaster.zip">http://homepage.hispeed.ch/peterfleury/i2cmaster.zip</a>
+
+<strong>Datasheet MLX90614: </strong><a href="https://www.sparkfun.com/datasheets/Sensors/Temperature/MLX90614_rev001.pdf">https://www.sparkfun.com/datasheets/Sensors/Temperature/MLX90614_rev001.pdf</a>

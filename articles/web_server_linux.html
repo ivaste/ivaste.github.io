@@ -1,0 +1,111 @@
+<!--<h1>Creare un web server su un sistema operativo linux.</h1>-->
+<p>Passi da eseguire:</p>
+<ul>
+	<a href="#LinkApache"><li>Installare Apache</li></a>
+	<a href="#LinkPhp5"><li>Installare php5</li></a>
+	<a href="#LinkMySql"><li>Installare MySql</li></a>
+	<a href="#LinkPhpMyAdmin"><li>Installare PhpMyAdmin</li></a>
+	<a href="#LinkComodita"><li>Comodita</li></a>
+	<a href="#LinkProblemi"><li>Problemi</li></a>
+</ul>
+&nbsp;&nbsp;&nbsp;
+
+
+<p>Se si usa un <strong>raspberry pi</strong> prima di iniziare leggere <a href="#LinkRapberry">qua</a>.</p>
+<p>Per prima cosa aprire il terminale e iniziamo a digitare i seguenti comandi.</p>
+<p>Diventare amministratore:</p>
+	<code><em>Sudo -i</em></code>
+<p>Poi:</p>
+	<code><em>apt-get update</em></code>
+&nbsp;&nbsp;
+
+<a name="LinkApache"><h1>Installare Apache</h1></a>
+	<code><em>apt-get install apache2 apache2-utils libexpat1 apache2-suexec</em></code>
+<p>Adesso bisogna impostare il nome del server appena creato, aggiungendo alla fine del file apache2.conf la riga:</p>
+<p>ServerName NomeDelServer</p>
+	<code><em>nano /etc/apache2/apache2.conf</em></code>
+<p><img src="../uploads/2015/01/Apache2.jpg" height="350"/></p>
+<p>Bisogna riavviare Apache:</p>
+	<code><em>service apache2 force-reload</em></code>
+&nbsp;&nbsp;&nbsp;
+
+<a name="LinkPhp5"><h1>Installare PHP5</h1></a>
+<p>Installare php5 richiede un solo comando:</p>
+	<code><em>apt-get install php5 libapache2-mod-php5</em></code>
+&nbsp;&nbsp;&nbsp;
+
+<a name="LinkMySql"><h1>Installare MySql</h1></a>
+	<code><em>apt-get install mysql-server mysql-client</em></code>
+<p>Durante l’installazione si deve impostare la password per accedere al database.</p>
+<p><img src="../uploads/2015/01/MySQL2.jpg" height="350"/>
+<img src="../uploads/2015/01/MySQL3.jpg" height="350"/></p>
+&nbsp;&nbsp;&nbsp;
+
+<a name="LinkPhpMyAdmin"><h1>Installare Phpmyadmin</h1></a>
+	<code><em>apt-get install phpmyadmin</em></code>
+<p>Durante l'installazione scEgliere l'opzione apache2.</p>
+<p>Rispondere yes alla domanda "configurare il database di phpmyadmin con dbconfig-common?".</p>
+<p>Poi viene chiesta la password del database prima creato.</p>
+<p>E definire la password di amministratore phpmyadmin.</p>
+<p><img src="../uploads/2015/01/phpmyadmin2.jpg" height="350"/>
+<img src="../uploads/2015/01/phpmyadmin3.jpg" height="350"/>
+<img src="../uploads/2015/01/phpmyadmin4.jpg" height="350"/>
+<img src="../uploads/2015/01/phpmyadmin5.jpg" height="350"/>
+<img src="../uploads/2015/01/phpmyadmin6.jpg" height="350"/></p>
+&nbsp;&nbsp;
+<p>La directory del server si trova in "/var/www/".</p>
+&nbsp;&nbsp;&nbsp;
+
+<a name="LinkComodita"><h1>Comodita</h1></a>
+<p>La directory del server si trova in "/var/www/" si può creare una directory più comoda,  ad esempio nella scrivania.</p>
+<p>Usciamo dalla modalita amministratore digitando : "<em>exit</em>".</p>
+<p>Creiamo la cartalla nella scrivania:</p>
+	<code><em>mkdir /home/NomeUtente/Scrivania/Sito</em></code>
+<p>Dovrebbe essersi creata una cartella nella scrivania:</p>
+	<p><img src="../uploads/2015/01/Directory3.jpg" height="250"/></p>
+<p>Ritornare alla modalità amministratore: "<em>sudo -i</em>".</p>
+<p>Prima di modificare il file di configurazione apache lo duplichiamo:</p>
+	<code><em>cp /etc/apache2/sites-available/default /etc/apache2/sites-available/NomeDelSito</em></code>
+<p>Aprire il file di configurazione:</p>
+	<code><em>gedit /etc/apache2/sites-available/ NomeDelSito</em></code>
+<p>Cambiare il parametro ServerAdmin con la vostra email(operazione non necessaria).</p>
+<p>Cambiare il parametro DocumentRoot per fare in modo che punti al nuovo percorso, ad esempio <em>/home/NomeUtente/Scrivania/Sito/</em></p>
+<p>Cambiare la direttiva Directory, sostituendo <em>Directory /var/www/</em> con <em>Directory /home/NomeUtente/Scrivania/Sito/</em></p>
+<p><img src="../uploads/2015/01/Directory6.jpg" height="350"/>
+<img src="../uploads/2015/01/Directory7.jpg" height="350"/></p>
+<p>Salvare ed uscire.</p>
+<p>Si deve attivare il sito con i parmaetri cambiati:</p>
+	<code><em>a2dissite default && sudo a2ensite NomeDelSito</em></code>
+<p>Bisogna riavviare Apache:</p>
+	<code><em>service apache2 force-reload</em></code>
+&nbsp;&nbsp;&nbsp;
+
+<a name="LinkProblemi"><h1>Problemi</h1></a>
+<a name="LinkRapberry"><h2>Problema Memora Rasperrypi</h2></a>
+<p>Se si usa un raspberry pi prima di iniziare verificare lo spazio libero sulla microSD:</p>
+<code><em>df -h</em></code>
+<p>Il sistema operativo occupa circa 1.9GB, e vi lascia spazio libero di 100MB(2GB in totale), anche se avete una microSD più ampia.</p>
+<p>Quindi bisogna estendere la memoria per usare tutto lo spazio della microSD, perchè 100MB non bastano per l'installazione del webserver.</p>
+<p>Quindi:</p>
+<code><em>sudo raspi-config</em></code>
+<p>Scegliere l'opzione "<em>expand_rootfs</em>", e alla domanda di riavviare il sistema rispondere SI.</p>
+<!--IMMAGINE RASPI-CONFIG-->
+<p>Se si ricontrolla lo stato della memoria "<em>df -h</em>" si noterà che lo spazio disponibile è aumentato.</p>
+&nbsp;&nbsp;
+
+<a name=""><h2>Problema accesso ai file</h2></a>
+<p>Potrebbe verificarsi il problema che il web server non apre le nostre pagine php e non fa accedere ai file.</p>
+<p>Quindi apriamo:</p>
+<code><em>gedit /etc/apache2/envvars</em></code>
+<p>Modificare le linee:</p>
+<p><em>export APACHE_RUN_USER=www-data&nbsp;
+export APACHE_RUN_GROUP=www-data</em></p>
+<p>con</p>
+<p><em>export APACHE_RUN_USER=NomeUtente&nbsp;
+export APACHE_RUN_GROUP=NomeUtente</em></p>
+<!--METTERE INSIEME LE 2 IMMAGINI PRIMA E DOPO DEL FILE-->
+<p><img src="../uploads/2015/01/ProblemaPagine2.jpg" height="350"/>
+<img src="../uploads/2015/01/ProblemaPagine3.jpg" height="350"/></p>
+<p>Salvare ed uscire.</p>
+<p>Poi rimuovere un file:</p>
+<code><em>sudo rm -r /var/lock/apache2</em></code>

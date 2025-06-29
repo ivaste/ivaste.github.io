@@ -1,0 +1,213 @@
+<!--<h1>Alimentatore Stabilizzato con tensione di uscita variabile</h1>-->
+<h2>(Progetto scolastico)</h2>
+&nbsp;
+<a href="../uploads/2015/01/AlimentatoreStabilizzato.pdf">Scarica il documento PDF</a>
+&nbsp;&nbsp;
+
+
+<!--SOMMARIO-->
+<p align="justify">Di seguito si illustra il progetto di un alimentatore stabilizzato.
+&nbsp;Che serve a trasformare una tensione alternata di 18V in una tensione continua variabile da 3V a 12V con 1A di corrente massima.
+&nbsp;La tensione è regolata tramite un potenziometro ed un regolatore LM317K.
+&nbsp;Il circuito contiene due led uno verde ed uno rosso, che segnalano rispettivamente la presenza di tensione e il raggiungimento della corrente massima fornibile.
+</p>
+&nbsp;&nbsp;
+
+
+<!--INDICE-->
+<h2>Indice</h2>
+<ul>
+	<li><a href="#LinkIntroduzione">Introduzione</a></li>
+	<li><a href="#LinkSchemaABlocchi">Schema a Blocchi</a></li>
+	<li><a href="#LinkSchemaElettrico">Schema elettrico</a></li>
+	<li><a href="#LinkRaddrizzatore">Raddrizzatore e filtro</a></li>
+	<li><a href="#LinkPowerOn">Segnalazione presenza di tensione (PowerOn)</a></li>
+	<li><a href="#LinkOverload">Segnalazione corrente max (Overload)</a></li>
+	<li><a href="#LinkLM317">Regolatore di tensione e dissipatore</a></li>
+	<li><a href="#LinkDimensionamento">Dimensionamento dei componenti</a>
+		<ul>
+			<li><a href="#LinkComponentiElettrici">Componenti elettrici</a></li>
+			<li><a href="#LinkAnalisiTermica">Analisi termica</a></li>
+		</ul>
+	</li>
+	<li><a href="#LinkListaComponenti">Lista componenti</a></li>
+
+	<li><a href="#LinkCaratteristica">Caratteristica di uscita</a>
+		<ul>
+			<li><a href="#LinkVmin">Vmin</a></li>
+			<li><a href="#LinkVm">Vm</a></li>
+			<li><a href="#LinkVmax">Vmax</a></li>
+		</ul>
+	</li>
+	<li><a href="#LinkConclusioni">Conclusioni</a></li>
+	<li><a href="#LinkDisegni">Disegni tecnici</a></li>
+</ul>
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+<!--INTRODUZIONE-->
+<a name="LinkIntroduzione"><h2>Introduzione</h2></a>
+<p align="justify">Lo scopo del progetto è di realizzare un circuito in grado di acquisire una tensione di 18V alternati e di fornire in uscita una tensione continua e aventi le seguenti specifiche:</p>
+<ul>
+	<li>Tensione continua variabile da 3V a 12V.</li>
+	<li>Corrente massima 1A.</li>
+	<li>Fattore di ripple massimo 5%.</li>
+	<li>Un led rosso che segnala il raggiungimento della corrente massima.</li>
+	<li>Un led verde che segnala la presenza di tensione.</li>
+</ul>
+&nbsp;
+<p align="justify">Viene utilizzato un trasformatore esterno al circuito che trasforma la tensione di rete di 230V AC in 18V AC che verranno utilizzati dal circuito.
+&nbsp;Un ponte di diodi KBL05 utilizzato come raddrizzatore trasforma le semionde negative in positive per ottenere la tensione continua.
+&nbsp;Un condensatore da 4.7uF viene utilizzato come filtro che stabilizza il segnale.
+&nbsp;Il led rosso segnala che si sta richiedendo la corrente massima.
+&nbsp;Il Regolatore LM317K regola e stabilizza meglio la tensione da 3V a 12V al variare del valore del potenziometro.
+&nbsp;Il led verde segnala la presenza di tensione.</p>
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+<!--SCHEMA A BLOCCHI-->
+<a name="LinkSchemaABlocchi"><h2>Schema a blocchi</h2></a>
+<p align="justify">Di seguito si mostra lo schema a blocchi del circuito:</p>
+<p align="center"><img src="../uploads/2015/01/AlimentatoreStabilizzato01.jpg" height="150"/></p>
+<p align="justify">Però, nel circuito realizzato non sarà presente il trasformatore.</p>
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+<!--SCHEMA A ELETTRICO-->
+<a name="LinkSchemaElettrico"><h2>Schema elettrico</h2></a>
+Clicca sull'immagine per ingrandirla&nbsp;
+<p align="center"><a href="../uploads/2015/01/AlimentatoreStabilizzato02.jpg"><img src="../uploads/2015/01/AlimentatoreStabilizzato02.jpg" height="450"/></a></p>
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+<!--RADDRIZZATORE E FILTRO-->
+<a name="LinkRaddrizzatore"><h2>Raddrizzatore e filtro</h2></a>
+<p align="justify">Il ponte di diodi non fa altro che prendere in ingresso un segnale sinusoidale alternato e dare in uscita un segnale con le semionde negative trasformate in positive.</p>
+<p align="center"><img src="../uploads/2015/01/AlimentatoreStabilizzato03.jpg" height="200"/></p>
+<p align="justify">Infatti sia nella fase della semionda positiva che in quella negativa la corrente sul carico scorre nello stesso verso.
+&nbsp;Grazie al condensatore si ottiene una forma d’onda simile al dente di sega semplificando i calcoli.</p>
+<p align="center"><img src="../uploads/2015/01/AlimentatoreStabilizzato04.jpg" height="200"/></p>
+<p align="center"><img src="../uploads/2015/01/AlimentatoreStabilizzato05.jpg" height="200"/></p>
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+<!--POWER ON-->
+<a name="LinkPowerOn"><h2>Segnalazione presenza di tensione (PowerOn)</h2></a>
+<p align="justify">Per segnalare la presenza di tensione è stato posto un led, con opportuna resistenza, ai capi del condensatore. La caduta di tensione sul led verde è di 2.1V quindi il led si accenderà a circa questa tensione.</p>
+<p align="center"><img src="../uploads/2015/01/AlimentatoreStabilizzato06.jpg" height="300"/></p>
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+<!--OVERLOAD-->
+<a name="LinkOverload"><h2>Segnalazione raggiungimento corrente max (Overload)</h2></a>
+<p align="justify">Se la corrente in entrata raggiunge il valore di quella massima il transistor entra in conduzione facendo accendere il led rosso. Quindi per alte correnti come quella richiesta(1 A) si dovrà utilizzare una resistenza (R2) da 5W.</p>
+<p align="center"><img src="../uploads/2015/01/AlimentatoreStabilizzato07.jpg" height="300"/></p>
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+<!--LM317-->
+<a name="LinkLM317"><h2>Regolatore di tensione e dissipatore</h2></a>
+<p align="justify">Il regolatore fornisce in uscita una tensione di forma d’onda idealmente lineare, regolabile tramite la variazione della resistenza del potenziometro. E stata usata la configurazione proposta dal datasheet, al posto di una resistenza normale tra ADJ e GND è stato usato un potenziometro, appunto per far regolare all’utilizzatore la tensione di uscita.</p>
+<p align="center"><img src="../uploads/2015/01/AlimentatoreStabilizzato08.jpg" height="300"/></p>
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+<!--DIMENSIONAMENTO-->
+<a name="LinkDimensionamento"><h2>Dimensionamento dei componenti</h2></a>
+<a name="LinkComponentiElettrici"><h3>Componenti elettrici</h3></a>
+<p align="justify"><strong>Condensatore:</strong></p>
+<img src="../uploads/2015/01/AlimentatoreStabilizzato09.jpg" height="50"/>
+<p align="justify">Pero si deve tenere conto dell’errore del 20% presente nella serie E6:</p>
+<img src="../uploads/2015/01/AlimentatoreStabilizzato10.jpg" height="50"/>
+<p align="justify">E’ stato scelto un condensatore da 4.7uF.</p>
+&nbsp;
+<p align="justify"><strong>Ponte di diodi:</strong></p>
+<p align="justify">La corrente media sui diodi:</p>
+<img src="../uploads/2015/01/AlimentatoreStabilizzato11.jpg" height="50"/>
+<p align="justify">La tensione inversa:</p>
+<img src="../uploads/2015/01/AlimentatoreStabilizzato12.jpg" height="50"/>
+<p align="justify">E’ stato scelto un ponte KBL005.</p>
+&nbsp;
+<p align="justify"><strong>Segnalazione presenza di tensione:</strong></p>
+<img src="../uploads/2015/01/AlimentatoreStabilizzato13.jpg" height="50"/>
+<p align="justify">E stata scelta una resistenza da 1.5kΩ.</p>
+&nbsp;
+<p align="justify"><strong>Segnalazione Overload:</strong></p>
+<p align="justify">Led Rosso:</p>
+<img src="../uploads/2015/01/AlimentatoreStabilizzato14.jpg" height="50"/>
+<p align="justify">E stata scelta una resistenza da 1.5kΩ.</p>
+&nbsp;
+<p align="justify"><strong>Segnalazione Overload:</strong></p>
+<img src="../uploads/2015/01/AlimentatoreStabilizzato15.jpg" height="80"/>
+<p align="justify">E’ stata una resistenza da scelta 270Ω.</p>
+<img src="../uploads/2015/01/AlimentatoreStabilizzato16.jpg" height="50"/>
+<p align="justify">E’ stata scelta 0.2mA.</p>
+<img src="../uploads/2015/01/AlimentatoreStabilizzato17.jpg" height="80"/>
+<p align="justify">E’ stata scelta 500Ω.</p>
+&nbsp;
+<p align="justify"><strong>Trasformatore:</strong></p>
+<img src="../uploads/2015/01/AlimentatoreStabilizzato18.jpg" height="80"/>
+<p align="justify">E’ stata scelto un trasformatore da 18V 50VA.</p>
+&nbsp;
+<p align="justify"><strong>Stabilizzatore:</strong></p>
+<p align="justify">Partendo dalla formula fornita dal datasheet:</p>
+<img src="../uploads/2015/01/AlimentatoreStabilizzato19.jpg" height="80"/>
+<p align="justify">E’ stata scelta una resistenza da 120Ω.</p>
+<img src="../uploads/2015/01/AlimentatoreStabilizzato20.jpg" height="60"/>
+<p align="justify">Però non è possibile trovare un potenziometro da 1022Ω.
+&nbsp;Quindi è stata messa una resistenza in serie ed una in parallelo al potenziometro:</p>
+<img src="../uploads/2015/01/AlimentatoreStabilizzato21.jpg" height="100"/>
+<p align="justify">E’ stata scelta una resistenza in parallelo di 15kΩ.</p>
+&nbsp;&nbsp;
+<a name="LinkAnalisiTermica"><h3>Analisi termica</h3></a>
+<p align="justify"><strong>Dissipatore:</strong></p>
+<img src="../uploads/2015/01/AlimentatoreStabilizzato22.jpg" height="80"/>
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+<!--LISTA COMPONENTI-->
+<a name="LinkListaComponenti"><h2>Lista componenti</h2></a>
+<p align="justify">Lista dei componenti utilizzati per realizzare il progetto:</p>
+<p align="center"><img src="../uploads/2015/01/AlimentatoreStabilizzato30.jpg" height="600"/></p>
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+<!--CARATTERISTICA DI USCITA-->
+<a name="LinkCaratteristica"><h2>Caratteristica di uscita</h2></a>
+<p align="justify">Finito il progetto sono state effettuare delle misure di tensione al variare della richiesta di corrente per ricavare le caratteristiche di uscita e la resistenza del circuito.</p>
+<a name="LinkVmin"><h3>Vmin</h3></a>
+<p align="justify">La prima serie di misure è stata effettuata impostando come tensione di uscita quella minima, ovvero 3V. Come si può vedere dalla tabella e dal grafico la tensione in uscita è abbastanza stabile, infatti si ha una caduta di soli 29mV chiedendo 1A.</p>
+<p align="center"><img src="../uploads/2015/01/AlimentatoreStabilizzato23.jpg" height="300"/></p>
+&nbsp;&nbsp;
+<a name="LinkVm"><h3>Vm</h3></a>
+<p align="justify">La seconda serie di misure è stata effettuata impostando come tensione di uscita una tensione intermedia, pari a 7,5V. In questo caso la caduta di tensione è di 22mV.</p>
+<p align="center"><img src="../uploads/2015/01/AlimentatoreStabilizzato24.jpg" height="300"/></p>
+&nbsp;&nbsp;
+<a name="LinkVmax"><h3>Vmax</h3></a>
+<p align="justify">L’ultima serie di misure è stata effettuata impostando la tensione di uscita alla tensione massima, pari a 12V. La caduta di tensione in questo caso è di 33mV.</p>
+<p align="center"><img src="../uploads/2015/01/AlimentatoreStabilizzato25.jpg" height="300"/></p>
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+<!--CONCLUSIONI-->
+<a name="LinkConclusioni"><h2>Conclusioni</h2></a>
+<p align="justify">Come si vede dai grafici il coefficiente angolare indica la resistenza del circuito, che è molto bassa, il valore oscilla tra i 21.9mΩ e 32.9mΩ.
+&nbsp;Quindi nonostante molte scelte siano state condizionate dai componenti in possesso dal magazzino scolastico, l’alimentatore rispetta le specifiche di progetto.</p>
+<p align="center"><img src="../uploads/2015/01/AlimentatoreStabilizzato31.jpg" height="450"/></p>
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+<!--DISEGNI-->
+<a name="LinkDisegni"><h2>Disegni Tecnici</h2></a>
+Clicca sull'immagini per ingrandirle&nbsp;
+
+<p align="center"><a href="../uploads/2015/01/AlimentatoreStabilizzato02.jpg"><img src="../uploads/2015/01/AlimentatoreStabilizzato02.jpg" height="450"/></a>
+&nbsp;
+<a href="../uploads/2015/01/AlimentatoreStabilizzato26.jpg"><img src="../uploads/2015/01/AlimentatoreStabilizzato26.jpg" height="450"/></a>
+&nbsp;
+<a href="../uploads/2015/01/AlimentatoreStabilizzato27.jpg"><img src="../uploads/2015/01/AlimentatoreStabilizzato27.jpg" height="450"/></a>
+&nbsp;
+<a href="../uploads/2015/01/AlimentatoreStabilizzato28.jpg"><img src="../uploads/2015/01/AlimentatoreStabilizzato28.jpg" height="450"/></a>
+&nbsp;
+<a href="../uploads/2015/01/AlimentatoreStabilizzato29.jpg"><img src="../uploads/2015/01/AlimentatoreStabilizzato29.jpg" height="450"/></a>
+</p>

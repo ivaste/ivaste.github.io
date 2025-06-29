@@ -1,0 +1,69 @@
+<a href="../uploads/2015/02/MouseArduino.pdf">Scarica il documento PDF</a>
+&nbsp;
+
+<!--SOMMARIO-->
+<p align="justify">È possibile utilizzare il sensore interno contenuto nei mouse da computer Per rilevare lo spostamento compiuto da un oggetto che si muove a rasoterra, come ad esempio un robot aspirapolvere o automobiline radiocomandate.
+Questo documento spiega come utilizzare i sensori più comuni, ovvero: AN3101, ADNS-2610, ADNS-2083 o ADNS-2051.
+È necessario scaricare la libreria <a href="../uploads/2015/02/OptiMouse.rar">Opti-Mouse</a> e includerla nello sketch.</p>
+
+&nbsp;
+&nbsp;
+
+<!--SCHEMA ELETTRICO-->
+<h2>Connessione ad Arduino</h2>
+<p align="justify">
+	<ul>
+		<li>Aprire il mouse e asportare la scheda all’interno.</li>
+		<li>Controllare il datasheet dell’integrato.</li>
+		<li>Tagliare le piste dei pin SDIO e SCLK.</li>
+		<li>Saldare 4 cavetti sui pin 5V, GND, SDIO e SCLK.</li>
+	</ul></p>
+<p align="center"><img src="../uploads/2015/02/Schema.jpg" height="300"/><img src="../uploads/2015/02/Aprire.jpg" height="300"/><img src="../uploads/2015/02/Tagliare2.jpg" height="300"/><img src="../uploads/2015/02/Saldare.jpg" height="300"/><img src="../uploads/2015/02/ConnessioneArduino.jpg" height="300"/>
+</p>
+
+&nbsp;
+&nbsp;
+
+<!--CODICE ARDUINO-->
+<h2>Codice</h2>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">
+#include "ADNS2610.h"
+
+#define SCLK 2                            // Serial clock pin on the Arduino
+#define SDIO 3                            // Serial data (I/O) pin on the Arduino
+
+ADNS2610 Optical1 = ADNS2610(SCLK, SDIO);
+
+signed long x = 0;                        // Variables for our 'cursor'
+signed long y = 0;                        //
+
+int c = 0;                                // Counter variable for coordinate reporting
+
+void setup()
+{
+  Serial.begin(38400);
+  Optical1.begin();                       // Resync (not really necessary?)
+}
+
+void loop()
+{
+    x += Optical1.dx();                   // Read the dX register and in/decrease X with that value
+    y += Optical1.dy();                   // Same thing for dY register.....
+  if (c++ & 0x80)
+  {                                       // Report the coordinates once in a while...
+    Serial.print("x=");
+    Serial.print(x, DEC);
+    Serial.print(" y=");
+    Serial.print(y, DEC);
+    Serial.println();
+    c = 0;                                // Reset the report counter
+  }
+}
+</pre>
+
+&nbsp;
+&nbsp;
+
+<!--LINK-->
+<h2>Link utili</h2>
+<a href="http://www.martijnthe.nl/2009/07/interfacing-an-optical-mouse-sensor-to-your-arduino/">http://www.martijnthe.nl/2009/07/interfacing-an-optical-mouse-sensor-to-your-arduino/</a>

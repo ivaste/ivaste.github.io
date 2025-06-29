@@ -1,0 +1,121 @@
+<a href="../uploads/2015/01/LCD.pdf">Scarica il documento PDF</a>
+
+&nbsp;
+
+<!--SOMMARIO-->
+<p align="justify">Un display LCD 16x2 possiede 2 righe da 16 colonne, ovvero ciascuna riga contiene 16 caratteri.</p>
+<p align="center"><img src="../uploads/2015/01/Display.jpg" alt="" height="200" /></p>
+&nbsp;
+
+&nbsp;
+
+<!--LISTA COMPONENTI-->
+<h2>Componenti</h2>
+<ul>
+	<li>Display LCD 16x2</li>
+	<li>Resistore da 330Ω</li>
+	<li>Resistore da 1kΩ</li>
+	<li>Resistore da 22kΩ</li>
+	<li>Arduino</li>
+</ul>
+&nbsp;
+
+&nbsp;
+
+<!--SCHEMA ELETTRICO-->
+<h2>Schema elettrico</h2>
+Clicca sull'immagine per ingrandirla
+<p align="center"><a href="../uploads/2015/01/Display_schem.png"><img src="../uploads/2015/01/Display_schem.png" alt="" height="350" /></a><a href="../uploads/2015/01/Display_bb.png"><img src="../uploads/2015/01/Display_bb.png" alt="" height="350" /></a></p>
+<p align="justify">Vo serve per il contrasto luminoso, si è trovato un ottimo contrasto utilizzando una resistenza R1=22kΩ e una R2=1kΩ.</p>
+Per la retroilluminazione, tra il piedino di Vret+ e Vcc è stata inserita una resistenza di 330Ω per limitare la corrente a 15mA.
+
+&nbsp;
+
+<!--Tabella connessione piedini-->
+<h2>Tabella connessione piedini</h2>
+<p align="center"><img src="../uploads/2015/01/Tabella1.jpg" alt="" height="400" /></p>
+<p align="justify">Attraverso l’istruzione:</p>
+LiquidCrystal lcd(RS, Enable, D4, D5, D6, D7);
+
+è possibile utilizzare i pin di arduino a propria scelta.
+
+&nbsp;
+
+&nbsp;
+
+<!--CODICE ARDUINO-->
+<h2>Codice</h2>
+<strong>INCLUDE</strong>
+<pre>#include &lt;<span style="color: #cc6600;">LiquidCrystal</span>.h&gt;
+</pre>
+<p align="justify">Questa istruzione serve per includere nello sketch la libreria contenente le funzioni per controllare il display.</p>
+
+&nbsp;
+
+<strong>LCD(pin utilizzati)</strong>
+<pre><span style="color: #cc6600;">LiquidCrystal</span> lcd(12, 11, 5, 4, 3, 2);
+</pre>
+<p align="justify">Serve per utilizzare i pin di arduino a propria scelta.</p>
+
+&nbsp;
+
+<strong>BEGIN</strong>
+<pre>  lcd.<span style="color: #cc6600;">begin</span>(16, 2);
+</pre>
+<p align="justify">Inizializza lcd a x colonne e y righe</p>
+
+&nbsp;
+
+<strong>SET CURSOR</strong>
+<pre>  lcd.<span style="color: #cc6600;">setCursor</span>(0, 1);
+</pre>
+<p align="justify">Imposta il cursore di scrittura alla colonna X e alla riga Y.</p>
+
+&nbsp;
+
+<strong>PRINT</strong>
+<pre>  lcd.<span style="color: #cc6600;">print</span>(<span style="color: #006699;">"hello, world!"</span>);
+</pre>
+<p align="justify">Scrive sul display una stringa.</p>
+
+&nbsp;
+
+<strong>CLEAR</strong>
+<pre>  lcd.<span style="color: #cc6600;">clear</span>();
+</pre>
+<p align="justify">Cancella il contenuto del display.</p>
+
+&nbsp;
+
+<strong>DISPLAY-NODISPLAY</strong>
+<p align="justify">Accendere il display:</p>
+<pre>  lcd.<span style="color: #cc6600;">display</span>();</pre>
+
+&nbsp;
+
+Spegnere il display:
+<pre>  lcd.<span style="color: #cc6600;">noDisplay</span>();</pre>
+&nbsp;
+
+&nbsp;
+
+<strong>Codice di esempio:</strong>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">#include &lt;LiquidCrystal.h&gt;
+
+// initialize the library with the numbers of the interface pins
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+void setup() {
+  // set up the LCD's number of columns and rows:
+  lcd.begin(16, 2);
+  // Print a message to the LCD.
+  lcd.print("hello, world!");
+}
+
+void loop() {
+  // set the cursor to column 0, line 1
+  // (note: line 1 is the second row, since counting begins with 0):
+  lcd.setCursor(0, 1);
+  // print the number of seconds since reset:
+  lcd.print(millis() / 1000);
+}</pre>

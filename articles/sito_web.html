@@ -1,0 +1,430 @@
+<!--<h1>Sito web</h1>-->
+<p>Come è costituito questo sito:
+Ogni pagina visibile dai visitatori ha una struttura di base, che viene auto generata in linguaggio php dal server, questo perché il sito potrebbe contenere molte pagine, quindi per non perdere tempo nel copiare ogni volta la stessa parte di codice della struttura di base del sito ed inoltre se si vogliono apportare modifiche sostanziali alla struttura della pagina, si dovrebbe cambiare decine se non centinaia di pagine.
+Quindi si hanno 2 pagine di base, ovvero pagine da cui tutte le altre prendono “spunto”: una in html visibile dal visitatore, che viene però generata dalla seconda in php.</p>
+<ul>
+<a href="#LinkPaginaBaseHTML"><li>Pagina di base HTML</li></a>
+<a href="#LinkPaginaBasePHP"><li>Pagina di base PHP</li></a>
+</ul>
+
+&nbsp;&nbsp;&nbsp;
+
+<a name="LinkPaginaBaseHTML"><h1>Pagina di base HTML</h1></a>
+<p>La pagina HTML è divisa in 2 parti principali:</p>
+<ul>
+<a href="#LinkHead"><li>Head: che contiene il titolo che verrà visualizzato sulla scheda del browser, e i link che includono le pagine di stile css.</li></a>
+<a href="#LinkBody"><li>Body: che sarà il contenuto che si visualizzerà concretamente.</li></a>
+</ul>
+
+&nbsp;&nbsp;&nbsp;
+
+<a name="LinkHead"><h1>Head:</h1></a>
+<h2>Titolo</h2>
+<p>Il titolo si imposta semplicemente mettendolo tra i tag:</p>
+<pre>
+<span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>title</span><span style='color:#7f0055; '>></span>Titolo Pagina<span style='color:#7f0055; '>&lt;/</span><span style='color:#7f0055; font-weight:bold; '>title</span><span style='color:#7f0055; '>></span>
+</pre>
+&nbsp;&nbsp;&nbsp;
+
+<h2>I link ai fogli di stile css</h2>
+<pre>
+<span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>link</span> rel=<span style='color:#2a00ff; '>"stylesheet"</span> href=<span style='color:#2a00ff; '>"</span><span style='color:#7f0055; background:#ffffe8; '>&lt;?php</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>echo</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>'Http://'</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$_SERVER</span><span style='color:#000000; background:#ffffe8; '>[</span><span style='color:#2a00ff; background:#ffffe8; '>'SERVER_NAME'</span><span style='color:#000000; background:#ffffe8; '>]</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>'/FilePagine/style.css'</span><span style='color:#7f0055; background:#ffffe8; '>?></span><span style='color:#2a00ff; '>"</span><span style='color:#7f0055; '>></span>
+</pre>
+<p>Il codice php restituisce http://nomesito.com/FilePagine/style.css questo perchè se per qualche motivo viene fatto un cambiamento di dominio, non sarà necessario modificare il link. Inoltre ho usato la cordinata assoluta, invece di quella relativa(scrivendo solamente “/FilePagine/style.css”.), perché non tutte le pagine si troveranno nella root del server, ma saranno situate in altre sottocartelle, al cui interno non sarà presente un file style.css, quindi tutte le pagine del sito includeranno il file “style.css” che si trova nella sottocartella “FilePagine” della root del server.</p>
+<p>Ho usato dei file a parte per gli stili perché inserirli direttamente nella pagina avrebbe creato confusione perché sono molto lunghi, inoltre siccome il sito avrà più di una pagina, se si deve apportare qualche modifica agli stili si dovrà modificare un solo file, anzi che decine di pagine(se non centinaia o migliaia).</p>
+<p>Ho usato due file, uno per il menu dropdown e l’altro per il resto della pagina</p>
+<p>Quindi il codice risultante è:</p>
+<hr />
+<pre>
+<span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>head</span><span style='color:#7f0055; '>></span>
+	<span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>meta</span> charset=<span style='color:#2a00ff; '>"wtf-8"</span><span style='color:#7f0055; '>/></span>
+	<span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>title</span><span style='color:#7f0055; '>></span>Titolo Pagina<span style='color:#7f0055; '>&lt;/</span><span style='color:#7f0055; font-weight:bold; '>title</span><span style='color:#7f0055; '>></span>
+	<span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>link</span> rel=<span style='color:#2a00ff; '>"stylesheet"</span> href=<span style='color:#2a00ff; '>"</span><span style='color:#7f0055; background:#ffffe8; '>&lt;?php</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>echo</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>'Http://'</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$_SERVER</span><span style='color:#000000; background:#ffffe8; '>[</span><span style='color:#2a00ff; background:#ffffe8; '>'SERVER_NAME'</span><span style='color:#000000; background:#ffffe8; '>]</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>'"/FilePagine /style.css'</span><span style='color:#7f0055; background:#ffffe8; '>?></span><span style='color:#2a00ff; '>"</span><span style='color:#7f0055; '>></span>
+	<span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>link</span> rel=<span style='color:#2a00ff; '>"stylesheet"</span> href=<span style='color:#2a00ff; '>"</span><span style='color:#7f0055; background:#ffffe8; '>&lt;?php</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>echo</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>'Http://'</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$_SERVER</span><span style='color:#000000; background:#ffffe8; '>[</span><span style='color:#2a00ff; background:#ffffe8; '>'SERVER_NAME'</span><span style='color:#000000; background:#ffffe8; '>]</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>'"/FilePagine /dropdown.css'</span><span style='color:#7f0055; background:#ffffe8; '>?></span><span style='color:#2a00ff; '>"</span><span style='color:#7f0055; '>></span>
+<span style='color:#7f0055; '>&lt;/</span><span style='color:#7f0055; font-weight:bold; '>head</span><span style='color:#7f0055; '>></span>
+</pre>
+<hr />
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+<a name="LinkBody"><h1>Body</h1></a>
+
+<p>Il body contiene un unico grande div, id=pagina, che a sua volta contiene in ordine:</p>
+<ul>
+	<a href="#LinkHeader"><li>Header</li></a>
+	<a href="#LinkMenu"><li>Menu dropdown</li></a>
+	<a href="#LinkContenuto"><li>Contenuto</li></a>
+	<a href="#LinkFooter"><li>Footer</li></a>
+</ul>
+&nbsp;<p><strong>Codice html:</strong></p>
+<hr />
+<pre>
+<span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>body</span><span style='color:#7f0055; '>></span>
+	<span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>div</span> id=<span style='color:#2a00ff; '>"pagina"</span><span style='color:#7f0055; '>></span>
+	<span style='color:#3f7f59; '>&lt;!--Blocchi  della pagina(Header, Menu, Contenuto, e footer)--></span>
+	<span style='color:#7f0055; '>&lt;/</span><span style='color:#7f0055; font-weight:bold; '>div</span><span style='color:#7f0055; '>></span>
+<span style='color:#7f0055; '>&lt;/</span><span style='color:#7f0055; font-weight:bold; '>body</span><span style='color:#7f0055; '>></span>
+</pre>
+<hr />
+&nbsp;<p><strong>Codice css:</strong></p>
+<hr />
+<pre>
+<span style='color:#7f0055; font-weight:bold; '>body</span>{
+	<span style='color:#7f0055; font-weight:bold; '>width</span>:100%;				<span style='color:#3f7f59; '>/*La larghezza del body è del 100% della larghezza del browser*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>display</span>:-webkit-box;			<span style='color:#3f7f59; '>/* ”Incapsula” il contenuto del body*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>display</span>:<span style='color:#7f0055; font-weight:bold; '>-moz-box</span>;			<span style='color:#3f7f59; '>/*Stesso comando precedente ma per browser firefox*/</span>
+	-webkit-box-pack:center;		<span style='color:#3f7f59; '>/*Mette tutto il contenuto del body al centro della pagina*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>-moz-box-pack</span>:center;			<span style='color:#3f7f59; '>/*Stesso comando precedente ma per browser firefox*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>background</span>:rgba(0,0,0,0.2); 		<span style='color:#3f7f59; '>/*Lo sfondo è nero, con trasparenza al 0.2(20%)*/</span>
+}
+
+#pagina{			<span style='color:#3f7f59; '>/*id del div che contiene tutta la pagina*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>max-width</span>:1000px;			<span style='color:#3f7f59; '>/*La larghezza massima della pagina puo essere di 1000px*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>display</span>:-webkit-box;			<span style='color:#3f7f59; '>/*”Incapsula” il contenuto del div */</span>
+	-webkit-box-orient:<span style='color:#7f0055; font-weight:bold; '>vertical</span>;		<span style='color:#3f7f59; '>/*Gli elementi del div si allineano verticalmente*/</span>
+	-webkit-box-flex: 1;			<span style='color:#3f7f59; '>/*1=vuol dire flessibile ovvero se si ridimensiona il browser si ridimensiona anche il div*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>display</span>:<span style='color:#7f0055; font-weight:bold; '>-moz-box</span>;			<span style='color:#3f7f59; '>/*Stesso comando precedente ma per browser firefox*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>-moz-box-orient</span>:<span style='color:#7f0055; font-weight:bold; '>vertical</span>;		<span style='color:#3f7f59; '>/*Stesso comando precedente ma per browser firefox*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>-moz-box-flex</span>: 1;			<span style='color:#3f7f59; '>/*Stesso comando precedente ma per browser firefox*/</span>
+}
+</pre>
+<hr />
+
+&nbsp;&nbsp;&nbsp;
+
+<a name="LinkHeader"><h2>Header:</h2></a>
+<p>L’header sarebbe quella grande immagine che rappresenta il sito, in questo caso un immagine con il mio nome. Il codice php restituisce http://nomesito.com/img/Titolo.png, che sarebbe l’indirizzo dell’immagine.</p>
+<img src="../uploads/2015/01/MisureHeader2.jpg" height="250"/>
+
+&nbsp;<p><strong>Codice html:</strong></p>
+<hr />
+<pre>
+<span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; '>header</span> id=<span style='color:#2a00ff; '>"top_header"</span><span style='color:#7f0055; '>></span>
+	<span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>img</span> src=<span style='color:#2a00ff; '>"</span><span style='color:#7f0055; background:#ffffe8; '>&lt;?php</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>echo</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>'Http://'</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$_SERVER</span><span style='color:#000000; background:#ffffe8; '>[</span><span style='color:#2a00ff; background:#ffffe8; '>'SERVER_NAME'</span><span style='color:#000000; background:#ffffe8; '>]</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>'/img/Titolo.png'</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#7f0055; background:#ffffe8; '>?></span><span style='color:#2a00ff; '>"</span> height=<span style='color:#2a00ff; '>"45"</span><span style='color:#7f0055; '>/></span>
+<span style='color:#7f0055; '>&lt;/</span><span style='color:#7f0055; '>header</span><span style='color:#7f0055; '>></span>
+</pre>
+<hr />
+&nbsp;<p><strong>Codice css:</strong></p>
+<hr />
+<pre>
+#top_header{			<span style='color:#3f7f59; '>/*id del div che contiene l’header*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>border</span>:2px solid rgba(0,0,0,0.4);	<span style='color:#3f7f59; '>/*Il bordo e di 2px, nero, con trasparenza al 0.4(40%) */</span>
+	border-radius:10px;			<span style='color:#3f7f59; '>/*Gli angoli vengono smussati di 10px*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>background</span>:white;			<span style='color:#3f7f59; '>/*Lo sfondo è bianco*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>margin-bottom</span>:10px;			<span style='color:#3f7f59; '>/*Sotto il div lascia 10px*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>margin-top</span>:30px;			<span style='color:#3f7f59; '>/* Sopra il div lascia 30px */</span>
+	<span style='color:#7f0055; font-weight:bold; '>padding</span>:20px;				<span style='color:#3f7f59; '>/*Mette 20 pixel tra il testo e il bordo in ogni lato.*/</span>
+}
+</pre>
+<hr />
+
+&nbsp;&nbsp;&nbsp;
+
+<a name="LinkMenu"><h2>Menu</h2></a>
+<p>Il menu non è altro che una lista delle pagine che contiene il sito, che può contenere liste dentro una lista. Per fare questo ho clasificato 3 diversi gradi di liste: il primo è orizzontale, il secondo è verticale, il terzo è verticale, ma spostato a destra rispetto il secondo.</p>
+<!-------------------------------IMMAGINE MENU CON MISURE(PADDING, MARGIN, FONT…)------------------------------>
+
+&nbsp;<p><strong>Codice html d’esempio:</strong></p>
+<hr />
+<pre>
+<span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; '>nav</span> id=<span style='color:#2a00ff; '>"menu"</span><span style='color:#7f0055; '>></span>
+	<span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>ul</span> class=<span style='color:#2a00ff; '>"dropdown"</span><span style='color:#7f0055; '>></span>
+		<span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>li</span><span style='color:#7f0055; '>></span><span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>a</span> href=<span style='color:#2a00ff; '>"</span><span style='color:#7f0055; background:#ffffe8; '>&lt;?php</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>echo</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>'Http://'</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$_SERVER</span><span style='color:#000000; background:#ffffe8; '>[</span><span style='color:#2a00ff; background:#ffffe8; '>'SERVER_NAME'</span><span style='color:#000000; background:#ffffe8; '>]</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>'/Elemento1.php'</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; '>?></span><span style='color:#2a00ff; '> "</span><span style='color:#7f0055; '>></span>Elemento1<span style='color:#7f0055; '>&lt;/</span><span style='color:#7f0055; font-weight:bold; '>a</span><span style='color:#7f0055; '>></span><span style='color:#7f0055; '>&lt;/</span><span style='color:#7f0055; font-weight:bold; '>li</span><span style='color:#7f0055; '>></span>
+		<span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>li</span><span style='color:#7f0055; '>></span><span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>a</span> href=<span style='color:#2a00ff; '>"</span><span style='color:#7f0055; background:#ffffe8; '>&lt;?php</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>echo</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>'Http://'</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$_SERVER</span><span style='color:#000000; background:#ffffe8; '>[</span><span style='color:#2a00ff; background:#ffffe8; '>'SERVER_NAME'</span><span style='color:#000000; background:#ffffe8; '>]</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>'/Elemento2.php'</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; '>?></span><span style='color:#2a00ff; '> "</span><span style='color:#7f0055; '>></span>Elemento2<span style='color:#7f0055; '>&lt;/</span><span style='color:#7f0055; font-weight:bold; '>a</span><span style='color:#7f0055; '>></span>
+			<span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>ul</span><span style='color:#7f0055; '>></span>
+				<span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>li</span><span style='color:#7f0055; '>></span><span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>a</span> href=<span style='color:#2a00ff; '>"</span><span style='color:#7f0055; background:#ffffe8; '>&lt;?php</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>echo</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>'Http://'</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$_SERVER</span><span style='color:#000000; background:#ffffe8; '>[</span><span style='color:#2a00ff; background:#ffffe8; '>'SERVER_NAME'</span><span style='color:#000000; background:#ffffe8; '>]</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>'/Elemento2/Elemento1.php'</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#7f0055; background:#ffffe8; '>?></span><span style='color:#2a00ff; '>"</span><span style='color:#7f0055; '>></span>Elemento1 di Elemento2<span style='color:#7f0055; '>&lt;/</span><span style='color:#7f0055; font-weight:bold; '>a</span><span style='color:#7f0055; '>></span>
+					<span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>ul</span><span style='color:#7f0055; '>></span>
+						<span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>li</span><span style='color:#7f0055; '>></span><span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>a</span> href=<span style='color:#2a00ff; '>"</span><span style='color:#7f0055; background:#ffffe8; '>&lt;?php</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>echo</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>'Http://'</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$_SERVER</span><span style='color:#000000; background:#ffffe8; '>[</span><span style='color:#2a00ff; background:#ffffe8; '>'SERVER_NAME'</span><span style='color:#000000; background:#ffffe8; '>]</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>'/ Elemento2/Elemento1/Elemento1.php'</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#7f0055; background:#ffffe8; '>?></span><span style='color:#2a00ff; '>"</span><span style='color:#7f0055; '>></span> Elemento1 di Elemento1 di Elemento2<span style='color:#7f0055; '>&lt;/</span><span style='color:#7f0055; font-weight:bold; '>a</span><span style='color:#7f0055; '>></span><span style='color:#7f0055; '>&lt;/</span><span style='color:#7f0055; font-weight:bold; '>li</span><span style='color:#7f0055; '>></span>
+						<span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>li</span><span style='color:#7f0055; '>></span><span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>a</span> href=<span style='color:#2a00ff; '>"</span><span style='color:#7f0055; background:#ffffe8; '>&lt;?php</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>echo</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>'Http://'</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$_SERVER</span><span style='color:#000000; background:#ffffe8; '>[</span><span style='color:#2a00ff; background:#ffffe8; '>'SERVER_NAME'</span><span style='color:#000000; background:#ffffe8; '>]</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>'/ Elemento2/Elemento1/Elemento2.php'</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#7f0055; background:#ffffe8; '>?></span><span style='color:#2a00ff; '>"</span><span style='color:#7f0055; '>></span> Elemento2 di Elemento1 di Elemento2<span style='color:#7f0055; '>&lt;/</span><span style='color:#7f0055; font-weight:bold; '>a</span><span style='color:#7f0055; '>></span><span style='color:#7f0055; '>&lt;/</span><span style='color:#7f0055; font-weight:bold; '>li</span><span style='color:#7f0055; '>></span>
+					<span style='color:#7f0055; '>&lt;/</span><span style='color:#7f0055; font-weight:bold; '>ul</span><span style='color:#7f0055; '>></span>
+				<span style='color:#7f0055; '>&lt;/</span><span style='color:#7f0055; font-weight:bold; '>li</span><span style='color:#7f0055; '>></span>
+			<span style='color:#7f0055; '>&lt;/</span><span style='color:#7f0055; font-weight:bold; '>ul</span><span style='color:#7f0055; '>></span>
+		<span style='color:#7f0055; '>&lt;/</span><span style='color:#7f0055; font-weight:bold; '>li</span><span style='color:#7f0055; '>></span>
+	<span style='color:#7f0055; '>&lt;/</span><span style='color:#7f0055; font-weight:bold; '>ul</span><span style='color:#7f0055; '>></span>
+<span style='color:#7f0055; '>&lt;/</span><span style='color:#7f0055; '>nav</span><span style='color:#7f0055; '>></span>
+</pre>
+<hr />
+&nbsp;<p><strong>Codice css:</strong></p>
+<hr />
+<pre>
+#menu{			<span style='color:#3f7f59; '>/*id del nav che contiene il menu*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>display</span>:-webkit-box;			<span style='color:#3f7f59; '>/*”Incapsula” il contenuto del div */</span>
+	-webkit-box-pack:center;		<span style='color:#3f7f59; '>/*Mette tutto il contenuto al centro della pagina*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>max-width</span>:1000px;			<span style='color:#3f7f59; '>/*La larghezza massima della menu puo essere di 1000px*/</span>
+}
+#menu <span style='color:#7f0055; font-weight:bold; '>ul</span> a{		<span style='color:#3f7f59; '>/*Tutti i link dentro una lista del menu*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>text-decoration</span>: none;			<span style='color:#3f7f59; '>/*Per non avere link sottolineati*/</span>
+}
+#menu <span style='color:#7f0055; font-weight:bold; '>ul</span>{		<span style='color:#3f7f59; '>/*Tutte le liste del menu*/</span>
+	border-radius:10px;			<span style='color:#3f7f59; '>/*Gli angoli vengono smussati di 10px */</span>
+}
+
+#menu <span style='color:#7f0055; font-weight:bold; '>ul</span>.dropdown,
+<span style='color:#7f0055; font-weight:bold; '>ul</span>.dropdown <span style='color:#7f0055; font-weight:bold; '>li</span>,
+<span style='color:#7f0055; font-weight:bold; '>ul</span>.dropdown <span style='color:#7f0055; font-weight:bold; '>ul</span> {	<span style='color:#3f7f59; '>/*Liste, elementi delle liste, e le liste dentro le liste dropdown*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>list-style</span>: none;				<span style='color:#3f7f59; '>/*La lista non ha stile(niente pallini, numeri…)*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>font</span>:bold 25px Calibri;			<span style='color:#3f7f59; '>/*Il testo diventa grassetto grande 25px di font Calibri*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>padding</span>:5px; 				<span style='color:#3f7f59; '>/*Mette 5 pixel tra il testo e il bordo in ogni lato.*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>border</span>:1px solid rgba(0,0,0,0.4);	<span style='color:#3f7f59; '>/*Il bordo e di 1px, nero, con trasparenza al 0.4(40%) */</span>
+	<span style='color:#7f0055; font-weight:bold; '>background</span>:rgba(0,0,0,0.1);		<span style='color:#3f7f59; '>/*Lo sfondo è nero, con trasparenza al 0.1(10%)*/</span>
+}
+
+#menu <span style='color:#7f0055; font-weight:bold; '>ul</span>.dropdown {			<span style='color:#3f7f59; '>/*La lista dropdown*/</span>
+	 <span style='color:#7f0055; font-weight:bold; '>position</span>: relative;
+	 <span style='color:#7f0055; font-weight:bold; '>float</span>: left;				<span style='color:#3f7f59; '>/*Dispone le liste una a fianco all’altra*/</span>
+}
+
+#menu <span style='color:#7f0055; font-weight:bold; '>ul</span>.dropdown <span style='color:#7f0055; font-weight:bold; '>li</span> {			<span style='color:#3f7f59; '>/*Gli elementi della lista dropdown*/</span>
+ 	<span style='color:#7f0055; font-weight:bold; '>float</span>: left;				<span style='color:#3f7f59; '>/*Dispone gli elementi uno a fianco all’altro*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>min-height</span>: 1px;			<span style='color:#3f7f59; '>/*Minima larghezza 1px*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>max-width</span>:500px;			<span style='color:#3f7f59; '>/*Massima larghezza dell’elemento è di 500px*/</span>
+ 	<span style='color:#7f0055; font-weight:bold; '>vertical-align</span>: middle;			<span style='color:#3f7f59; '>/*Allinea gli elementi al centro*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>padding-left</span>:5px;			<span style='color:#3f7f59; '>/*Mette 5 pixel tra il testo e il bordo a sinistra.*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>padding-right</span>:5px;			<span style='color:#3f7f59; '>/*Mette 5 pixel tra il testo e il bordo a destra.*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>border</span>:1px solid black;			<span style='color:#3f7f59; '>/*Il bordo e di 1px nero*/</span>
+}
+
+#menu <span style='color:#7f0055; font-weight:bold; '>ul</span>.dropdown <span style='color:#7f0055; font-weight:bold; '>li</span>:<span style='color:#7f0055; font-weight:bold; '>hover</span> {		<span style='color:#3f7f59; '>/*Quando si passa con il mouse sopra un elemento della lista*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>position</span>: relative;
+	<span style='color:#7f0055; font-weight:bold; '>cursor</span>: default;				<span style='color:#3f7f59; '>/*Il cursore rimane normale*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>background</span>:rgba(0,0,0,0.3);		<span style='color:#3f7f59; '>/*Lo sfondo è nero, con trasparenza al 0.3(30%)*/</span>
+}
+#menu a{				<span style='color:#3f7f59; '>/*Tutti i link del menu*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>color</span>:white;				<span style='color:#3f7f59; '>/* Il colore del font diventa bianco*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>text-decoration</span>:none;			<span style='color:#3f7f59; '>/*Per non avere link sottolineati*/</span>
+}
+#menu <span style='color:#7f0055; font-weight:bold; '>li</span> <span style='color:#7f0055; font-weight:bold; '>a</span>:<span style='color:#7f0055; font-weight:bold; '>hover</span>{			<span style='color:#3f7f59; '>/*Quando si passa col mouse sopra ad un link del menu*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>color</span>:black;				<span style='color:#3f7f59; '>/*Il colore del font diventa nero*/</span>
+}
+
+#menu <span style='color:#7f0055; font-weight:bold; '>ul</span>.dropdown <span style='color:#7f0055; font-weight:bold; '>ul</span> {		<span style='color:#3f7f59; '>/*La lista dentro una lista*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>visibility</span>: hidden;			<span style='color:#3f7f59; '>/*Normalmente Nascosta*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>position</span>: absolute;
+	<span style='color:#7f0055; font-weight:bold; '>top</span>: 100%;
+	<span style='color:#7f0055; font-weight:bold; '>width</span>: auto;				<span style='color:#3f7f59; '>/*La larghezza è regolata in automatico*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>left</span>:-1px;				<span style='color:#3f7f59; '>/*Perche c'è 1px di bordo*/</span>
+	border-radius:0px 0px 7px 7px;		<span style='color:#3f7f59; '>/*Gli angoli sotto vengono smussati di 7px*/</span>
+}
+
+#menu <span style='color:#7f0055; font-weight:bold; '>ul</span>.dropdown <span style='color:#7f0055; font-weight:bold; '>ul</span> <span style='color:#7f0055; font-weight:bold; '>li</span> {		<span style='color:#3f7f59; '>/*Elementi di una dentro una lista dropdown*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>float</span>: none;				<span style='color:#3f7f59; '>/*Vengono messi uno sotto l'altro*/</span>
+}
+
+#menu <span style='color:#7f0055; font-weight:bold; '>ul</span>.dropdown <span style='color:#7f0055; font-weight:bold; '>ul</span> <span style='color:#7f0055; font-weight:bold; '>ul</span> {		<span style='color:#3f7f59; '>/*Lista dentro una lista dentro una lista*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>top</span>: -7px;				<span style='color:#3f7f59; '>/*Bordo di 1+1px + padding 5px*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>left</span>: 100%;
+	border-radius:0px 7px 7px 7px;		<span style='color:#3f7f59; '>/*Gli angoli sotto e in alto a dx vengono smussati di 7px*/</span>
+}
+
+#menu <span style='color:#7f0055; font-weight:bold; '>ul</span>.dropdown <span style='color:#7f0055; font-weight:bold; '>li</span>:<span style='color:#7f0055; font-weight:bold; '>hover</span> > <span style='color:#7f0055; font-weight:bold; '>ul</span> {	<span style='color:#3f7f59; '>/*Quando si passa sopra col mouse ad un elemento della lista*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>visibility</span>: visible;			<span style='color:#3f7f59; '>/*La lista dell’elemento viene resa visibile*/</span>
+}
+</pre>
+<hr />
+
+&nbsp;&nbsp;&nbsp;
+
+<a name="LinkContenuto"><h2>Contenuto</h2></a>
+<p>Il contenuto è quella parte che contiene il testo da leggere della pagina.</p>
+<!-------------------------------IMMAGINE CONTENUTO CON MISURE(PADDING, MARGIN, FONT…)-------------------->
+
+&nbsp;<p><strong>Codice html:</strong></p>
+<hr />
+<pre>
+<span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>div</span> id=<span style='color:#2a00ff; '>"new_div"</span><span style='color:#7f0055; '>></span>
+	<span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; '>section</span> id=<span style='color:#2a00ff; '>"main_section"</span><span style='color:#7f0055; '>></span>
+		<span style='color:#3f7f59; '>&lt;!--Contenuto della pagina--></span>
+	<span style='color:#7f0055; '>&lt;/</span><span style='color:#7f0055; '>section</span><span style='color:#7f0055; '>></span>
+<span style='color:#7f0055; '>&lt;/</span><span style='color:#7f0055; font-weight:bold; '>div</span><span style='color:#7f0055; '>></span>
+</pre>
+<hr />
+&nbsp;<p><strong>Codice css:</strong></p>
+<hr />
+<pre>
+#new_div{			<span style='color:#3f7f59; '>/*id del div che contiene il contenuto testuale della pagina*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>display</span>:-webkit-box;			<span style='color:#3f7f59; '>/*”Incapsula” il contenuto del div*/</span>
+	-webkit-box-orient:<span style='color:#7f0055; font-weight:bold; '>horizontal</span>;		<span style='color:#3f7f59; '>/*Gli elementi del div si allineano orizontalmente*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>display</span>:<span style='color:#7f0055; font-weight:bold; '>-moz-box</span>;			<span style='color:#3f7f59; '>/*Stesso comando precedente ma per browser firefox*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>-moz-box-orient</span>:<span style='color:#7f0055; font-weight:bold; '>horizontal</span>;		<span style='color:#3f7f59; '>/*Stesso comando precedente ma per browser firefox*/</span>
+}
+
+#main_section{			<span style='color:#3f7f59; '>/*id del div che contiene il contenuto testuale della pagina*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>border</span>:2px solid rgba(0,0,0,0.4);	<span style='color:#3f7f59; '>/*Il bordo e di 2px, nero, con trasparenza al 0.4(40%) */</span>
+	-webkit-box-flex: 1;			<span style='color:#3f7f59; '>/*1=vuol dire flessibile ovvero se si ridimensiona il browser si ridimensiona anche il div*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>-moz-box-flex</span>: 1;			<span style='color:#3f7f59; '>/*Stesso comando precedente ma per browser firefox*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>margin-bottom</span>:10px;			<span style='color:#3f7f59; '>/*Sotto il div lascia 10px*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>margin-top</span>:10px;			<span style='color:#3f7f59; '>/*Sopra il div lascia 10px*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>padding</span>:20px;				<span style='color:#3f7f59; '>/*Mette 20 pixel tra il testo e il bordo in ogni lato.*/</span>
+	border-radius:10px;			<span style='color:#3f7f59; '>/*Gli angoli vengono smussati di 10px*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>background</span>:white;			<span style='color:#3f7f59; '>/*Sfondo bianco*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>font</span>:16px Calibri;			<span style='color:#3f7f59; '>/*Font del contenuto Calibri grande 16px*/</span>
+}
+#main_section <span style='color:#7f0055; font-weight:bold; '>ul</span>{		<span style='color:#3f7f59; '>/*Liste dentro il contenuto*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>list-style-type</span>:decimal;			<span style='color:#3f7f59; '>/*Primo livello di liste catalogate con numeri*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>margin-left</span>:20px;			<span style='color:#3f7f59; '>/*padding di 20 px quindi sposto di 20px la lista*/</span>
+}
+#main_section <span style='color:#7f0055; font-weight:bold; '>ul</span> <span style='color:#7f0055; font-weight:bold; '>ul</span>{		<span style='color:#3f7f59; '>/*Liste dentro Liste dentro il contenuto*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>list-style-type</span>:disc;			<span style='color:#3f7f59; '>/*Secondo livello di liste catalogate con pallini*/</span>
+}
+#main_section <span style='color:#7f0055; font-weight:bold; '>ul</span> <span style='color:#7f0055; font-weight:bold; '>ul</span> <span style='color:#7f0055; font-weight:bold; '>ul</span>{		<span style='color:#3f7f59; '>/*Liste dentro Liste dentro Liste dentro il contenuto*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>list-style-type</span>:square;			<span style='color:#3f7f59; '>/*Terzo livello di liste catalogate con quadrati*/</span>
+}
+#main_section <span style='color:#7f0055; font-weight:bold; '>hr</span>{		<span style='color:#3f7f59; '>/*Separatori dentro il contenuto*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>background</span>:rgba(0,0,0,0.4);		<span style='color:#3f7f59; '>/*di colore nero, con trasparenza al 0.4(40%) */</span>
+	<span style='color:#7f0055; font-weight:bold; '>height</span>:1;				<span style='color:#3f7f59; '>/*Altezza 1px*/</span>
+}
+#main_section a{		<span style='color:#3f7f59; '>/*Link dentro il contenuto*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>color</span>:black;				<span style='color:#3f7f59; '>/*Colore nero*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>font</span>:bold 16px Calibri;			<span style='color:#3f7f59; '>/*font grassetto Calibri grande 16px*/</span>
+}
+#main_section <span style='color:#7f0055; font-weight:bold; '>a</span>:<span style='color:#7f0055; font-weight:bold; '>hover</span>{		<span style='color:#3f7f59; '>/*Quando si passa col mouse sopra ad un link*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>color</span>:rgba(0,0,0,0.4);			<span style='color:#3f7f59; '>/*colore nero, con trasparenza al 0.4(40%) */</span>
+	<span style='color:#7f0055; font-weight:bold; '>font</span>:bold 18px Calibri;			<span style='color:#3f7f59; '>/*font grassetto Calibri grande 18px*/</span>
+}
+#main_section <span style='color:#7f0055; font-weight:bold; '>h1</span>{		<span style='color:#3f7f59; '>/*Header1(Titoli di 1 livello)*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>font</span>:bold 36px Calibri;			<span style='color:#3f7f59; '>/*font grassetto Calibri grande 36px*/</span>
+}
+#main_section <span style='color:#7f0055; font-weight:bold; '>h2</span>{		<span style='color:#3f7f59; '>/*Header2(Titoli di 2 livello)*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>font</span>:bold 24px Calibri;			<span style='color:#3f7f59; '>/*font grassetto Calibri grande 24px*/</span>
+}
+#main_section <span style='color:#7f0055; font-weight:bold; '>h3</span>{		<span style='color:#3f7f59; '>/*Header3(Titoli di 3 livello)*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>font</span>:bold 20px Calibri;			<span style='color:#3f7f59; '>/*font grassetto Calibri grande 20px*/</span>
+}
+#main_section <span style='color:#7f0055; font-weight:bold; '>code</span> {		<span style='color:#3f7f59; '>/*Codici*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>color</span>:blue;				<span style='color:#3f7f59; '>/*Teso di Colore blu*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>margin-left</span>:20px;			<span style='color:#3f7f59; '>/*rientrati di 20px*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>font</span>:italic 18px Calibri;			<span style='color:#3f7f59; '>/*Font corsivo Calibri grande 18px*/</span>
+}
+</pre>
+<hr />
+
+&nbsp;&nbsp;&nbsp;
+
+<a name="LinkFooter"><h2>Footer</h2></a>
+<p>Il footer che si trova in fondo alla pagina, contiene i copyright.</p>
+<!-------------------------------IMMAGINE FOOTER CON MISURE(PADDING, MARGIN, FONT…)-------------------->
+
+&nbsp;<p><strong>Codice html:</strong></p>
+<hr />
+<pre>
+<span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; '>footer</span> id=<span style='color:#2a00ff; '>"footer"</span><span style='color:#7f0055; '>></span>
+	Copyright-2013. By Stefano Ivancich
+<span style='color:#7f0055; '>&lt;/</span><span style='color:#7f0055; '>footer</span><span style='color:#7f0055; '>></span>
+</pre>
+<hr />
+&nbsp;<p><strong>Codice css:</strong></p>
+<hr />
+<pre>
+#footer{
+	<span style='color:#7f0055; font-weight:bold; '>color</span>:white;		<span style='color:#3f7f59; '>/*Testo di colore bianco*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>text-align</span>:center;			<span style='color:#3f7f59; '>/*Tutto il testo viene allineato al centro*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>padding</span>:20px;				<span style='color:#3f7f59; '>/*Mette 20 pixel tra il testo e il bordo in ogni lato.*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>border</span>:2px solid rgba(0,0,0,0.4);	<span style='color:#3f7f59; '>/*Il bordo e di 2px, nero, con trasparenza al 0.4(40%) */</span>
+	border-radius:10px;			<span style='color:#3f7f59; '>/*Gli angoli vengono smussati di 10px*/</span>
+	<span style='color:#7f0055; font-weight:bold; '>background</span>:rgba(0,0,0,0.3);		<span style='color:#3f7f59; '>/*sfondo nero, con trasparenza al 0.3(30%) */</span>
+}
+</pre>
+<hr />
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<a name="LinkPaginaBasePHP"><h1>Pagina di Base PHP:</h1></a>
+<p>La pagina base HTML è stata scomposta in 6 file: head fino al titolo, l’head dopo il titolo con i link css, l’header del body, il menu, la main_section prima del contenuto ed infine il footer.</p>
+<p>Quindi possiamo dire che la pagina php è composta così:</p>
+<ul>
+	<li>Richiama il file head</li>
+	<li>Scrive il titolo della pagina</li>
+	<li>Richiama il file con i link css</li>
+	<li>Richiama il file del header del body</li>
+	<li>Richiama il file del menu</li>
+	<li>Richiama il file della main_section</li>
+	<li>Richiama il file HTML del contenuto</li>
+	<li>Richiama il file del footer</li>
+</ul>
+&nbsp;<p><strong>Codice php:</strong></p>
+<hr />
+<pre>
+<span style='color:#7f0055; background:#ffffe8; '>&lt;?php</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>include</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>'FilePagine/0_Connessione_Database.php'</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; '>?></span>
+<span style='color:#7f0055; background:#ffffe8; '>&lt;?php</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>include</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>'FilePagine/1_Head1_Titolo.php'</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; '>?></span>
+<span style='color:#7f0055; background:#ffffe8; '>&lt;?php</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>echo</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>'Titolo'</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; '>?></span>
+<span style='color:#7f0055; background:#ffffe8; '>&lt;?php</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>include</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>'FilePagine/2_Head2_Css.php'</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; '>?></span>
+<span style='color:#7f0055; background:#ffffe8; '>&lt;?php</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>include</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>'FilePagine/3_Body1_Header.php'</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; '>?></span>
+<span style='color:#7f0055; background:#ffffe8; '>&lt;?php</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>include</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>'FilePagine/4_Body2_Menu.php'</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; '>?></span>
+<span style='color:#7f0055; background:#ffffe8; '>&lt;?php</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>include</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>'FilePagine/5_Body3_MainSection.php'</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; '>?></span>
+<span style='color:#7f0055; background:#ffffe8; '>&lt;?php</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>include</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>'PaginaCreata.html'</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; '>?></span>
+<span style='color:#7f0055; background:#ffffe8; '>&lt;?php</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>include</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>'FilePagine/6_Body4_Footer.php'</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; '>?></span>
+</pre>
+<hr />
+
+&nbsp;&nbsp;
+
+<p>Per generare il codice appena visto è stata creata una pagina apposita: CreaNuovaPagina.php.</p>
+<p>La pagina contiene 3 textbox per: la directory, il nome del file e il titolo per il browser, una textarea per il contenuto della pagina e un pulsante per creare la pagina.</p>
+<img src="../uploads/2015/01/CreaPagina.jpg" height="350"/>
+&nbsp;<p><strong>Codice html:</strong></p>
+<hr />
+<pre>
+<span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>form</span> action=<span style='color:#2a00ff; '>"CreaNuovaPagina.php"</span> method=<span style='color:#2a00ff; '>"POST"</span><span style='color:#7f0055; '>></span><span style='color:#3f7f59; '>&lt;!--POST--></span>
+	Directory: <span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>input</span> type=<span style='color:#2a00ff; '>"text"</span> name=<span style='color:#2a00ff; '>"Directory"</span> <span style='color:#7f0055; '>/></span> <span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>br</span><span style='color:#7f0055; '>></span>
+	File Name: <span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>input</span> type=<span style='color:#2a00ff; '>"text"</span> name=<span style='color:#2a00ff; '>"FileName"</span> <span style='color:#7f0055; '>/></span> <span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>br</span><span style='color:#7f0055; '>></span>
+	Titolo Browser: <span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>input</span> type=<span style='color:#2a00ff; '>"text"</span> name=<span style='color:#2a00ff; '>"Titolo"</span> <span style='color:#7f0055; '>/></span> <span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>br</span><span style='color:#7f0055; '>></span>
+	Contenuto:<span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>br</span><span style='color:#7f0055; '>></span>
+	<span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>textarea</span> name=<span style='color:#2a00ff; '>"Contenuto"</span> rows=<span style='color:#2a00ff; '>"20"</span> cols=<span style='color:#2a00ff; '>"80"</span> height=<span style='color:#2a00ff; '>"100px"</span><span style='color:#7f0055; '>></span><span style='color:#7f0055; '>&lt;/</span><span style='color:#7f0055; font-weight:bold; '>textarea</span><span style='color:#7f0055; '>></span> <span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>br</span><span style='color:#7f0055; '>></span>
+	<span style='color:#7f0055; '>&lt;</span><span style='color:#7f0055; font-weight:bold; '>input</span> type=<span style='color:#2a00ff; '>"submit"</span> value=<span style='color:#2a00ff; '>"Crea"</span><span style='color:#7f0055; '>/></span>
+<span style='color:#7f0055; '>&lt;/</span><span style='color:#7f0055; font-weight:bold; '>form</span><span style='color:#7f0055; '>></span>
+<span style='color:#7f0055; background:#ffffe8; '>&lt;?php</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>require</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>"CreaNuovaPaginaCode.php"</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; '>?></span>
+</pre>
+<hr />
+
+&nbsp;&nbsp;
+
+<p>Come si nota è stata aggiunta un istruzione in php che richiama la pagina che contiene effettivamente il codice php, questo perché il codice è molto lungo e complesso ed è stato preferito metterlo in una pagina a parte.</p>
+&nbsp;<p><strong>Codice php:</strong></p>
+<hr />
+<pre>
+<span style='color:#7f0055; background:#ffffe8; '>&lt;?php</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>if</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>isset</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#000000; background:#ffffe8; '>$_POST</span><span style='color:#000000; background:#ffffe8; '>[</span><span style='color:#2a00ff; background:#ffffe8; '>'Directory'</span><span style='color:#000000; background:#ffffe8; '>]</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>&amp;</span><span style='color:#000000; background:#ffffe8; '>&amp;</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>isset</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#000000; background:#ffffe8; '>$_POST</span><span style='color:#000000; background:#ffffe8; '>[</span><span style='color:#2a00ff; background:#ffffe8; '>'FileName'</span><span style='color:#000000; background:#ffffe8; '>]</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>&amp;</span><span style='color:#000000; background:#ffffe8; '>&amp;</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>isset</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#000000; background:#ffffe8; '>$_POST</span><span style='color:#000000; background:#ffffe8; '>[</span><span style='color:#2a00ff; background:#ffffe8; '>'Titolo'</span><span style='color:#000000; background:#ffffe8; '>]</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>&amp;</span><span style='color:#000000; background:#ffffe8; '>&amp;</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>isset</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#000000; background:#ffffe8; '>$_POST</span><span style='color:#000000; background:#ffffe8; '>[</span><span style='color:#2a00ff; background:#ffffe8; '>'Contenuto'</span><span style='color:#000000; background:#ffffe8; '>]</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#000000; background:#ffffe8; '>{</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>	</span><span style='color:#000000; background:#ffffe8; '>$Directory</span><span style='color:#000000; background:#ffffe8; '>=</span><span style='color:#000000; background:#ffffe8; '>$_POST</span><span style='color:#000000; background:#ffffe8; '>[</span><span style='color:#2a00ff; background:#ffffe8; '>'Directory'</span><span style='color:#000000; background:#ffffe8; '>]</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '>				</span><span style='color:#3f7f59; background:#ffffe8; '>// Assegno alla variabile "Directory" il contenuto della textbox "Direcory"</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>	</span><span style='color:#000000; background:#ffffe8; '>$FileName</span><span style='color:#000000; background:#ffffe8; '>=</span><span style='color:#000000; background:#ffffe8; '>$_POST</span><span style='color:#000000; background:#ffffe8; '>[</span><span style='color:#2a00ff; background:#ffffe8; '>'FileName'</span><span style='color:#000000; background:#ffffe8; '>]</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '>				</span><span style='color:#3f7f59; background:#ffffe8; '>// Assegno alla variabile "FileName" il contenuto della textbox "FileName"</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>	</span><span style='color:#000000; background:#ffffe8; '>$Titolo</span><span style='color:#000000; background:#ffffe8; '>=</span><span style='color:#000000; background:#ffffe8; '>$_POST</span><span style='color:#000000; background:#ffffe8; '>[</span><span style='color:#2a00ff; background:#ffffe8; '>'Titolo'</span><span style='color:#000000; background:#ffffe8; '>]</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '>					</span><span style='color:#3f7f59; background:#ffffe8; '>// Assegno alla variabile "Titolo" il contenuto della textbox "Titolo"</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>	</span><span style='color:#000000; background:#ffffe8; '>$Contenuto</span><span style='color:#000000; background:#ffffe8; '>=</span><span style='color:#000000; background:#ffffe8; '>$_POST</span><span style='color:#000000; background:#ffffe8; '>[</span><span style='color:#2a00ff; background:#ffffe8; '>'Contenuto'</span><span style='color:#000000; background:#ffffe8; '>]</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '>				</span><span style='color:#3f7f59; background:#ffffe8; '>// Assegno alla variabile "Contenuto" il contenuto della textarea "Contenuto"</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>	</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>if</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>empty</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#000000; background:#ffffe8; '>$FileName</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>echo</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>'Devi scrivere il FileName'</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '> 	</span><span style='color:#3f7f59; background:#ffffe8; '>// Se la textbox "FileName"  è vuotaì</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>	</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>else</span><span style='color:#000000; background:#ffffe8; '>{</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>	</span><span style='color:#3f7f59; background:#ffffe8; '>// Ottengo le cordinate relative per tornare alla root:</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>		</span><span style='color:#000000; background:#ffffe8; '>$Root</span><span style='color:#000000; background:#ffffe8; '>=</span><span style='color:#2a00ff; background:#ffffe8; '>''</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>		</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>for</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#000000; background:#ffffe8; '>$i</span><span style='color:#000000; background:#ffffe8; '>=</span><span style='color:#000000; background:#ffffe8; '>0</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '>$i</span><span style='color:#000000; background:#ffffe8; '>&lt;</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>strlen</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#000000; background:#ffffe8; '>$Directory</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '>$i</span><span style='color:#000000; background:#ffffe8; '>+</span><span style='color:#000000; background:#ffffe8; '>+</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>{</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>			</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>if</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>substr</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#000000; background:#ffffe8; '>$Directory</span><span style='color:#000000; background:#ffffe8; '>,</span><span style='color:#000000; background:#ffffe8; '>$i</span><span style='color:#000000; background:#ffffe8; '>,</span><span style='color:#000000; background:#ffffe8; '>1</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>=</span><span style='color:#000000; background:#ffffe8; '>=</span><span style='color:#2a00ff; background:#ffffe8; '>"/"</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#000000; background:#ffffe8; '>{</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>					</span><span style='color:#000000; background:#ffffe8; '>$Root</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>=</span><span style='color:#2a00ff; background:#ffffe8; '>"../"</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>			</span><span style='color:#000000; background:#ffffe8; '>}</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>		</span><span style='color:#000000; background:#ffffe8; '>}</span><span style='color:#000000; background:#ffffe8; '>						</span>
+<span style='color:#000000; background:#ffffe8; '>		</span>
+<span style='color:#000000; background:#ffffe8; '>	</span><span style='color:#3f7f59; background:#ffffe8; '>// Cancello contenuto del file PHP:</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>		</span><span style='color:#000000; background:#ffffe8; '>$file</span><span style='color:#000000; background:#ffffe8; '>=</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>fopen</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#2a00ff; background:#ffffe8; '>"../"</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$Directory</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$FileName</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>".php"</span><span style='color:#000000; background:#ffffe8; '>,</span><span style='color:#2a00ff; background:#ffffe8; '>'w'</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>		</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>fwrite</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#000000; background:#ffffe8; '>$file</span><span style='color:#000000; background:#ffffe8; '>,</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>""</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>		</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>fclose</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#000000; background:#ffffe8; '>$file</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '>			</span><span style='color:#3f7f59; background:#ffffe8; '>// Chiude la connessione tra il codice ed il file</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>	</span><span style='color:#3f7f59; background:#ffffe8; '>// Scrivo sul file PHP:	</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>		</span><span style='color:#000000; background:#ffffe8; '>$file</span><span style='color:#000000; background:#ffffe8; '>=</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>fopen</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#2a00ff; background:#ffffe8; '>"../"</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$Directory</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$FileName</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>".php"</span><span style='color:#000000; background:#ffffe8; '>,</span><span style='color:#2a00ff; background:#ffffe8; '>'a'</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>		</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>fwrite</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#000000; background:#ffffe8; '>$file</span><span style='color:#000000; background:#ffffe8; '>,</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>"&lt;?php include '"</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$Root</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>"'.'FilePagine/0_Connessione_Database.php'; ?>"</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>"</span><span style='color:#2a00ff; background:#ffffe8; '>\n</span><span style='color:#2a00ff; background:#ffffe8; '>"</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>		</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>fwrite</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#000000; background:#ffffe8; '>$file</span><span style='color:#000000; background:#ffffe8; '>,</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>"&lt;?php include '"</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$Root</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>"'.'FilePagine/1_Head1_Titolo.php'; ?>"</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>"</span><span style='color:#2a00ff; background:#ffffe8; '>\n</span><span style='color:#2a00ff; background:#ffffe8; '>"</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>		</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>fwrite</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#000000; background:#ffffe8; '>$file</span><span style='color:#000000; background:#ffffe8; '>,</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>"&lt;?php echo '"</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$Titolo</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>"; ?>"</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>"</span><span style='color:#2a00ff; background:#ffffe8; '>\n</span><span style='color:#2a00ff; background:#ffffe8; '>"</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>		</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>fwrite</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#000000; background:#ffffe8; '>$file</span><span style='color:#000000; background:#ffffe8; '>,</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>"&lt;?php include '"</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$Root</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>"'.'FilePagine/2_Head2_Css.php'; ?>"</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>"</span><span style='color:#2a00ff; background:#ffffe8; '>\n</span><span style='color:#2a00ff; background:#ffffe8; '>"</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>		</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>fwrite</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#000000; background:#ffffe8; '>$file</span><span style='color:#000000; background:#ffffe8; '>,</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>"&lt;?php include '"</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$Root</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>"'.'FilePagine/3_Body1_Header.php'; ?>"</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>"</span><span style='color:#2a00ff; background:#ffffe8; '>\n</span><span style='color:#2a00ff; background:#ffffe8; '>"</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>		</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>fwrite</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#000000; background:#ffffe8; '>$file</span><span style='color:#000000; background:#ffffe8; '>,</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>"&lt;?php include '"</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$Root</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>"'.'FilePagine/4_Body2_Menu.php'; ?>"</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>"</span><span style='color:#2a00ff; background:#ffffe8; '>\n</span><span style='color:#2a00ff; background:#ffffe8; '>"</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>		</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>fwrite</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#000000; background:#ffffe8; '>$file</span><span style='color:#000000; background:#ffffe8; '>,</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>"&lt;?php include '"</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$Root</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>"'.'FilePagine/5_Body3_MainSection.php'; ?>"</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>"</span><span style='color:#2a00ff; background:#ffffe8; '>\n</span><span style='color:#2a00ff; background:#ffffe8; '>"</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>		</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>fwrite</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#000000; background:#ffffe8; '>$file</span><span style='color:#000000; background:#ffffe8; '>,</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>"&lt;?php include '"</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$Root</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$Directory</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$FileName</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>".html'; ?>"</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>"</span><span style='color:#2a00ff; background:#ffffe8; '>\n</span><span style='color:#2a00ff; background:#ffffe8; '>"</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>		</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>fwrite</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#000000; background:#ffffe8; '>$file</span><span style='color:#000000; background:#ffffe8; '>,</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>"&lt;?php include '"</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$Root</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>"'.'FilePagine/6_Body4_Footer.php'; ?>"</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>		</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>fclose</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#000000; background:#ffffe8; '>$file</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '>			</span><span style='color:#3f7f59; background:#ffffe8; '>// Chiude la connessione tra il codice ed il file</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>			</span>
+<span style='color:#000000; background:#ffffe8; '>			</span>
+<span style='color:#000000; background:#ffffe8; '>	</span><span style='color:#3f7f59; background:#ffffe8; '>// Cancello contenuto del file HTML:</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>		</span><span style='color:#000000; background:#ffffe8; '>$file</span><span style='color:#000000; background:#ffffe8; '>=</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>fopen</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#2a00ff; background:#ffffe8; '>"../"</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$Directory</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$FileName</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>".html"</span><span style='color:#000000; background:#ffffe8; '>,</span><span style='color:#2a00ff; background:#ffffe8; '>'w'</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>		</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>fwrite</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#000000; background:#ffffe8; '>$file</span><span style='color:#000000; background:#ffffe8; '>,</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#2a00ff; background:#ffffe8; '>""</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>		</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>fclose</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#000000; background:#ffffe8; '>$file</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '>			</span><span style='color:#3f7f59; background:#ffffe8; '>// Chiude la connessione tra il codice ed il file</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>	</span><span style='color:#3f7f59; background:#ffffe8; '>// Scrivo sul file HTML:	</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>		</span><span style='color:#000000; background:#ffffe8; '>$file</span><span style='color:#000000; background:#ffffe8; '>=</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>fopen</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#2a00ff; background:#ffffe8; '>"../"</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$Directory</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#000000; background:#ffffe8; '>$FileName</span><span style='color:#000000; background:#ffffe8; '>.</span><span style='color:#2a00ff; background:#ffffe8; '>".html"</span><span style='color:#000000; background:#ffffe8; '>,</span><span style='color:#2a00ff; background:#ffffe8; '>'a'</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>		</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>fwrite</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#000000; background:#ffffe8; '>$file</span><span style='color:#000000; background:#ffffe8; '>,</span><span style='color:#000000; background:#ffffe8; '> </span><span style='color:#000000; background:#ffffe8; '>$Contenuto</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>		</span><span style='color:#7f0055; background:#ffffe8; font-weight:bold; '>fclose</span><span style='color:#000000; background:#ffffe8; '>(</span><span style='color:#000000; background:#ffffe8; '>$file</span><span style='color:#000000; background:#ffffe8; '>)</span><span style='color:#000000; background:#ffffe8; '>;</span><span style='color:#000000; background:#ffffe8; '>			</span><span style='color:#3f7f59; background:#ffffe8; '>// Chiude la connessione tra il codice ed il file</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>	</span><span style='color:#000000; background:#ffffe8; '>}</span><span style='color:#000000; background:#ffffe8; '></span>
+<span style='color:#000000; background:#ffffe8; '>}</span><span style='color:#000000; background:#ffffe8; '>	</span>
+<span style='color:#7f0055; background:#ffffe8; '>?></span>
+</pre>
+<hr />

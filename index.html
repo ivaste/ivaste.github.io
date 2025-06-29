@@ -12,6 +12,34 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- Custom CSS for sticky footer -->
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .content-wrapper {
+            flex: 1 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #content {
+            flex: 1 0 auto;
+        }
+        
+        footer {
+            flex-shrink: 0;
+        }
+    </style>
+
     <!-- Custom JS -->
     <script src="assets/js/script.js"></script>
 
@@ -27,31 +55,31 @@
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav pt-2">
                     <li class="nav-item">
-                        <button class="nav-link active" aria-current="page" onclick="loadSection('pages/home.html')">Home</button>
+                        <button class="nav-link active" aria-current="page" onclick="navigateToPage('home')">Home</button>
                     </li>
                     <li class="nav-item">
-                        <button class="nav-link" onclick="loadSection('pages/resume.html')">Resume</button>
+                        <button class="nav-link" onclick="navigateToPage('resume')">Resume</button>
                     </li>
                     <li class="nav-item">
-                        <button class="nav-link" onclick="loadSection('pages/home.html', 'contact')">Contact</button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="nav-link" onclick="loadSection('pages/blog.html')">Blog</button>
+                        <button class="nav-link" onclick="navigateToPage('blog')">Blog</button>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Content container -->
-  <div id="content" class="container mt-4">
-    <!-- Content from external files will be injected here -->
-  </div>
+    <!-- Content wrapper -->
+    <div class="content-wrapper">
+        <!-- Content container -->
+        <div id="content" class="container mt-4" style="max-width: 700px;">
+            <!-- Content from external files will be injected here -->
+        </div>
+    </div>
 
-  <!-- Footer -->
-  <footer class="bg-dark text-white text-center py-3">
-    <p>&copy; 2025 Stefano Ivancich. All rights reserved.</p>
-  </footer>
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; <script>document.write(new Date().getFullYear());</script> Stefano Ivancich. All rights reserved.</p>
+    </footer>
 
     
 </body>

@@ -1,0 +1,44 @@
+<a href="../uploads/2015/01/Infrarossi.pdf">Scarica il documento PDF</a>
+
+&nbsp;
+
+<!--SOMMARIO-->
+<p align="justify">Sensore infrarossi in grado di rilevare un ostacolo in una distanza compresa tra 10 e 80 cm. Il sensore fornisce in uscita una tensione che varia in funzione della distanza. Per sapere la distanza rilevata è necessario interfacciare l'uscita ad un microcontrollore, ad un convertitore analogico-digitale oppure può essere collegata ad un comparatore per la rilevazione della soglia. Ideale per applicazioni nella robotica.</p>
+<p align="center"><img src="../uploads/2015/01/Infrarossi.jpg" alt="" height="200" /><img src="../uploads/2015/01/PinOut.png" alt="" height="200" /></p>
+&nbsp;
+
+&nbsp;
+
+<!--LISTA COMPONENTI-->
+<h2>Componenti</h2>
+<ul>
+	<li>Infrarossi Sharp GP2Y0A21</li>
+	<li>Arduino</li>
+</ul>
+&nbsp;
+
+&nbsp;
+
+<!--SCHEMA ELETTRICO-->
+<h2>Schema elettrico</h2>
+Clicca sull'immagine per ingrandirla
+<p align="center"><a href="../uploads/2015/01/Infrarossi_schem.png"><img src="../uploads/2015/01/Infrarossi_schem.png" alt="" height="450" /></a><a href="../uploads/2015/01/Infrarossi_bb.png"><img src="../uploads/2015/01/Infrarossi_bb.png" alt="" height="450" /></a></p>
+&nbsp;
+
+&nbsp;
+
+<!--CODICE ARDUINO-->
+<h2>Codice di esempio</h2>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="enlighter">void setup(){
+  Serial.begin(9600);
+}
+
+void loop(){
+  Serial.println(distanza());
+  delay(100);
+}
+
+float distanza(){
+  float distanza=4800/(analogRead(0)-20);
+  return distanza;
+}</pre>

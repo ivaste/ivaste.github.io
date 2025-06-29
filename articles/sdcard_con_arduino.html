@@ -1,0 +1,73 @@
+<a href="../uploads/2015/01/SdCard.pdf">Scarica il documento PDF</a>
+
+<!--SOMMARIO-->
+<p align="justify">Questo SdCard Reader si interfaccia con il protocollo di comunicazione SPI. Grazie al regolatore di tensione interno è in grado di acquisire tensioni di alimentazione di 3.3V e 5V.</p>
+<p align="center"><img src="../uploads/2015/01/SdCard.jpg" alt="" height="250" /></p>
+&nbsp;
+
+&nbsp;
+
+<!--LISTA COMPONENTI-->
+<h2>Componenti</h2>
+<ul>
+	<li>SdCard Reader</li>
+	<li>SdCard</li>
+	<li>Arduino</li>
+</ul>
+&nbsp;
+
+&nbsp;
+
+<!--Tabella connessione piedini-->
+<h2>Tabella connessione piedini</h2>
+<p align="center"><img src="../uploads/2015/01/Tabella3.jpg" alt="" height="200" /></p>
+&nbsp;
+
+&nbsp;
+
+<!--CODICE ARDUINO-->
+<h2>Codice di esempio</h2>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">#include &lt;SPI.h&gt;
+#include &lt;SD.h&gt;
+
+Sd2Card card;
+
+File myFile;
+
+void setup() {
+  Serial.begin(9600);
+  while (!Serial);
+  while (!SD.begin(10)) Serial.println("initialization failed!");
+  Serial.println("initialization done.");
+}
+
+void loop() {
+  // Scrivere sul file:
+  scriviSD();
+
+  // Leggere il file:
+  leggiSD();
+
+  delay(1000);
+}
+
+void scriviSD(){
+  myFile = SD.open("test.txt", FILE_WRITE);
+    if (myFile) {  // Se il file si è aperto
+      Serial.print("Scrivo sul file...");
+      myFile.println("aaaaa");
+      myFile.close();
+      Serial.println("Scritto.");
+    }
+    else Serial.println("Errore apertura file");
+}
+
+void leggiSD(){
+  myFile = SD.open("test.txt");
+    if (myFile) {
+      Serial.println("\nContenuto del file:");
+      while (myFile.available()) Serial.write(myFile.read());
+      myFile.close();
+    }
+    else Serial.println("Errore apertura file");
+}</pre>

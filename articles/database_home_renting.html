@@ -1,0 +1,433 @@
+<a href="../uploads/2018/02/HomeRenting00.png"><img src="../uploads/2018/02/HomeRenting00.png"></a>
+
+<div class="center download-resume">
+  <a href="../uploads/2018/02/Home-Renting.pdf" class="btn btn-info">Download PDF</a>  <a href="http://dbstud2.dei.unipd.it/2017/ivancichst/ui/index.php" class="btn btn-success">Live Demo</a> <a href="https://github.com/ivaste/HomeRenting" class="btn btn-warning">GitHub Code</a>
+</div>
+
+<div class="row">
+
+	<!--INDICE-->
+	<div class="col-sm-3">
+		<h2>Indice</h2>
+		<ul class="nav nav-pills nav-stacked">
+		  <li><a href="#1">1. Descrizione del progetto</a></li>
+		  <li><a href="#1.1">1.1. Requisiti strutturati</a></li>
+		  <li><a href="#1.2">1.2. Operazioni sulla base di dati</a></li>
+		  <li><a href="#1.3">1.3. Glossario</a></li>
+		  <li><a href="#2">2. Progettazione Concettuale</a></li>
+		  <li><a href="#2.1">2.1. Modello Concettuale: Entità-Associazione (E-R)</a></li>
+		  <li><a href="#2.2">2.2. Dizionario dei dati</a></li>
+		  <li><a href="#2.2.1">2.2.1. Entità</a></li>
+		  <li><a href="#2.2.2">2.2.2. Associazioni</a></li>
+		  <li><a href="#2.3">2.3. Schema Concettuale, Regole di vincolo</a></li>
+		  <li><a href="#3">3. Progettazione Logica</a></li>
+		  <li><a href="#3.1">3.1. Ristrutturazione schema E.R.</a></li>
+		  <li><a href="#3.2">3.2. Modello Logico: Relazionale</a></li>
+		  <li><a href="#3.3">3.3. Schema Logico, Regole di vincolo</a></li>
+		  <li><a href="#4">4. Codice SQL</a></li>
+		  <li><a href="#4.1">4.1. Struttura</a></li>
+		  <li><a href="#4.2">4.2. Alcune Query</a></li>
+		  <li><a href="#5">5. Interfaccia grafica</a></li>
+		  <li><a href="#6">6. Note</a></li>
+		</ul>
+	</div>
+	
+	<!--CONTENUTO-->
+	<div class="col-sm-9">
+		<h2 id="1">1. Descrizione del progetto</h2>
+		<p class="text-justify">
+			Si vuole realizzare una base di dati per un’applicazione online che mette in contatto persone in cerca di un alloggio per brevi periodi, con persone (privati) che mettono a disposizione una tale abitazione nelle principali città Italiane.
+			Per la quale si vogliono rappresentare i dati degli utenti, delle prenotazioni, degli alloggi, della città di collocazione dell’alloggio, dei servizi standard di cui è dotato l’alloggio e delle tipologie standard (appartamento, casa, ecc.) che può assumere l’alloggio, storicizzando i vari eventi possibili.
+		</p>
+		
+		<h3 id="1.1">1.1. Requisiti strutturati</h3>
+		<p class="text-justify">
+			<strong>Frasi per Utente:</strong>
+			Per ogni utente, identificato univocamente tramite id, rappresentiamo i seguenti dati personali: l’indirizzo e-mail che deve essere unico, password, nome, cognome, sesso, la data di nascita, telefono, la fotografia, descrizione, lingue parlate.
+			Un utente viene chiamato “Host” se in una prenotazione è il possessore dell’alloggio, altrimenti viene chiamato “Ospite”. Tale nomenclatura viene utilizzata nel seguito del documento allo scopo di presentare più chiaramente il progetto.
+			Ogni utente può essere sia Ospite che Host e può possedere zero, uno o più alloggi.
+			Ogni utente può prenotare un alloggio che non sia di sua proprietà.
+			Ogni Ospite può avere associato nessuna, una o più valutazioni, fatte dagli Host dopo la conclusione della prenotazione. L’Host deve effettuare una e una sola recensione sull’Ospite dopo che la prenotazione risulta conclusa. Mentre l’Ospite alla conclusione della prenotazione deve effettuare una e una sola recensione dell’alloggio.
+			
+			<strong>Frasi per Alloggio:</strong>
+			Per ogni alloggio, identificato univocamente tramite id, rappresentiamo i seguenti dati: nome, prezzo per notte, descrizione, numero posti, la via, le fotografie.
+			Ogni alloggio appartiene a uno e un solo utente ed è collocato in una sola città.
+			Ogni alloggio è dotato di almeno un servizio e ogni alloggio deve essere di una e una sola tipologia (casa, appartamento, ecc.).
+			Ogni alloggio può essere incluso in nessuna, una o più prenotazioni e può avere associata nessuna, una o più recensioni ricevuta dall’Ospite alla conclusione della prenotazione. L’Ospite alla conclusione della prenotazione effettua una e una sola recensione dell’alloggio.
+			Nel caso il cui l’alloggio sia stato venduto o a causa di altri motivi che rendono impossibili effettuare altre prenotazioni allora le informazioni relative all’alloggio possono essere archiviate.
+			Un alloggio può essere eliminato definitivamente dal database solo se non sono state mai effettuate prenotazioni su di esso.
+			
+			<strong>Frasi per Servizio:</strong>
+			Per ogni servizio, identificato univocamente dal nome, rappresentiamo la sua descrizione.
+			Ogni servizio può essere nelle dotazioni di nessuno, uno o più alloggi.
+			I servizi sono standard (stabiliti dal gestore della piattaforma) e sono 11, di seguito i nomi: Ascensore, Animali domestici ammessi, Internet, Parcheggio Gratuito Incluso, TV, È permesso fumare, Aria condizionata, Riscaldamento, Disponibile per eventi, Accessibile per chi ha mobilità ridotta, Per famiglie e bambini.
+			
+			<strong>Frasi per Città:</strong>
+			Per ogni città, identificata dal nome, rappresentiamo una descrizione, necessaria a presentare il luogo di ubicazione dell’alloggio.
+			Ogni città può contenere nessuno, uno o più alloggi.
+			
+			<strong>Frasi per TipoAlloggio:</strong>
+			Per ogni tipologia di alloggio, identificato univocamente dal nome, rappresentiamo la sua descrizione.
+			Le tipologie di alloggio non possono intersecarsi, ovvero ogni alloggio può essere di una e una sola tipologia.
+			Le tipologie di alloggio sono standard (stabilite dal gestore della piattaforma) e sono 7, di seguito i nomi: Appartamento intero, Camera singola, Camera condivisa, Dèpandance, Suite degli ospiti, Casa Vacanze, Pensione.
+			
+			<strong>Frasi per Prenotazione:</strong>
+			Per ogni prenotazione, identificato univocamente tramite id, rappresentiamo la data di check in, l’alloggio associato e l’utente (Ospite) associato, la data di check out, il prezzo (complessivo pagato dall’Ospite), il numero di posti prenotati e la data di richiesta.
+			Ogni prenotazione è relativa a uno e un solo utente e ha associato uno e un solo alloggio.
+			Inoltre, la prenotazione ha associato uno stato che può assume uno dei seguenti valori: Sospeso, Rifiutata, Annullata, Accettata, Cancellata, Conclusa, In Corso. L’associazione di uno di questi stati avviene nel seguente modo:
+			al momento della effettuazione della prenotazione da parte dell’utente (Ospite) su un determinato alloggio, alla prenotazione viene associato lo stato Sospeso, in quanto il proprietario dell’alloggio (Host) dovrà leggere la proposta di prenotazione e decidere se accettarla o meno.
+			Nel caso in cui il Host accetta la prenotazione allora la prenotazione passa allo stato di Accettata, altrimenti allo stato di Rifiutata. Però se l’Ospite decide di eliminare la prenotazione prima che l’Host abbia deciso se accettare allora la prenotazione passa dallo stato di Sospeso allo stato di Annullata.
+			Successivamente, se la prenotazione si trova nello stato di Accettata e il cliente decide di eliminare la sua prenotazione prima della data di check-in allora lo stato della prenotazione assume il valore Cancellata.
+			Infine, se la prenotazione è nello stato di Accettata e l’Ospite soggiorna nell’alloggio allora la prenotazione assume lo stato di In Corso durante il periodo di check-in e di check-out, mentre alla fine di tale periodo (quando l’Ospite rilascia l’alloggio) la prenotazione passa allo stato di Conclusa. Inoltre, solo in questo ultimo caso l’Ospite dovrà effettuare una e una sola recensione dell’alloggio (associata alla prenotazione) e l’Host dovrà effettuare una e una sola recensione dell’Ospite (associata alla prenotazione).
+		</p>
+		
+		<h3 id="1.2">1.2. Operazioni sulla base di dati</h3>
+		<p class="text-justify">
+			<strong>Tabella delle Operazioni:</strong>
+			<a href="../uploads/2018/02/HomeRenting01.png"><img src="../uploads/2018/02/HomeRenting01.png"></a>
+		</p>
+		
+		<h3 id="1.3">1.3. Glossario</h3>
+		<a href="../uploads/2018/02/HomeRenting02.png"><img src="../uploads/2018/02/HomeRenting02.png"></a>
+		
+		<h2 id="2">2. Progettazione Concettuale</h2>
+		<h3 id="2.1">2.1. Modello Concettuale: Entità-Associazione (E-R)</h3>
+		<p class="text-justify">Di seguito lo schema concettuale prodotto per la rappresentazione della realtà di interesse:</p>
+		<a href="../uploads/2018/02/HomeRenting03.png"><img src="../uploads/2018/02/HomeRenting03.png"></a>
+		
+		<h3 id="2.2">2.2. Dizionario dei dati</h3>
+		<h4 id="2.2.1">2.2.1. Entità</h4>
+		<a href="../uploads/2018/02/HomeRenting04.png"><img src="../uploads/2018/02/HomeRenting04.png"></a>
+		
+		<h4 id="2.2.2">2.2.2. Associazioni</h4>
+		<a href="../uploads/2018/02/HomeRenting05.png"><img src="../uploads/2018/02/HomeRenting05.png"></a>
+		
+		<h3 id="2.3">2.3. Schema Concettuale, Regole di vincolo</h3>
+		<p class="text-justify">
+		Per rispettare la rappresentazione fedele della realtà di interesse descritta in sezione 1.1 è necessario definire delle regole di vincolo per concetti altrimenti non esprimibili utilizzando il modello E.R.
+		- Regola di Vincolo 1: Un utente non deve effettuare una prenotazione su un alloggio di cui è proprietario.
+		- Regola di Vincolo 2: Un alloggio non deve essere eliminato definitivamente dal database se è stata fatta almeno una prenotazione su di esso.
+		</p>
+		
+		<h2 id="3">3. Progettazione Logica</h2>
+		<h3 id="3.1">3.1. Ristrutturazione schema E.R.</h3>
+		<p class="text-justify">
+			<strong>Tabella dei volumi:</strong>
+			<a href="../uploads/2018/02/HomeRenting06.png"><img src="../uploads/2018/02/HomeRenting06.png"></a>
+			<a href="../uploads/2018/02/HomeRenting07.png"><img src="../uploads/2018/02/HomeRenting07.png"></a>
+			
+			<strong>Eliminazione della generalizzazione Prenotazione</strong>
+			Date le tabelle degli accessi precedenti è evidente che mantenendo la generalizzazione dell’entità “Prenotazione” in entità separate comporterebbe un costo notevole perché si dovrebbe andare a visualizzare per ogni entità se la Prenotazione è stata Annullata, Rifiutata, Cancellata ovvero se l’alloggio è prenotabile o no in quella data.
+			Quindi si è deciso di accorpare tutte le entità figlie nell’entità padre “Prenotazione”, aggiungendo un attributo “Stato” che indica uno dei seguenti stati (esposti nella sezione 1.1): In sospeso, Rifiutata, Annullata, In corso(Accettata), Cancellata(Accettata) e Concluso (Accettata).
+			Gli attributi delle entità figlie, quindi, vengono aggiunti alla entità “Prenotazione” e potranno assumere valori nulli, in quanto non significativi per alcune occorrenze del genitore, quindi la loro cardinalità sarà (0,1).
+		
+			Inoltre, vengono aggiunti i seguenti vincoli:
+			1. “Una prenotazione non deve ricevere una recensione se non è nello stato Concluso”;
+			2. “Un utente non deve ricevere una valutazione, quando in veste di Ospite, riguardo a un soggiorno se la relativa prenotazione non è in stato Concluso”.
+			
+			<strong>Eliminazione della generalizzazione Alloggio</strong>
+			Siccome sull’entità archiviato non si eseguono operazioni, si è deciso di accorpare l’entità “Archiviato” in “Alloggio” aggiungendo l’attributo Archiviato che può assumere i valori TRUE oppure FALSE.
+			L’attributo “DataArchiviato” viene aggiunto ad Alloggio e può assumere valori nulli.
+			
+			Inoltre, vengono aggiunti i seguenti vincoli:
+			1. “Un alloggio non deve essere prenotato se è Archiviato (valore TRUE sull’attributo Archiviato)”;
+			2. “Un alloggio non deve essere modificato se è Archiviato (valore TRUE sull’attributo Archiviato)”;
+			3. “Un alloggio non deve essere incluso nei risultati della ricerca da parte dell’utente se è Archiviato (valore TRUE sull’attributo Archiviato)”.
+
+			
+			<strong>Eliminazione dell’attributo multivalore “Foto”</strong>
+			Il modello relazionale non permette di rappresentare attributi multivalore, quindi viene aggiunta un entità “Foto” identificata da un id e come attributo “Link”. L’entità “Foto” è collegata all’entità “Alloggio” tramite un’associazione uno a molti in quanto una foto può appartenere a un solo alloggio, mentre un alloggio può avere zero, una oppure molte foto associate.
+			
+			<strong>Eliminazione dell’attributo multivalore “Lingue parlate”</strong>
+			Viene aggiunta l’entità “Lingue” identificata dall’attributo Nome. Tale entità è collegata all’entità “Utente” tramite una relazione molti a molti in quanto una lingua può essere parlata da nessuno, uno o più più utenti mentre un utente può parlare nessuna (se l’utente decide di non indicare la lingua), una o più lingue.
+			
+			Di seguito, è rappresentato lo schema E.R. concettuale ristrutturato.
+			<a href="../uploads/2018/02/HomeRenting08.png"><img src="../uploads/2018/02/HomeRenting08.png"></a>
+			
+		</p>
+		
+		<h3 id="3.2">3.2. Modello Logico: Relazionale</h3>
+		<p class="text-justify">
+			Di seguito lo schema logico prodotto per la rappresentazione della realtà di interesse:
+			<a href="../uploads/2018/02/HomeRenting09.png"><img src="../uploads/2018/02/HomeRenting09.png"></a>
+		</p>
+		
+		<h3 id="3.3">3.3. Schema Logico, Regole di vincolo</h3>
+		<p>
+			- RV1: Un utente non deve effettuare una prenotazione su un alloggio di cui è proprietario.
+			- RV2: Un alloggio non deve essere eliminato definitivamente dal database se sono state effettuate prenotazioni su di esso.
+			- RV3: Gli attributi DataRecensioneAlloggio, VotoRecensionAlloggio, TestoRecensioneAlloggio, DataValutaOspite, VotoValutaOspite, TestoValutaOspite possono essere riempiti solo se la prenotazione se è nello stato Concluso.
+			- RV4: Un alloggio non deve essere prenotato se è Archiviato.
+			- RV5: Un alloggio non deve essere incluso nei risultati della ricerca se è Archiviato.
+			- RV6: Gli attributi id, Email, Password, Nome, Cognome, Sesso, DataNascita, nTelefono di Utente non devono essere nulli.
+			- RV7: Gli attributi Nome, Prezzoxnotte, Descrizione, nPosti, Via, DataInserimento di Alloggio non devono essere nulli.
+			- RV8: Gli attributi DataCheckIn, DataCheckOut, Prezzi, nPosti, Stato, DataRichiesta di Prenotazione non devono essere nulli
+		</p>
+		
+		<h2 id="4">4. Codice SQL</h2>
+		<h3 id="4.1">4.1. Struttura</h3>
+		<pre class="EnlighterJSRAW" data-enlighter-language="sql">CREATE TABLE lingua
+			(
+			  nome VARCHAR(10) PRIMARY KEY
+			);
+
+			CREATE TABLE utente
+			(
+			  id SERIAL PRIMARY KEY,	/*SERIAL equivale ad INTEGER AUTO_INCREMENT per postgre*/
+			  email VARCHAR(40) UNIQUE,	/*No 2 utenti con la stessa email*/
+			  password VARCHAR(40) NOT NULL,
+			  nome VARCHAR(40) NOT NULL,
+			  cognome VARCHAR(40) NOT NULL,
+			  sesso BOOLEAN NOT NULL,	/*FALSE=maschio*/
+			  datanascita DATE NOT NULL,
+			  ntelefono NUMERIC(10,0) NOT NULL CHECK(ntelefono&gt;999999999),	/*i cellulari hanno 10 cifre*/
+			  fotoprofilo VARCHAR(256) DEFAULT 'utente.png',	/*immagine di default*/
+			  descrizione VARCHAR(256) /*utente può descrivere in max 256 caratteri*/
+			);
+
+			CREATE TABLE parla
+			(
+			  lingua VARCHAR(10) NOT NULL,
+			  utente INTEGER NOT NULL,
+			  PRIMARY KEY (lingua, utente),
+			  FOREIGN KEY (lingua) REFERENCES lingua(nome)
+				ON DELETE CASCADE ON UPDATE CASCADE,	/*Se viene eliminata una lingua và eliminata anche la riga*/
+			  FOREIGN KEY (utente) REFERENCES utente(id)
+				ON DELETE CASCADE ON UPDATE CASCADE	/*Se viene eliminato un utente vanno eliminate le righe che dicono quali lingue parlava*/
+			);
+
+			CREATE TABLE tipoalloggio
+			(
+			  nome VARCHAR(20) PRIMARY KEY,
+			  descrizione VARCHAR(256) /*max 256 caratteri*/
+			);
+
+			CREATE TABLE citta
+			(
+			  nome VARCHAR(20) PRIMARY KEY,
+			  descrizione VARCHAR(256)	/*max 256 caratteri*/
+			);
+
+
+			CREATE TABLE alloggio
+			(
+			  id SERIAL PRIMARY KEY,	/*SERIAL equivale ad INTEGER AUTO_INCREMENT per postgre*/
+			  nome VARCHAR(50) NOT NULL,
+			  prezzoxnotte NUMERIC(6,2) NOT NULL CHECK(prezzoxnotte&gt;0),	/*numero che va da 0 a 9999.99*/
+			  nposti INTEGER NOT NULL CHECK(nposti&gt;0 AND nposti&lt;10),	/*Almeno 1 posto per essere valido*/
+			  descrizione VARCHAR(256),	/*max 256 caratteri*/
+			  via VARCHAR(40) NOT NULL,
+			  archiviato BOOLEAN NOT NULL,
+			  dataarchivio DATE,	/*Se NULL vuol dire che non è mai stato archiviato*/
+			  datainserimento DATE NOT NULL,
+			  citta VARCHAR(20) NOT NULL,
+			  tipoalloggio VARCHAR(20) NOT NULL,
+			  proprietario INTEGER NOT NULL,
+			  FOREIGN KEY (citta) REFERENCES citta(nome)
+				ON DELETE NO ACTION ON UPDATE CASCADE,
+			  FOREIGN KEY (tipoalloggio) REFERENCES tipoalloggio(nome)
+				ON DELETE NO ACTION ON UPDATE CASCADE,
+			  FOREIGN KEY (proprietario) REFERENCES utente(id)
+				ON DELETE NO ACTION ON UPDATE CASCADE	/*Se un utente viene eliminato, non vengono eliminati i suoi alloggi perchà potrebbero riferire a delle prenotazioni*/
+			);
+
+			CREATE TABLE foto
+			(
+			  id SERIAL PRIMARY KEY,
+			  link VARCHAR(256) DEFAULT 'ImmagineVuota.png',
+			  alloggio INTEGER NOT NULL,
+			  FOREIGN KEY (alloggio) REFERENCES alloggio(id)
+				ON DELETE CASCADE ON UPDATE CASCADE	/*Se viene eliminato un alloggio, devono essere eliminate tutte le sue foto*/
+			);
+
+
+			CREATE TABLE servizio
+			(
+			  nome VARCHAR(40) PRIMARY KEY,
+			  descrizione VARCHAR(256) /*max 256 caratteri*/
+			);
+
+			CREATE TABLE dotato
+			(
+			  alloggio INTEGER NOT NULL,
+			  servizio VARCHAR(40) NOT NULL,
+			  PRIMARY KEY (alloggio, servizio),
+			  FOREIGN KEY (alloggio) REFERENCES alloggio(id)
+				ON DELETE CASCADE ON UPDATE CASCADE, /*Se viene eliminato un alloggio, vanno eliminate le righe che dicono quali servizi aveva*/
+			  FOREIGN KEY (servizio) REFERENCES servizio(nome)
+				ON DELETE NO ACTION ON UPDATE CASCADE
+			);
+
+			CREATE DOMAIN statoprenotazione AS VARCHAR(12)
+			CHECK(VALUE ='Sospeso' OR VALUE ='Rifiutata' OR VALUE ='Annullata' OR VALUE ='Accettata' OR VALUE ='Cancellata' OR VALUE ='Conclusa' OR VALUE='In Corso');
+
+
+			CREATE TABLE prenotazione
+			(
+			  id SERIAL PRIMARY KEY,
+			  datacheckin DATE NOT NULL,
+			  datacheckout DATE NOT NULL,
+			  prezzo NUMERIC(7,2) NOT NULL CHECK(prezzo&gt;0), 
+			  nposti INTEGER NOT NULL CHECK(nposti&gt;0 AND nposti&lt;10), 
+			  stato	statoprenotazione NOT NULL,
+			  datarichiesta DATE NOT NULL,
+			  datarifiuto DATE,	/*Se NULL vuol dire che non è stata ancora Rifiutata*/
+			  dataannullata DATE,	/*Se NULL vuol dire che non è stata ancora Annullata*/
+			  dataaccettata DATE,	/*Se NULL vuol dire che non è stata ancora Accettata*/
+			  datacancellata DATE,	/*Se NULL vuol dire che non è stata ancora Cancellata*/
+			  datarecensionealloggio DATE,	/*Se NULL vuol dire che non è stato ancora valutato*/
+			  /*Voto deve essere tra 0 e 10, se NULL vuol dire che non è stato ancora valutato*/
+			  votorecensionealloggio INTEGER 
+				CHECK((votorecensionealloggio&gt;=0 AND votorecensionealloggio&lt;=10) OR votorecensionealloggio=NULL), 
+			  testorecensionealloggio VARCHAR(256),	/*max 256 caratteri, Se NULL vuol dire che non è stato ancora valutato*/
+			  datavalutaospite DATE,	/*Se NULL vuol dire che non è stato ancora valutato*/
+			  /*Voto deve essere tra 0 e 10, se NULL vuol dire che non è stato ancora valutato*/
+			  votovalutaospite INTEGER 
+				CHECK((votovalutaospite&gt;=0 AND votovalutaospite&lt;=10) OR votovalutaospite=NULL),  
+			  testovalutaospite VARCHAR(256),	/*max 256 caratteri, Se NULL vuol dire che non è stato ancora valutato*/
+			  ospite INTEGER NOT NULL,
+			  host INTEGER NOT NULL,
+			  alloggio INTEGER NOT NULL,
+
+			  FOREIGN KEY (ospite) REFERENCES utente(id)
+				ON DELETE NO ACTION ON UPDATE CASCADE,
+			  FOREIGN KEY (host) REFERENCES utente(id)
+				ON DELETE NO ACTION ON UPDATE CASCADE,
+			  FOREIGN KEY (alloggio) REFERENCES alloggio(id)
+				ON DELETE NO ACTION ON UPDATE CASCADE
+			);
+
+			/* Privilegi per eseguire INSERT, UPDATE, SELECT,... da codice PHP*/
+			GRANT ALL PRIVILEGES ON alloggio TO webdb;
+			GRANT ALL PRIVILEGES ON citta TO webdb;
+			GRANT ALL PRIVILEGES ON dotato TO webdb;
+			GRANT ALL PRIVILEGES ON foto TO webdb;
+			GRANT ALL PRIVILEGES ON lingua TO webdb;
+			GRANT ALL PRIVILEGES ON parla TO webdb;
+			GRANT ALL PRIVILEGES ON prenotazione TO webdb;
+			GRANT ALL PRIVILEGES ON servizio TO webdb;
+			GRANT ALL PRIVILEGES ON tipoalloggio TO webdb;
+			GRANT ALL PRIVILEGES ON utente TO webdb;
+		</pre>
+		
+		<h3 id="4.2">4.2. Alcune Query</h3>
+		<p class="text-justify">Per l'elenco completo delle operazioni: <a href="../uploads/2018/02/OperazioniHR.pdf">PDF</a></p>
+		
+		<strong>Inserire un Utente</strong>
+		<pre class="EnlighterJSRAW" data-enlighter-language="sql">INSERT INTO utente
+		(email, password, nome, cognome, datanascita, sesso, ntelefono)
+		VALUES ('utente@email', 'password', 'nome', 'cognome', '2018-01-01', TRUE, 3333333333);</pre>
+		&nbsp;
+		
+		<strong>Inserire un nuovo Alloggio</strong>
+		<pre class="EnlighterJSRAW" data-enlighter-language="sql">INSERT INTO alloggio
+		(nome, prezzoxnotte, nposti, via, archiviato, descrizione, datainserimento, citta, tipoalloggio, proprietario)
+		VALUES (value1, value2, value3, value3, TRUE, value3, value3, value3, value3, value3);</pre>
+		&nbsp;
+		
+		<strong>Inserire una Prenotazione</strong>
+		<pre class="EnlighterJSRAW" data-enlighter-language="sql">INSERT INTO prenotazione
+		(ospite, host, alloggio, datacheckin, datacheckout, prezzo, nposti, stato, datarichiesta)
+		VALUES (1234, 1234, 1234, '2018-02-01', '2018-02-01', 250, 2, 'Sospeso', '2018-01-01');</pre>
+		&nbsp;
+		
+		<strong>Lista delle date in cui l’Alloggio di id=1234 non può essere prenotato</strong>
+		<a href="../uploads/2018/02/HomeRenting10.png"><img src="../uploads/2018/02/HomeRenting10.png"></a>
+		<pre class="EnlighterJSRAW" data-enlighter-language="sql">SELECT DISTINCT datacheckin, datacheckout
+		FROM prenotazione
+		WHERE alloggio=1234 AND (stato='Accettata' OR stato='In Corso');</pre>
+		&nbsp;
+		
+		<strong>Lista delle Prenotazioni ricevute (come Host)</strong>
+		<a href="../uploads/2018/02/HomeRenting11.png"><img src="../uploads/2018/02/HomeRenting11.png"></a>
+		<pre class="EnlighterJSRAW" data-enlighter-language="sql">SELECT DISTINCT p.stato, p.id, p.alloggio, alloggio.nome, p.ospite, utente.nome AS nomeOspite, p.datacheckin, p.datacheckout, p.nposti, p.prezzo, p.datacancellata, p.datarifiuto, p.dataannullata
+		FROM prenotazione AS p
+		INNER JOIN alloggio
+			ON p.alloggio=alloggio.id
+		INNER JOIN utente
+			ON p.ospite=utente.id
+		WHERE p.host=1234;</pre>
+		&nbsp;
+		
+		<strong>Lista delle Recensioni fatte dagli Ospiti sull’Alloggio di id=1234</strong>
+		<a href="../uploads/2018/02/HomeRenting12.png"><img src="../uploads/2018/02/HomeRenting12.png"></a>
+		<pre class="EnlighterJSRAW" data-enlighter-language="sql">SELECT DISTINCT u.id, u.nome, u.fotoprofilo, p.datarecensionealloggio, p.testorecensionealloggio, p.votorecensionealloggio
+		FROM prenotazione AS p
+		INNER JOIN utente AS u
+			ON p.ospite=u.id
+		WHERE p.alloggio=1234 AND p.datarecensionealloggio IS NOT NULL;</pre>
+		&nbsp;
+		
+		<strong>Lista dei 20 Alloggi (non Archiviati) che hanno la media delle recensioni più alta</strong>
+		<a href="../uploads/2018/02/HomeRenting13.png"><img src="../uploads/2018/02/HomeRenting13.png"></a>
+		<pre class="EnlighterJSRAW" data-enlighter-language="null">SELECT DISTINCT p.alloggio, AVG(p.votorecensionealloggio) AS mediavoti, COUNT(p.votorecensionealloggio), a.nome, a.tipoalloggio, a.nposti, a.prezzoxnotte
+		FROM prenotazione AS p
+		RIGHT JOIN alloggio AS a
+			ON p.alloggio=a.id
+		WHERE a.archiviato = FALSE
+		GROUP BY p.alloggio, a.nome, a.tipoalloggio, a.nposti, a.prezzoxnotte
+		ORDER BY mediavoti DESC
+		LIMIT 20;</pre>
+		&nbsp;
+		
+		<strong>Lista dei 20 Alloggi (non Archiviati) di una Città in ordine di media delle recensioni</strong>
+		<a href="../uploads/2018/02/HomeRenting14.png"><img src="../uploads/2018/02/HomeRenting14.png"></a>
+		<pre class="EnlighterJSRAW" data-enlighter-language="sql">SELECT DISTINCT p.alloggio, AVG(p.votorecensionealloggio) AS mediavoti, COUNT(p.votorecensionealloggio), a.nome, a.tipoalloggio, a.nposti, a.prezzoxnotte
+		FROM prenotazione AS p
+		RIGHT JOIN alloggio AS a
+			ON p.alloggio=a.id
+		WHERE a.archiviato = FALSE AND a.citta='nomecitta'
+		GROUP BY p.alloggio, a.nome, a.tipoalloggio, a.nposti, a.prezzoxnotte
+		ORDER BY mediavoti DESC
+		LIMIT 20;</pre>
+		&nbsp;
+		
+		<strong>Lista degli Alloggi (non Archiviati) di un certo Tipo, di una determinata Città con determinati Servizi, che possono ospitare un certo numero di persone.</strong>
+		<a href="../uploads/2018/02/HomeRenting15.png"><img src="../uploads/2018/02/HomeRenting15.png"></a>
+		<pre class="EnlighterJSRAW" data-enlighter-language="sql">SELECT DISTINCT a.id, AVG(p.votorecensionealloggio) AS mediavoti, COUNT(p.votorecensionealloggio), a.nome, a.tipoalloggio, a.nposti, a.prezzoxnotte
+		FROM prenotazione AS p
+		RIGHT JOIN alloggio AS a
+			ON p.alloggio=a.id
+		INNER JOIN dotato
+			ON a.id=dotato.alloggio
+		WHERE a.archiviato = FALSE AND a.citta='Milano' AND dotato.servizio = 'nomeservizio' AND a.tipoalloggio = 'tipoalloggio' AND a.nposti &gt;= 2
+		GROUP BY p.alloggio, a.nome, a.tipoalloggio, a.nposti, a.prezzoxnotte
+		ORDER BY mediavoti DESC
+		LIMIT 20;</pre>
+		&nbsp;
+		
+		
+		
+		
+		<h2 id="5">5. Interfaccia grafica</h2>
+		Prova la <a href="http://dbstud2.dei.unipd.it/2017/ivancichst/ui/index.php" class="btn btn-success">Live Demo</a>
+		<p class="text-justify">
+			L’applicazione è stata sviluppata combinando HTML, CSS, PHP e Bootstrap e pensata per 2 categorie di utilizzatori, gli utenti registrati e gli utenti non registrati.
+			Per ogni tipo di utilizzatore sono state realizzata delle homepage personali attraverso le quali si può accedere inserendo la email e la password.
+			All’avvio dell’applicazione appare una schermata generica di ricerca, successivamente, è possibile registrarsi e/o loggarsi per poter prenotare, recensire ed effettuare tutte quelle azioni per usufruire del servizio.
+			L’interfaccia è stata pensata per rendere l’applicazione intuitiva ed efficiente e per questo si è deciso di utilizzare una grafica semplice e minimale. Tuttavia, è possibile migliorarla aggiungendo (o modificando) altre funzionalità. Di seguito vengono riportati gli screenshot dell’applicazione.
+		</p>
+		<a href="../uploads/2018/02/HomeRenting16.png"><img src="../uploads/2018/02/HomeRenting16.png"></a>
+		<a href="../uploads/2018/02/HomeRenting17.png"><img src="../uploads/2018/02/HomeRenting17.png"></a>
+		<a href="../uploads/2018/02/HomeRenting18.png"><img src="../uploads/2018/02/HomeRenting18.png"></a>
+		<a href="../uploads/2018/02/HomeRenting19.png"><img src="../uploads/2018/02/HomeRenting19.png"></a>
+		<a href="../uploads/2018/02/HomeRenting20.png"><img src="../uploads/2018/02/HomeRenting20.png"></a>
+		
+		<h2 id="6">6. Note</h2>
+		<p class="text-justify">
+			Strumenti utilizzati: Microsoft Word, draw.io, PostgreSQL, SublimeText3.
+			Possibili miglioramenti:
+			- Provvedere alla creazione di un’area amministratore riservato al gestore della piattaforma.
+			- Includere un’area dedicata alla community in cui gli utenti possono condividere impressioni e discutere dei soggiorni trascurati in determinate città utilizzando gli alloggi offerti dalla piattaforma.
+			- Al fine di far vivere agli utenti Ospiti una esperienza unica nelle città in cui decidono di prendere alloggio, può essere pianificato di realizzare una area della piattaforma dedicata a ciascuna città in cui gestori di teatri, guide turistiche, artisti, ecc. possono pubblicare una esperienza da far fare agli utenti Ospiti della piattaforma gratis o a pagamento. In tale modo oltre ad accrescere la popolarità della città, viene alimentata ancora di più l’economia locale.
+			- Una tale possibilità è offerta dalla piattaforma Airbnb tramite il concetto di Experience.
+			Difficoltà incontrate:
+			- La raccolta dei requisiti ha richiesto una certa quantità di tempo in quanto è stato necessario analizzare la piattaforma Airbnb (principale piattaforma nel campo del home renting) per capire come funziona chiaramente un tale tipo di servizio.
+			- La gestione della entità della prenotazione in quanto è stato necessario analizzare i diversi stati per cui può passare (come lo si può vedere nella generalizzazione della entità “Prenotazione” dello schema concettuale in Figura 1).
+			- Ristrutturazione dello schema concettuale in Figura 1, infatti è stato necessario realizzare (basandoci sulle ipotesi desunte dalla raccolta dei requisiti) la Tabella dei Volumi e alcune Tabelle degli accessi per effettuare una buona ristrutturazione.
+			- Sviluppando l’interfaccia grafica sono emerse molte operazioni in più necessarie per il funzionamento basilare di essa.
+		</p>
+				
+	</div>
+	
+</div>
